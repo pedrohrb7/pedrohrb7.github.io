@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
-          node-version-file: services/frontend/package.json
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: services/frontend/package-lock.json
       - run: npm ci

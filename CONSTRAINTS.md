@@ -6,7 +6,7 @@
 - O repositório precisa se chamar `pedrohrb7.github.io` para o site ser servido na raiz do domínio (sem `basePath`).
 - Toda rota termina com barra (`trailingSlash: true`) para gerar `pasta/index.html`, formato que o GitHub Pages serve corretamente.
 - Stack: Next.js + TypeScript + Tailwind CSS.
-- Node >= 24.15 (exigido por dependências do jsdom/Playwright).
+- Versão do Node definida só no `.nvmrc` da raiz (hoje 24.21.0; mínimo 24.15 por dependências do jsdom/Playwright). O CI lê o `.nvmrc`; o `Dockerfile` (`ARG NODE_VERSION`) e o `engines` do `package.json` (`^<versão>`) repetem o valor, e o teste `test/config/node-version.test.ts` falha se divergirem. O `.npmrc` tem `engine-strict=true`.
 - TypeScript fixado na linha 6.x e ESLint na 9.x enquanto `typescript-eslint` e `eslint-plugin-react` não suportam TS 7 / ESLint 10.
 
 ## Negócio

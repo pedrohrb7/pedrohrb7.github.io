@@ -29,6 +29,7 @@
 - Nada que dependa de servidor funciona no export estático: API routes, middleware, `redirect()` em runtime, `next/image` otimizado, cookies/headers.
 - `typescript` fica em 6.x e `eslint` em 9.x: `typescript-eslint` ainda não suporta TS 7 e `eslint-plugin-react` quebra com ESLint 10.
 - `next/font/google` baixa as fontes no build; builds offline falham.
+- Para trocar a versão do Node, altere o `.nvmrc` da raiz, o `ARG NODE_VERSION` do `Dockerfile` e o `engines` do `package.json` juntos, e rode `npm install --package-lock-only` com o Node novo. O teste `test/config/node-version.test.ts` falha se algum ficar para trás.
 - `globalNotFound` ainda é experimental no Next 16. Ao atualizar o Next, confira se a flag mudou de nome ou saiu do `experimental` (o teste e2e "not found page" acusa se a 404 quebrar).
 - O container (`Dockerfile` + `nginx.conf`) imita o GitHub Pages: redirect `/pt` -> `/pt/` relativo (`absolute_redirect off`, senão perde a porta 8080) e `404.html` para rotas inexistentes. Mudou o comportamento de um, confira o outro.
 

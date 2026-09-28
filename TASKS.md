@@ -6,7 +6,6 @@
 
 ## Próximas
 
-- [ ] Atualizar o Node local para >= 24.15 (hoje 24.14.1; algumas dependências de teste exigem a versão nova)
 - [ ] Currículo em PDF por idioma gerado no build a partir de `src/content/`, com link de download no site (sem telefone) - spec em `docs/modules/resume-pdf/`
 - [ ] Atualizar o `resume.md` do repositório `pedrohrb7/pedrohrb7`: formação concluída, título "Desenvolvedor Full-Stack", Java/Spring Boot no resumo, habilidades reorganizadas
 - [ ] Adicionar favicon e imagem Open Graph (1200x630) por idioma
@@ -24,6 +23,7 @@
 
 ## Concluídas
 
+- [x] Versão do Node fixada pelo `.nvmrc` (24.21.0) em local (`engine-strict`), Docker e CI, com teste que impede divergência (2026-09-28)
 - [x] Questões respondidas: formação concluída em jun/2026, telefone não publicado, PDF gerado no build, manter `pedrohrb7.github.io`; projetos seguem em aberto (2026-09-28)
 - [x] Página 404 bilíngue com o layout do site e links para `/pt/` e `/en/` (2026-09-28)
 - [x] Habilidades reorganizadas: grupo "Outras tecnologias" removido; Java, Kotlin e PHP em Linguagens, Spring Boot em Back-end, Vue.js em Front-end (2026-09-28)

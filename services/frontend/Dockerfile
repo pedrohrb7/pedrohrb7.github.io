@@ -1,7 +1,9 @@
 # Builds the static export and serves it the same way GitHub Pages does: plain files, no Node runtime.
-FROM node:24-alpine AS build
+# NODE_VERSION must match the repo's .nvmrc (enforced by test/config/node-version.test.ts).
+ARG NODE_VERSION=24.21.0
+FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 COPY . .
 RUN npm run build

@@ -8,14 +8,17 @@ React 19 + TypeScript, Next.js 16 (App Router, `output: "export"`), Tailwind CSS
 
 ## Pré-requisitos
 
-- Node >= 24.15
+- Node na versão do `.nvmrc` da raiz do repositório (hoje 24.21.0), via nvm
 - npm >= 11
 
 ## Setup
 
 ```
+nvm use          # na raiz do repositório: ativa a versão do .nvmrc
 npm install
 ```
+
+O `npm install` falha com `EBADENGINE` se o Node ativo não for compatível com o `.nvmrc` (`engine-strict` no `.npmrc`).
 
 Não há `.env`.
 
