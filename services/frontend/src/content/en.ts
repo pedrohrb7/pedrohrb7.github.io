@@ -10,6 +10,7 @@ export const en: Content = {
     skipToContent: "Skip to content",
     primaryNav: "Main navigation",
     languageSwitcher: "Language",
+    theme: { label: "Theme", options: { system: "System", light: "Light", dark: "Dark" } },
     sections: {
       about: "About",
       experience: "Experience",

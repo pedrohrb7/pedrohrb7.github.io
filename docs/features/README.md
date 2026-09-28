@@ -13,7 +13,7 @@ Mapa das funcionalidades do site: o que já existe e os próximos passos. Cada f
 | [resume-pdf](resume-pdf/spec.md)               | Em andamento         | Currículo em PDF por idioma gerado no build a partir de `src/content/`         | -                                          |
 | [seo-assets](seo-assets/spec.md)               | Em andamento         | Favicon, imagem Open Graph, `sitemap.xml`, `robots.txt` e auditoria Lighthouse | -                                          |
 | [projects-showcase](projects-showcase/spec.md) | Bloqueada            | Seção de projetos com imagem, repositório e demo                               | Questão de projetos em `OPEN_QUESTIONS.md` |
-| [ux-enhancements](ux-enhancements/spec.md)     | Backlog              | Alternância manual de tema e destaque da seção atual no menu                   | -                                          |
+| [ux-enhancements](ux-enhancements/spec.md)     | Concluída            | Escolha manual de tema e destaque da seção atual no menu                       | -                                          |
 
 ## Status
 

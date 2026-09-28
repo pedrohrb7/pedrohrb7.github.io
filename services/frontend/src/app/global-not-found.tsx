@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { ThemeScript } from "@/components/theme/ThemeScript";
 import { getContent, profile } from "@/content";
 import { fontVariables } from "@/lib/fonts";
 import { defaultLocale, htmlLang, localePath, locales } from "@/lib/i18n";
@@ -17,10 +18,14 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
   return (
-    <html lang={htmlLang[defaultLocale]} className={fontVariables}>
+    // suppressHydrationWarning: ThemeScript sets data-theme on <html> before React hydrates.
+    <html lang={htmlLang[defaultLocale]} className={fontVariables} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <SiteHeader homeHref="/" />
-        <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-16 sm:px-6 sm:py-24">
+        <main className="mx-auto w-full max-w-content flex-1 px-4 py-16 sm:px-6 sm:py-24">
           <h1 className="font-mono text-6xl font-semibold tracking-tight text-accent sm:text-7xl">404</h1>
           <div className="mt-12 grid gap-12 sm:grid-cols-2 sm:gap-8">
             {locales.map((locale) => {

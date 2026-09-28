@@ -4,7 +4,7 @@
 
 ## Princípios
 
-Editorial e sóbrio: coluna única de leitura, muito espaço em branco, tipografia fazendo a hierarquia em vez de cor ou decoração. Um único acento (verde-azulado) para ações e rótulos de seção. Fonte mono para metadados técnicos (datas, stack), reforçando a identidade de desenvolvedor. Tema claro e escuro seguindo o sistema.
+Editorial e sóbrio: coluna única de leitura, muito espaço em branco, tipografia fazendo a hierarquia em vez de cor ou decoração. Um único acento (verde-azulado) para ações e rótulos de seção. Fonte mono para metadados técnicos (datas, stack), reforçando a identidade de desenvolvedor. Tema claro e escuro: segue o sistema por padrão, e o visitante pode fixar um pelo controle de tema no header.
 
 ## Cor
 
@@ -22,6 +22,8 @@ Editorial e sóbrio: coluna única de leitura, muito espaço em branco, tipograf
 | `color.danger` | - | - | Não usado ainda |
 
 Contraste mínimo: texto 4.5:1, texto grande/ícones 3:1 (WCAG AA) contra o token de fundo.
+
+Em `tokens.css` cada cor é `light-dark(<Claro>, <Escuro>)`, e o `color-scheme` do `<html>` escolhe a coluna: segue o sistema por padrão e é fixado por `<html data-theme="light|dark">`. Um tema novo entra como mais uma opção em `src/lib/theme.ts` e um bloco `[data-theme="..."]` em `tokens.css`, e ganha uma coluna nesta tabela.
 
 ## Escala tipográfica
 
@@ -49,7 +51,7 @@ Grade de 4px (escala padrão do Tailwind). Valores usados:
 | `space.lg` | 32px (`8`) |
 | `space.xl` | 48px / 64px (`12` / `16`) - espaçamento entre seções |
 
-Largura de conteúdo: `max-w-3xl` (768px). Margem lateral: 16px no mobile, 24px a partir de `sm`.
+Largura de conteúdo: token `container.content` (`--container-content`, 1024px / `64rem`), usado como `max-w-content` no header, no `main` e no footer. Parágrafos longos continuam limitados a `max-w-prose` para a linha não ficar comprida demais. Margem lateral: 16px no mobile, 24px a partir de `sm`. Menu de seções: 24px entre itens, 32px a partir de `lg`.
 
 ## Breakpoints
 

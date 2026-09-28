@@ -11,20 +11,20 @@
 
 ## Backlog
 
-- [ ] Alternância manual de tema claro/escuro (hoje segue o sistema) - `docs/features/ux-enhancements/`
 - [ ] Seção de projetos com imagens, links de repositório e demo - `docs/features/projects-showcase/`
 - [ ] Dados estruturados JSON-LD (`Person`) nas páginas de idioma (fora do escopo de `docs/features/seo-assets/`)
-- [ ] Reduzir o JavaScript da primeira carga (~190 KiB não usados segundo o Lighthouse mobile; veja `docs/features/seo-assets/lighthouse.md`)
+- [ ] Reduzir o JavaScript da primeira carga (~190 KiB não usados segundo o Lighthouse mobile; veja `docs/features/seo-assets/lighthouse.md`). Prioridade subiu: depois do controle de tema, `/en/` no mobile ficou em 95, no limite da meta
 - [ ] `nginx.conf` manda `Cache-Control: immutable` de 1 ano em `/_next/static/`, e o GitHub Pages manda `max-age=600`; decidir se o container deve imitar isso também
 - [ ] Escolher projetos públicos para a seção de Projetos (questão em aberto em `OPEN_QUESTIONS.md`) - bloqueia `docs/features/projects-showcase/`
-- [ ] Destacar a seção atual no menu durante a rolagem - `docs/features/ux-enhancements/`
 - [ ] Migrar para ESLint 10 e TypeScript 7 quando `eslint-plugin-react` e `typescript-eslint` suportarem (veja `CONSTRAINTS.md`)
 - [ ] Resolver o aviso do npm sobre os scripts de instalação do `unrs-resolver` e do `esbuild` (dependência do `tsx`) (aprovar ou confirmar que não são necessários; o `tsx` funciona hoje sem o script do `esbuild`)
 
 ## Concluídas
 
+- [x] Largura do conteúdo de 768px para 1024px, como token do design system (`--container-content` / `max-w-content`), e mais espaço entre os itens do menu - `docs/features/ux-enhancements/` (2026-09-28)
+- [x] Lista de opções do seletor de tema ilegível no tema escuro (texto claro sobre o fundo branco nativo): cores explícitas no `<select>` e nas opções, com e2e - `docs/features/ux-enhancements/` (2026-09-28)
+- [x] Melhorias de UX: escolha manual de tema (Sistema/Claro/Escuro, `<select>` pronto para mais temas, sem flash) e destaque da seção atual no menu - `docs/features/ux-enhancements/` (2026-09-28)
 - [x] Container: `nginx.conf` com gzip, como o GitHub Pages (sem isso o Lighthouse local dava Performance 83 no mobile) (2026-09-28)
-
 - [x] Geração do PDF decidida: `@react-pdf/renderer` em Node no pós-build, sem Chromium; Playwright descartado (veja `OPEN_QUESTIONS.md`) (2026-09-28)
 - [x] Estrutura de features em `docs/features/` (índice com status, `spec.md` + `plan.md` por feature); `docs/modules/` migrado e referências atualizadas (2026-09-28)
 - [x] Versão do Node fixada pelo `.nvmrc` (24.21.0) em local (`engine-strict`), Docker e CI, com teste que impede divergência (2026-09-28)

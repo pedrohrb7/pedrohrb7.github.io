@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { ThemeScript } from "@/components/theme/ThemeScript";
 import { getContent, profile } from "@/content";
 import { fontVariables } from "@/lib/fonts";
 import { htmlLang, isLocale, localePath, locales } from "@/lib/i18n";
@@ -51,7 +52,11 @@ export default async function LocaleLayout({ children, params }: LocaleParams & 
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={htmlLang[locale]} className={fontVariables}>
+    // suppressHydrationWarning: ThemeScript sets data-theme on <html> before React hydrates.
+    <html lang={htmlLang[locale]} className={fontVariables} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>{children}</body>
     </html>
   );

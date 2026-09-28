@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ProjectList } from "@/components/projects/ProjectList";
 import { SkillGroups } from "@/components/skills/SkillGroups";
+import { ThemeSelect } from "@/components/theme/ThemeSelect";
 import { getContent } from "@/content";
 import { isLocale } from "@/lib/i18n";
 import { Section } from "@/ui/Section";
@@ -29,9 +30,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </a>
       <SiteHeader homeHref="#top">
         <SectionNav ui={ui} />
-        <LanguageSwitcher current={locale} label={ui.languageSwitcher} />
+        <div className="flex items-center gap-2">
+          <ThemeSelect labels={ui.theme} />
+          <LanguageSwitcher current={locale} label={ui.languageSwitcher} />
+        </div>
       </SiteHeader>
-      <main id="main" className="mx-auto max-w-3xl px-4 sm:px-6">
+      <main id="main" className="mx-auto max-w-content px-4 sm:px-6">
         <Hero locale={locale} content={content} />
         <Section id="about" title={ui.sections.about}>
           <div className="max-w-prose space-y-4 text-lg leading-relaxed text-muted">

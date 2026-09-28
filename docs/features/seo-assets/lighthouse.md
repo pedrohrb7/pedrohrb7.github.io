@@ -19,6 +19,19 @@ Notas:
 - A primeira rodada deu Performance 83/84 no mobile porque o `nginx.conf` não comprimia nada, ao contrário do GitHub Pages (que serve com gzip). Com `gzip` ligado no container, o resultado acima passou a ser comparável ao de produção.
 - O elemento LCP é o primeiro parágrafo do "Sobre". O que ainda pesa no mobile é o JavaScript do Next (~190 KiB não usados na primeira carga, segundo o Lighthouse), não o conteúdo.
 
+## 2026-09-28 - container local, após ux-enhancements
+
+Mesmo ambiente, com o controle de tema e o destaque do menu (JavaScript novo no header).
+
+| Página | Dispositivo | Performance | Accessibility | Best Practices | SEO | LCP | TBT |
+|---|---|---|---|---|---|---|---|
+| `/pt/` | mobile | 98 | 100 | 100 | 100 | 1,7 s | 150 ms |
+| `/pt/` | desktop | 100 | 100 | 100 | 100 | 0,5 s | 0 ms |
+| `/en/` | mobile | 95 | 100 | 100 | 100 | 1,7 s | 240 ms |
+| `/en/` | desktop | 100 | 100 | 100 | 100 | 0,5 s | 0 ms |
+
+O TBT no mobile varia entre rodadas (130-240 ms), e é o que separa 95 de 98; `/en/` está no limite da meta.
+
 ## Pendente
 
 - Rodar de novo em https://pedrohrb7.github.io/pt/ e `/en/` depois do deploy e registrar aqui.

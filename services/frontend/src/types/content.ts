@@ -1,3 +1,5 @@
+import type { Theme } from "@/lib/theme";
+
 export type Experience = {
   company: string;
   role: string;
@@ -34,6 +36,7 @@ export type Content = {
     skipToContent: string;
     primaryNav: string;
     languageSwitcher: string;
+    theme: { label: string; options: Record<Theme, string> };
     sections: Record<SectionId, string>;
     contactHeadline: string;
     contactBody: string;

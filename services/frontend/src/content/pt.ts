@@ -10,6 +10,7 @@ export const pt: Content = {
     skipToContent: "Pular para o conteúdo",
     primaryNav: "Navegação principal",
     languageSwitcher: "Idioma",
+    theme: { label: "Tema", options: { system: "Sistema", light: "Claro", dark: "Escuro" } },
     sections: {
       about: "Sobre",
       experience: "Experiência",
