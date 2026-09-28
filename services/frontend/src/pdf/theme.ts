@@ -1,13 +1,7 @@
-/*
- * Design tokens for the resume PDF. react-pdf can't read CSS variables, so the light-theme colors
- * are mirrored from src/styles/tokens.css (checked by theme.test.ts). Sizes are in PDF points.
- */
-export const pdfColors = {
-  fg: "#1c1917",
-  muted: "#57534e",
-  border: "#e7e5e4",
-  accent: "#0f766e",
-} as const;
+import { lightColors } from "@/styles/tokens";
+
+// Design tokens for the resume PDF: light-theme colors from src/styles/tokens.ts. Sizes are in PDF points.
+export const pdfColors = lightColors;
 
 export const pdfFonts = {
   sans: "Geist",

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { getContent, profile } from "@/content";
 import { fontVariables } from "@/lib/fonts";
 import { htmlLang, isLocale, localePath, locales } from "@/lib/i18n";
+import { ogImagePath, ogImageSize, siteIcons } from "@/lib/site-metadata";
 import "@/styles/globals.css";
 
 type LocaleParams = { params: Promise<{ locale: string }> };
@@ -17,11 +18,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const { meta } = getContent(locale);
+  const { meta, title } = getContent(locale);
+  const image = { url: ogImagePath(locale), ...ogImageSize, type: "image/png", alt: `${profile.name} - ${title}` };
   return {
     metadataBase: new URL(profile.siteUrl),
     title: meta.title,
     description: meta.description,
+    icons: siteIcons,
     alternates: {
       canonical: localePath(locale),
       languages: Object.fromEntries(locales.map((l) => [htmlLang[l], localePath(l)])),
@@ -32,6 +35,13 @@ export async function generateMetadata({ params }: LocaleParams): Promise<Metada
       description: meta.description,
       url: localePath(locale),
       locale: htmlLang[locale].replace("-", "_"),
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+      images: [image],
     },
   };
 }

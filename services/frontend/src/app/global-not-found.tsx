@@ -4,12 +4,14 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { getContent, profile } from "@/content";
 import { fontVariables } from "@/lib/fonts";
 import { defaultLocale, htmlLang, localePath, locales } from "@/lib/i18n";
+import { siteIcons } from "@/lib/site-metadata";
 import { ButtonLink } from "@/ui/ButtonLink";
 import "@/styles/globals.css";
 
 // Unmatched URLs have no locale (GitHub Pages serves one 404.html), so the page is bilingual.
 export const metadata: Metadata = {
   title: `404 | ${profile.name}`,
+  icons: siteIcons,
   robots: { index: false },
 };
 

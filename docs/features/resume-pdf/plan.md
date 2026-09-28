@@ -11,7 +11,7 @@ Status: **Em andamento** (fases 1 e 2 concluídas; falta publicar)
 - [x] Decidir a abordagem (2026-09-28).
 - [x] `@react-pdf/renderer` e `tsx` (executa o script em TSX e resolve o alias `@/`) como dependências de desenvolvimento.
 - [x] Geist e Geist Mono em TTF vindas do pacote `geist` (versionado no `package.json`, sem binário no repositório), registradas em `src/pdf/fonts.ts`.
-- [x] Documento A4 em `src/pdf/ResumeDocument.tsx` lendo `getContent(locale)` e `profile`; cores do tema claro espelhadas em `src/pdf/theme.ts` (o teste `theme.test.ts` compara com `tokens.css`). Rodapé com nome, site e número de página.
+- [x] Documento A4 em `src/pdf/ResumeDocument.tsx` lendo `getContent(locale)` e `profile`; cores do tema claro vindas de `src/styles/tokens.ts` (o teste `tokens.test.ts` compara com `tokens.css`). Rodapé com nome, site e número de página.
 - [x] `scripts/generate-resume-pdf.ts` no `postbuild`, escrevendo `out/pedro-borges-curriculo.pdf` e `out/pedro-borges-resume.pdf` (nomes em `src/lib/resume-pdf.ts`). Cada PDF tem 2 páginas e ~48 KB.
 - [x] `src/pdf/render.test.ts` extrai o texto (`unpdf`) e confere nome, título, contatos, seções, entradas, ausência de telefone e no máximo 2 páginas.
 - [x] Validado no build local, no e2e (que roda o build) e no container nginx (`application/pdf`, 200).
