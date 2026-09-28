@@ -27,8 +27,10 @@ Nomes fixos (sem hash) para que o link possa ser compartilhado diretamente.
 
 ## Interface
 
-- Botão "Baixar currículo (PDF)" / "Download resume (PDF)" no hero, ao lado dos links, usando `ButtonLink` com o atributo `download`.
+- Botão "Baixar currículo (PDF)" / "Download resume (PDF)" no hero, usando `ButtonLink` com o atributo `download`.
+- A partir de `md` (768px), fica alinhado à direita, na mesma linha dos links de contato (e-mail, GitHub, LinkedIn), que ficam à esquerda. Abaixo de `md`, desce para a linha de baixo, alinhado à esquerda.
 - O link aponta sempre para o PDF do idioma da página.
+- No `npm run dev` o link dá 404: os PDFs só existem depois do `npm run build`.
 
 ## Critérios de aceite
 

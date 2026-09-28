@@ -32,7 +32,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <LanguageSwitcher current={locale} label={ui.languageSwitcher} />
       </SiteHeader>
       <main id="main" className="mx-auto max-w-3xl px-4 sm:px-6">
-        <Hero content={content} />
+        <Hero locale={locale} content={content} />
         <Section id="about" title={ui.sections.about}>
           <div className="max-w-prose space-y-4 text-lg leading-relaxed text-muted">
             {content.about.map((paragraph) => (

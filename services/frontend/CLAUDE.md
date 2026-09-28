@@ -8,6 +8,8 @@
 - `src/ui/` - primitivos genéricos. `src/components/<feature>/` - uma pasta por seção da página.
 - `src/lib/i18n.ts` - locales, detecção de idioma e caminhos. `src/lib/fonts.ts` - fontes via `next/font`.
 - `src/styles/tokens.css` - tokens de design (espelho do `DESIGN_SYSTEM.md` da raiz).
+- `src/pdf/` - currículo em PDF (`@react-pdf/renderer`): `ResumeDocument.tsx` lê o mesmo `Content`/`profile` do site, `theme.ts` copia as cores do tema claro, `fonts.ts` registra a Geist em TTF do pacote `geist`. Nunca é importado pelo site (só roda em Node). `src/lib/resume-pdf.ts` guarda os nomes dos arquivos, que o site pode importar.
+- `scripts/generate-resume-pdf.ts` - roda no `postbuild` (via `tsx`) e grava um PDF por idioma em `out/`.
 
 ## Convenções
 
@@ -31,6 +33,8 @@
 - `next/font/google` baixa as fontes no build; builds offline falham.
 - Para trocar a versão do Node, altere o `.nvmrc` da raiz, o `ARG NODE_VERSION` do `Dockerfile` e o `engines` do `package.json` juntos, e rode `npm install --package-lock-only` com o Node novo. O teste `test/config/node-version.test.ts` falha se algum ficar para trás.
 - `globalNotFound` ainda é experimental no Next 16. Ao atualizar o Next, confira se a flag mudou de nome ou saiu do `experimental` (o teste e2e "not found page" acusa se a 404 quebrar).
+- react-pdf (`src/pdf/`): um elemento `fixed` com `render` (o número da página no rodapé) some inteiro se herdar qualquer `lineHeight`, por isso o `lineHeight` fica num `View` de conteúdo e não na `Page`. `lineHeight` sem unidade num `View` é calculado sobre o `fontSize` do próprio `View` (18pt por padrão), então repita o `fontSize` junto. `minPresenceAhead` só funciona em elemento que tem irmãos antes dele e que não está sendo dividido; para manter um título junto do conteúdo, use `wrap={false}` num bloco com os dois. Confira qualquer mudança de layout renderizando o PDF (`pdftoppm -png out/pedro-borges-curriculo.pdf /tmp/cv`).
+- Testes que usam `node:fs` com `import.meta.url` ou geram PDF precisam de `// @vitest-environment node` no topo: no jsdom o `import.meta.url` não é `file://`.
 - O container (`Dockerfile` + `nginx.conf`) imita o GitHub Pages: redirect `/pt` -> `/pt/` relativo (`absolute_redirect off`, senão perde a porta 8080) e `404.html` para rotas inexistentes. Mudou o comportamento de um, confira o outro.
 
 ## Referência

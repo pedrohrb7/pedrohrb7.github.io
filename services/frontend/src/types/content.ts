@@ -38,6 +38,7 @@ export type Content = {
     contactHeadline: string;
     contactBody: string;
     emailCta: string;
+    resumeCta: string;
     stackLabel: string;
     notFound: { title: string; body: string; backHome: string };
   };

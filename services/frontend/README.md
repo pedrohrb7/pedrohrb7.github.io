@@ -28,7 +28,7 @@ Não há `.env`.
 npm run dev
 ```
 
-Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`). Ou, pela raiz do projeto, o build de produção via nginx: `cd services && docker-compose up frontend` (em `http://localhost:8080`).
+Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`). No modo dev o botão "Baixar currículo (PDF)" dá 404, porque os PDFs só são gerados no `npm run build`; para testá-lo use `npm run build && npm run preview` ou o container. Ou, pela raiz do projeto, o build de produção via nginx: `cd services && docker-compose up frontend` (em `http://localhost:8080`).
 
 ## Testes
 
@@ -43,9 +43,11 @@ npm run typecheck
 ## Build
 
 ```
-npm run build     # gera out/
+npm run build     # gera out/, incluindo os currículos em PDF (postbuild)
 npm run preview   # serve out/ em http://localhost:3000, igual ao GitHub Pages
 ```
+
+O `postbuild` grava `out/pedro-borges-curriculo.pdf` (PT) e `out/pedro-borges-resume.pdf` (EN) a partir de `src/content/`. Para regerar só os PDFs depois de um build: `npx tsx scripts/generate-resume-pdf.ts`.
 
 ## Variáveis de ambiente
 

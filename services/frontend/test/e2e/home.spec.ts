@@ -41,6 +41,29 @@ test.describe("not found page", () => {
   });
 });
 
+test.describe("resume PDF", () => {
+  const cases = [
+    { path: "/pt/", name: "Baixar currículo (PDF)", file: "pedro-borges-curriculo.pdf" },
+    { path: "/en/", name: "Download resume (PDF)", file: "pedro-borges-resume.pdf" },
+  ];
+
+  for (const { path, name, file } of cases) {
+    test(`downloads the ${file} from ${path}`, async ({ page }) => {
+      await page.goto(path);
+      const link = page.getByRole("link", { name });
+      await expect(link).toHaveAttribute("href", `/${file}`);
+
+      const [download] = await Promise.all([page.waitForEvent("download"), link.click()]);
+      expect(download.suggestedFilename()).toBe(file);
+
+      const response = await page.request.get(`/${file}`);
+      expect(response.status()).toBe(200);
+      expect(response.headers()["content-type"]).toBe("application/pdf");
+      expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");
+    });
+  }
+});
+
 test.describe("home page", () => {
   test("renders every section with content", async ({ page }) => {
     await page.goto("/pt/");

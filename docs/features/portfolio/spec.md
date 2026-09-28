@@ -2,7 +2,7 @@
 
 ## O que faz
 
-Página única por idioma com as seções: hero (título, nome, localização, links), Sobre, Experiência, Projetos, Habilidades, Formação e Contato. Header fixo com menu de âncoras (a partir de `md`) e seletor PT/EN.
+Página única por idioma com as seções: hero (título, nome, localização, links e download do currículo em PDF - veja `docs/features/resume-pdf/`), Sobre, Experiência, Projetos, Habilidades, Formação e Contato. Header fixo com menu de âncoras (a partir de `md`) e seletor PT/EN.
 
 ## Rotas
 

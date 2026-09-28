@@ -2,11 +2,10 @@
 
 ## Em andamento
 
-- [ ] Nenhuma
+- [ ] Currículo em PDF por idioma gerado no build a partir de `src/content/` com `@react-pdf/renderer`, com link de download no site (sem telefone) - `docs/features/resume-pdf/`. Geração (fase 1) e botão de download no hero (fase 2) concluídos; falta publicar e conferir no CI e no GitHub Pages (fase 3)
 
 ## Próximas
 
-- [ ] Currículo em PDF por idioma gerado no build a partir de `src/content/` com `@react-pdf/renderer`, com link de download no site (sem telefone) - `docs/features/resume-pdf/`
 - [ ] Atualizar o `resume.md` do repositório `pedrohrb7/pedrohrb7`: formação concluída, título "Desenvolvedor Full-Stack", Java/Spring Boot no resumo, habilidades reorganizadas
 - [ ] Adicionar favicon e imagem Open Graph (1200x630) por idioma - `docs/features/seo-assets/`
 - [ ] Rodar Lighthouse nas duas versões e registrar o resultado - `docs/features/seo-assets/`
@@ -19,7 +18,7 @@
 - [ ] Escolher projetos públicos para a seção de Projetos (questão em aberto em `OPEN_QUESTIONS.md`) - bloqueia `docs/features/projects-showcase/`
 - [ ] Destacar a seção atual no menu durante a rolagem - `docs/features/ux-enhancements/`
 - [ ] Migrar para ESLint 10 e TypeScript 7 quando `eslint-plugin-react` e `typescript-eslint` suportarem (veja `CONSTRAINTS.md`)
-- [ ] Resolver o aviso do npm sobre o script de instalação do `unrs-resolver` (aprovar ou confirmar que não é necessário)
+- [ ] Resolver o aviso do npm sobre os scripts de instalação do `unrs-resolver` e do `esbuild` (dependência do `tsx`) (aprovar ou confirmar que não são necessários; o `tsx` funciona hoje sem o script do `esbuild`)
 
 ## Concluídas
 

@@ -1,6 +1,6 @@
 # Design System - Portfolio Pedro Borges
 
-<!-- Fonte da verdade para UI. Espelhado em services/frontend/src/styles/tokens.css - altere os dois juntos. -->
+<!-- Fonte da verdade para UI. Espelhado em services/frontend/src/styles/tokens.css - altere os dois juntos. As cores do tema claro também são copiadas em services/frontend/src/pdf/theme.ts (currículo em PDF); o teste theme.test.ts acusa divergência com tokens.css. -->
 
 ## Princípios
 

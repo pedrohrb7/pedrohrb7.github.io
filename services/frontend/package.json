@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "tsx scripts/generate-resume-pdf.ts",
     "preview": "serve out -l 3000",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
+    "@react-pdf/renderer": "4.9.0",
     "@tailwindcss/postcss": "4.3.3",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.3",
@@ -32,10 +34,13 @@
     "@vitejs/plugin-react": "6.1.1",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.6",
+    "geist": "1.7.2",
     "jsdom": "30.1.1",
     "serve": "14.2.6",
     "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
     "typescript": "6.0.3",
+    "unpdf": "1.8.1",
     "vitest": "5.0.2"
   }
 }
