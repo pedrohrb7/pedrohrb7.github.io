@@ -1,6 +1,6 @@
 # Plano - SEO e assets
 
-Status: **Em andamento** (implementado e validado localmente; falta conferir no site publicado)
+Status: **Concluída** (2026-09-28, publicada). Performance mobile no site publicado fica no limite da meta (mediana 95-96); a margem depende do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`.
 
 ## Fase 1 - Ícones e Open Graph (concluída em 2026-09-28)
 
@@ -17,11 +17,11 @@ Decisão: as imagens são route handlers com `.png` no nome em vez das convenç�
 - [x] `sitemap.xml` com `/pt/` e `/en/` e alternates hreflang, gerado de `locales` e `profile.siteUrl` (`src/app/sitemap.ts`). Não lista `/` nem a 404.
 - [x] `robots.txt` permitindo tudo e apontando para o sitemap (`src/app/robots.ts`).
 - [x] Conferido no build, no e2e e no container nginx (`text/xml`, `text/plain`).
-- [ ] Conferir no GitHub Pages depois do deploy.
+- [x] Conferido no GitHub Pages (2026-09-28): `icon.svg`, `apple-touch-icon.png`, `og-image.png` dos dois idiomas, `sitemap.xml` e `robots.txt` respondendo 200 com o `Content-Type` certo.
 
 ## Fase 3 - Auditoria
 
 - [x] Lighthouse mobile e desktop em `/pt/` e `/en/` no container local: tudo >= 95 (veja `lighthouse.md`).
 - [x] Corrigido o que ficou abaixo de 95: o `nginx.conf` não comprimia os arquivos, ao contrário do GitHub Pages; `gzip` ligado.
-- [ ] Rodar de novo no site publicado e registrar em `lighthouse.md`.
-- [x] Atualizar `TASKS.md` e o índice em `docs/features/README.md`.
+- [x] Rodado no site publicado e registrado em `lighthouse.md` (2026-09-28): desktop 100 em tudo; mobile com Accessibility, Best Practices e SEO 100 e Performance entre 94 e 97 (mediana 96 em `/pt/`, 95 em `/en/`).
+- [x] Atualizar o índice em `docs/features/README.md`.

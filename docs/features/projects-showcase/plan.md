@@ -22,4 +22,4 @@ Status: **Bloqueada** (aguarda a questão de projetos em `OPEN_QUESTIONS.md`)
 ## Fase 3 - Fechamento
 
 - [ ] Rodar Lighthouse de novo e atualizar `docs/features/seo-assets/lighthouse.md`.
-- [ ] Atualizar `TASKS.md` e o índice em `docs/features/README.md`.
+- [ ] Atualizar o índice em `docs/features/README.md` e o escopo do `PRD.md`.

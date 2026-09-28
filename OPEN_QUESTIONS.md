@@ -39,7 +39,7 @@
 - **Decisão:** Sim, um PDF por idioma gerado no build a partir do mesmo conteúdo do site (`src/content/`).
 - **Data:** 2026-09-28
 - **Motivo:** Recrutadores pedem PDF; gerar no build garante que nunca diverge do site.
-- **Levado para:** `TASKS.md` (Próximas), `PRD.md` (Escopo)
+- **Levado para:** `docs/features/resume-pdf/`, `PRD.md` (Escopo)
 
 ### Como gerar o PDF do currículo no build?
 
@@ -56,6 +56,16 @@
 - **Decisão:** Não. Manter `https://pedrohrb7.github.io`.
 - **Data:** 2026-09-28
 - **Motivo:** Custo zero e sem manutenção de DNS.
+
+### Adotar shadcn/ui no frontend?
+
+- **Status:** resolvida
+- **Decisão:** Não adotar agora. Os componentes continuam próprios (`src/ui/`, `src/components/`) sobre os tokens do `DESIGN_SYSTEM.md`. Quando uma feature precisar de um componente interativo complexo (dialog, popover, dropdown estilizado, tooltip, galeria), adicionar só aquele componente pela CLI do shadcn, com as cores trocadas pelos nossos tokens, sem adotar a biblioteca inteira nem renomear o design system.
+- **Data:** 2026-09-28
+- **Motivo:** O site quase não tem componentes interativos (botões-link, tags, seletor de idioma por links, `<select>` nativo de tema, menu de âncoras), que é onde o shadcn/Radix ajuda. O JavaScript é o ponto fraco atual (Lighthouse mobile de `/en/` em 95, no limite da meta), e Radix + `lucide-react` + `class-variance-authority` + `tailwind-merge` + `clsx` aumentariam o bundle. As convenções de token do shadcn (`background`/`foreground`, `primary`, `muted` como fundo) conflitam com as nossas (`muted` é cor de texto), e o visual padrão teria de ser reestilizado para o design editorial de qualquer jeito.
+- **Único ganho hoje:** controle total do visual da lista do seletor de tema (a lista nativa não aceita estilização completa). Não compensa o JS extra para três opções.
+- **Revisitar quando:** `docs/features/projects-showcase/` (ou outra feature) precisar de modal, galeria ou outro componente interativo complexo.
+- **Levado para:** `services/frontend/CLAUDE.md` (Convenções)
 
 ### Quais projetos pessoais/open source entram na seção de Projetos?
 

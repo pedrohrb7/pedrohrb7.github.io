@@ -28,4 +28,4 @@ As duas partes são independentes.
 
 - [x] Conferido em captura de tela: header claro e escuro, tema salvo contra o sistema oposto, desktop e 360px, item do menu destacado.
 - [x] Lighthouse no container: mobile 98 (PT) e 95 (EN), desktop 100; Accessibility, Best Practices e SEO 100 (registrado em `docs/features/seo-assets/lighthouse.md`).
-- [x] Atualizar `TASKS.md` e o índice em `docs/features/README.md`.
+- [x] Atualizar o índice em `docs/features/README.md`.

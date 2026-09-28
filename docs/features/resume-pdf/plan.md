@@ -1,6 +1,6 @@
 # Plano - Currículo em PDF
 
-Status: **Em andamento** (fases 1 e 2 concluídas; falta publicar)
+Status: **Concluída** (2026-09-28, publicada)
 
 ## Decisão técnica
 
@@ -23,10 +23,11 @@ Status: **Em andamento** (fases 1 e 2 concluídas; falta publicar)
 - [x] Botão no hero apontando para `resumePdfPath(locale)`. A partir de `md`, os links de contato (e-mail, GitHub, LinkedIn) ficam à esquerda e o PDF à direita; abaixo de `md`, o PDF desce para a linha de baixo, alinhado à esquerda.
 - [x] E2E (desktop e mobile): link com o `href` do idioma, clique dispara o download com o nome certo e o arquivo responde 200 com `application/pdf` e começa com `%PDF-`.
 - [x] Conferido em captura de tela a 1280, 768, 767 e 360px, e no container nginx.
+- [x] Download testado manualmente pelo Pedro em PT e EN: funcionando (2026-09-28).
 
-## Fase 3 - Publicação
+## Fase 3 - Publicação (concluída em 2026-09-28)
 
 - [x] `Dockerfile` gera os PDFs sem mudança (o `npm run build` dispara o `postbuild`); validado em 2026-09-28.
-- [ ] Confirmar a geração no CI (`.github/workflows/deploy.yml`) no primeiro push; o workflow já roda `npm run build` via e2e, sem mudança prevista.
-- [ ] Conferir os PDFs publicados em https://pedrohrb7.github.io.
-- [ ] Atualizar `PRD.md`, `TASKS.md` e o índice em `docs/features/README.md`.
+- [x] Geração no CI (`.github/workflows/deploy.yml`) confirmada: o deploy só publica o `out/` depois do job de verificação, que roda o build; os PDFs estão no ar.
+- [x] PDFs publicados em https://pedrohrb7.github.io/pedro-borges-curriculo.pdf e `/pedro-borges-resume.pdf` (200, `application/pdf`), botão presente em `/pt/` e `/en/`; download testado pelo Pedro no site publicado.
+- [x] Atualizar `PRD.md` e o índice em `docs/features/README.md`.

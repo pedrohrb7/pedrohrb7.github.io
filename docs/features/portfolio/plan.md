@@ -1,6 +1,6 @@
 # Plano - Página do portfolio
 
-Status: **Concluída** (os próximos passos viraram features próprias, veja `docs/features/README.md`)
+Status: **Em andamento** (site no ar; falta sincronizar a fonte do conteúdo, fase 4. Os demais próximos passos viraram features próprias, veja `docs/features/README.md`)
 
 ## Fase 1 - Base (concluída em 2026-09-28)
 
@@ -21,3 +21,9 @@ Status: **Concluída** (os próximos passos viraram features próprias, veja `do
 - Feito (2026-09-28): título "Desenvolvedor Full-Stack", Java/Spring Boot no "Sobre", habilidades reorganizadas.
 - Feito (2026-09-28): questões de formação, telefone, PDF e domínio resolvidas (veja `OPEN_QUESTIONS.md`). Projetos seguem em aberto.
 - Movido para features próprias: currículo em PDF (`docs/features/resume-pdf/`), sitemap (`docs/features/seo-assets/`), seção de projetos rica (`docs/features/projects-showcase/`), tema manual (`docs/features/ux-enhancements/`).
+
+## Fase 4 - Sincronizar a fonte do conteúdo (próxima)
+
+O conteúdo do site foi derivado do `resume.md` do repositório de perfil `pedrohrb7/pedrohrb7`, mas as mudanças da fase 3 foram feitas só em `src/content/`.
+
+- [ ] Atualizar o `resume.md` do repositório `pedrohrb7/pedrohrb7`: formação concluída, título "Desenvolvedor Full-Stack", Java/Spring Boot no resumo, habilidades reorganizadas.

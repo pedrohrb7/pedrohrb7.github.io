@@ -9,24 +9,25 @@ Mapa das funcionalidades do site: o que já existe e os próximos passos. Cada f
 
 | Feature                                        | Status               | Resumo                                                                         | Depende de                                 |
 | ---------------------------------------------- | -------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
-| [portfolio](portfolio/spec.md)                 | Concluída (v1 no ar) | Página única por idioma com as seções do currículo e seletor PT/EN             | -                                          |
-| [resume-pdf](resume-pdf/spec.md)               | Em andamento         | Currículo em PDF por idioma gerado no build a partir de `src/content/`         | -                                          |
-| [seo-assets](seo-assets/spec.md)               | Em andamento         | Favicon, imagem Open Graph, `sitemap.xml`, `robots.txt` e auditoria Lighthouse | -                                          |
+| [portfolio](portfolio/spec.md)                 | Em andamento         | Página única por idioma com as seções do currículo e seletor PT/EN (no ar)     | -                                          |
+| [resume-pdf](resume-pdf/spec.md)               | Concluída (no ar)    | Currículo em PDF por idioma gerado no build a partir de `src/content/`         | -                                          |
+| [seo-assets](seo-assets/spec.md)               | Concluída (no ar)    | Favicon, imagem Open Graph, `sitemap.xml`, `robots.txt` e auditoria Lighthouse | -                                          |
 | [projects-showcase](projects-showcase/spec.md) | Bloqueada            | Seção de projetos com imagem, repositório e demo                               | Questão de projetos em `OPEN_QUESTIONS.md` |
-| [ux-enhancements](ux-enhancements/spec.md)     | Concluída            | Escolha manual de tema e destaque da seção atual no menu                       | -                                          |
+| [ux-enhancements](ux-enhancements/spec.md)     | Concluída (no ar)    | Escolha manual de tema e destaque da seção atual no menu                       | -                                          |
+| [structured-data](structured-data/spec.md)     | Backlog              | Dados estruturados JSON-LD (`ProfilePage`/`Person`) nas páginas de idioma      | -                                          |
 
 ## Status
 
 - **Backlog** - mapeada, sem prioridade definida.
 - **Próxima** - priorizada; é a próxima a entrar em andamento.
-- **Em andamento** - tem passo aberto no `plan.md` e item em "Em andamento" no `TASKS.md`.
+- **Em andamento** - tem passo aberto no `plan.md` sendo trabalhado.
 - **Bloqueada** - depende de uma decisão ou de outra feature (coluna "Depende de").
 - **Concluída** - todos os passos do `plan.md` feitos e testados.
 
 ## Convenções
 
 - Nome da pasta em inglês e kebab-case; conteúdo em português.
-- Nova feature: crie a pasta com `spec.md` e `plan.md`, adicione uma linha no índice acima, uma linha no escopo do `PRD.md` e os itens no `TASKS.md` apontando para a pasta.
-- Ao mudar de status, atualize o índice, o `plan.md` e o `TASKS.md` juntos.
+- Nova feature: crie a pasta com `spec.md` e `plan.md`, adicione uma linha no índice acima e uma linha no escopo do `PRD.md`.
+- Ao mudar de status, atualize o índice e o `plan.md` juntos. Este índice é o painel do trabalho em features; bugs e refactors ficam em `docs/backlog/`.
 - Decisões em aberto de uma feature vão para o `OPEN_QUESTIONS.md` da raiz; o `plan.md` só aponta para elas.
 - Tudo que uma feature fizer precisa respeitar o `CONSTRAINTS.md` (site 100% estático, paridade PT/EN, sem telefone).
