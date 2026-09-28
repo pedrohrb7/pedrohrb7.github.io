@@ -36,3 +36,18 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 }
+
+/*
+ * `dark:` utilities follow the effective scheme, same rule as the colors above: a forced data-theme wins,
+ * otherwise the system preference. Pure CSS, so it is right from the first paint.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) *) {
+      @slot;
+    }
+  }
+}

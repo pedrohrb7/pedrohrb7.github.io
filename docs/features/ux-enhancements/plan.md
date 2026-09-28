@@ -24,6 +24,8 @@ As duas partes são independentes.
 - [x] Lista de opções do tema ilegível no escuro (texto claro sobre o fundo branco nativo): cores explícitas no `<select>` e nas `<option>`, com e2e.
 - [x] Container de 768px para 1024px (token `--container-content`; 896px numa primeira rodada, aumentado depois) e mais espaço entre os itens do menu; conferido em 768, 1024, 1280 e 1440px, sem overflow.
 
+- [x] Seletor de tema refeito a pedido: o `<select>` nativo virou um listbox próprio estilizado com os tokens (ícone por opção, ✓ na selecionada, destaque no acento), e o botão passou a mostrar o esquema em vigor (sol/lua, via variante CSS `dark:`) com uma seta. Testes unitários de teclado, clique fora e seleção; e2e de teclado, visual (fundo, raio, dentro da tela em 360px) e ícone certo mesmo com os scripts bloqueados. Conferido em captura de tela, claro e escuro, desktop e 360px.
+
 ## Fase 3 - Fechamento (concluída em 2026-09-28)
 
 - [x] Conferido em captura de tela: header claro e escuro, tema salvo contra o sistema oposto, desktop e 360px, item do menu destacado.

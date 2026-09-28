@@ -5,13 +5,31 @@ const light = "rgb(250, 250, 249)";
 
 const background = (page: Page) => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
 
+const themeButton = (page: Page, name = "Tema") => page.getByRole("combobox", { name });
+
+async function chooseTheme(page: Page, option: string, name = "Tema") {
+  await themeButton(page, name).click();
+  await page.getByRole("listbox", { name }).getByRole("option", { name: option }).click();
+}
+
+const selected = (page: Page, name = "Tema") =>
+  page.getByRole("listbox", { name, includeHidden: true }).getByRole("option", { selected: true, includeHidden: true });
+
+// The trigger shows the effective scheme: exactly one of these is visible.
+const visibleIcon = (page: Page) =>
+  themeButton(page).evaluate((button) => {
+    const [sun, moon] = [...button.querySelectorAll("span")].slice(0, 2);
+    return getComputedStyle(sun).display !== "none" ? "sun" : getComputedStyle(moon).display !== "none" ? "moon" : "none";
+  });
+
 test.describe("theme", () => {
   test("follows the system until a theme is chosen", async ({ browser }) => {
     const context = await browser.newContext({ colorScheme: "dark" });
     const page = await context.newPage();
     await page.goto("/pt/");
-    await expect(page.getByRole("combobox", { name: "Tema" })).toHaveValue("system");
+    await expect(selected(page)).toHaveText("Sistema");
     expect(await background(page)).toBe(dark);
+    expect(await visibleIcon(page)).toBe("moon");
     await context.close();
   });
 
@@ -19,25 +37,68 @@ test.describe("theme", () => {
     const context = await browser.newContext({ colorScheme: "dark" });
     const page = await context.newPage();
     await page.goto("/pt/");
-    await page.getByRole("combobox", { name: "Tema" }).selectOption("light");
+    await chooseTheme(page, "Claro");
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
     expect(await background(page)).toBe(light);
+    // Forced light on a dark system: the icon follows the effective scheme, not the system.
+    expect(await visibleIcon(page)).toBe("sun");
 
     await page.reload();
     expect(await background(page)).toBe(light);
 
     await page.getByRole("navigation", { name: "Idioma" }).getByRole("link", { name: "EN" }).click();
     await expect(page).toHaveURL(/\/en\/$/);
-    await expect(page.getByRole("combobox", { name: "Theme" })).toHaveValue("light");
+    await expect(selected(page, "Theme")).toHaveText("Light");
     expect(await background(page)).toBe(light);
 
     await page.goto("/pagina-que-nao-existe/");
     expect(await background(page)).toBe(light);
 
     await page.goto("/en/");
-    await page.getByRole("combobox", { name: "Theme" }).selectOption("system");
+    await chooseTheme(page, "System", "Theme");
     await expect(page.locator("html")).not.toHaveAttribute("data-theme");
     expect(await background(page)).toBe(dark);
+    await context.close();
+  });
+
+  test("the theme list works with the keyboard and closes outside", async ({ page }) => {
+    await page.goto("/pt/");
+    const list = page.getByRole("listbox", { name: "Tema" });
+    await themeButton(page).focus();
+    await page.keyboard.press("ArrowDown");
+    await expect(list).toBeVisible();
+    await page.keyboard.press("End");
+    await page.keyboard.press("Enter");
+    await expect(list).toBeHidden();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(themeButton(page)).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await expect(list).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(list).toBeHidden();
+
+    await themeButton(page).click();
+    await page.mouse.click(10, 400);
+    await expect(list).toBeHidden();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("the theme list uses the site tokens and stays inside the viewport", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "dark", viewport: { width: 360, height: 740 } });
+    const page = await context.newPage();
+    await page.goto("/pt/");
+    await themeButton(page).click();
+    const list = page.getByRole("listbox", { name: "Tema" });
+    const style = await list.evaluate((element) => {
+      const css = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      return { background: css.backgroundColor, radius: css.borderRadius, left: box.left, right: box.right };
+    });
+    expect(style.background).toBe("rgb(28, 25, 23)");
+    expect(style.radius).toBe("6px");
+    expect(style.left).toBeGreaterThanOrEqual(0);
+    expect(style.right).toBeLessThanOrEqual(360);
     await context.close();
   });
 
@@ -50,21 +111,8 @@ test.describe("theme", () => {
     await page.goto("/pt/");
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     expect(await background(page)).toBe(dark);
-    await context.close();
-  });
-
-  test("the native option list is readable in dark mode", async ({ browser }) => {
-    // Form controls inherit the text color (Tailwind preflight); without an explicit background the native
-    // popup showed light text on the browser's white default.
-    const context = await browser.newContext({ colorScheme: "dark" });
-    const page = await context.newPage();
-    await page.goto("/pt/");
-    const option = page.getByRole("combobox", { name: "Tema" }).locator("option").first();
-    const colors = await option.evaluate((element) => {
-      const style = getComputedStyle(element);
-      return { color: style.color, background: style.backgroundColor };
-    });
-    expect(colors).toEqual({ color: "rgb(245, 245, 244)", background: "rgb(28, 25, 23)" });
+    // The icon is decided in CSS, so it is right without React too.
+    expect(await visibleIcon(page)).toBe("moon");
     await context.close();
   });
 

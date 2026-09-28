@@ -76,6 +76,8 @@ Largura de conteúdo: token `container.content` (`--container-content`, 1024px /
 - `src/ui/` guarda primitivos genéricos (`Section`, `TagList`, `ButtonLink`); `src/components/<feature>/` guarda composições de uma seção.
 - Nenhuma cor, tamanho ou espaçamento avulso: use os tokens acima; se faltar um, adicione aqui e em `tokens.css`.
 - Links externos usam `ButtonLink` com `external`, que aplica `target="_blank"` e `rel="noopener noreferrer"`.
+- Listas suspensas (ex.: seletor de tema): `bg-surface`, borda `border-border`, raio `radius.md`, `p-1`, sem sombra; opções com `min-h-9`, `px-3`, ícone de 16px à esquerda; opção ativa (teclado ou ponteiro) com fundo `accent/10`, selecionada em `text-accent` com ✓ à direita; sem transição de cor nas opções. Botão de abrir com seta de 12px que gira ao abrir.
+- O que depende do esquema em vigor (claro/escuro) usa a variante `dark:`, que segue a escolha manual e, sem ela, o sistema.
 
 ## Acessibilidade
 

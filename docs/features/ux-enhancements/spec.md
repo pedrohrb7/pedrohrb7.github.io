@@ -8,14 +8,16 @@ Duas melhorias independentes de navegação e leitura.
 
 Antes o tema seguia só `prefers-color-scheme`.
 
-- Controle no header (`ThemeSelect`), ao lado do seletor de idioma, em todas as larguras: um botão compacto com o ícone do tema atual (monitor, sol, lua) sobre um `<select>` nativo com as opções Sistema, Claro e Escuro. Padrão: Sistema.
-- Foi um `<select>` para suportar mais temas no futuro: a lista vem de `themes` em `src/lib/theme.ts`, e um tema novo é mais uma opção, sem mudar o controle. O `<select>` nativo também dá teclado, leitor de tela e o seletor nativo do celular sem código de menu próprio.
+- Controle no header (`ThemeSelect`), ao lado do seletor de idioma, em todas as larguras: um botão compacto com o ícone do esquema em vigor (sol ou lua, inclusive em "Sistema") e uma seta, que abre uma lista com Sistema, Claro e Escuro. Padrão: Sistema.
+- O ícone do botão é decidido só por CSS, com a variante `dark:` (que segue `data-theme` e, sem ele, `prefers-color-scheme`), então está certo desde a primeira pintura, sem piscar.
+- A lista é um listbox próprio (padrão WAI-ARIA "select-only combobox"): botão com `role="combobox"`, `aria-expanded` e `aria-activedescendant`; lista com `role="listbox"` e opções com `aria-selected`. Teclado: setas, Home/End, Enter/Espaço, Esc, Tab e digitar a inicial. Fecha ao clicar fora. Cada opção tem seu ícone (monitor, sol, lua); a selecionada fica no acento com ✓, a ativa com fundo `accent/10`; lista com `bg-surface`, borda e raio `md`, alinhada à direita do botão.
+- Suporta mais temas no futuro: a lista vem de `themes` em `src/lib/theme.ts`, e um tema novo é mais uma opção.
+- Histórico: a primeira versão usava um `<select>` nativo invisível sobre o ícone. A lista nativa não aceita estilização (espaçamento, cantos, destaque) e ficou crua, então foi trocada pelo listbox próprio (~2,3 KiB com gzip de código nosso, em vez dos ~25 KiB do Select do shadcn/Radix; veja o `OPEN_QUESTIONS.md`).
 - A escolha persiste no `localStorage` (chave `theme`; "Sistema" apaga a chave) e vale para os dois idiomas, `/` e a 404. Mudanças em outra aba são aplicadas na hora.
 - Sem flash de tema errado: um script inline no `<head>` dos três layouts raiz aplica `data-theme` no `<html>` antes da primeira pintura.
 - Sem JS, o site segue o sistema.
 - Cores: cada token em `tokens.css` é `light-dark(<claro>, <escuro>)`. O `color-scheme` do `<html>` escolhe o lado: `light dark` por padrão (segue o sistema) e fixo quando há `data-theme`. Um tema futuro que não seja só claro/escuro ganha um bloco `[data-theme="..."]` sobrescrevendo as variáveis.
-- Rótulo e opções em `Content.ui.theme`; nome acessível "Tema"/"Theme"; foco visível no botão; mesma altura e borda do seletor de idioma.
-- O `<select>` e as `<option>` têm `bg-surface text-fg` explícitos: o preflight do Tailwind faz os controles herdarem a cor do texto com fundo transparente, e no tema escuro a lista nativa aparecia com texto claro sobre o fundo branco padrão do navegador.
+- Rótulo e opções em `Content.ui.theme`; nome acessível "Tema"/"Theme"; foco visível no botão só pelo teclado; mesma altura e borda do seletor de idioma.
 
 ## 2. Destaque da seção atual no menu
 
