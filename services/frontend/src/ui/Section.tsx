@@ -1,0 +1,19 @@
+import type { ReactNode } from "react";
+
+type SectionProps = {
+  id: string;
+  title: string;
+  children: ReactNode;
+};
+
+export function Section({ id, title, children }: SectionProps) {
+  const headingId = `${id}-heading`;
+  return (
+    <section id={id} aria-labelledby={headingId} className="scroll-mt-20 border-t border-border py-12 sm:py-16">
+      <h2 id={headingId} className="mb-8 font-mono text-sm font-medium tracking-wide text-accent uppercase">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}

@@ -1,0 +1,121 @@
+import type { Content } from "@/types/content";
+
+export const pt: Content = {
+  meta: {
+    title: "Pedro Borges | Desenvolvedor Full-Stack",
+    description:
+      "Desenvolvedor Full-Stack com experiência em TypeScript, NestJS, Node.js, React, Next.js, microsserviços e modernização de sistemas legados.",
+  },
+  ui: {
+    skipToContent: "Pular para o conteúdo",
+    primaryNav: "Navegação principal",
+    languageSwitcher: "Idioma",
+    sections: {
+      about: "Sobre",
+      experience: "Experiência",
+      projects: "Projetos",
+      skills: "Habilidades",
+      education: "Formação",
+      contact: "Contato",
+    },
+    contactHeadline: "Vamos conversar",
+    contactBody: "Estou aberto a oportunidades remotas ou híbridas. Fale comigo por e-mail ou pelas redes abaixo.",
+    emailCta: "Enviar e-mail",
+    stackLabel: "Stack",
+    notFound: {
+      title: "Página não encontrada",
+      body: "O endereço que você acessou não existe ou foi movido.",
+      backHome: "Voltar ao início",
+    },
+  },
+  title: "Desenvolvedor Full-Stack",
+  location: "São Paulo - SP · aberto a remoto/híbrido",
+  about: [
+    "Desenvolvedor Full-Stack com atuação no ciclo completo de desenvolvimento de software, do back-end ao front-end. Tenho autonomia para conduzir demandas do início ao fim, com experiência na modernização de arquiteturas legadas, implementação de microsserviços e migração de sistemas.",
+    "Trabalho principalmente com o ecossistema JavaScript/TypeScript (NestJS, Node.js, React, Next.js e React Native) e também desenvolvo em Java com Spring Boot no back-end. Atuo com bancos como MySQL, MongoDB e Postgres, containerização com Docker e deploy em cloud (AWS). Cultivo cultura de qualidade com testes automatizados e code review como prática de time, em ambientes ágeis remotos e distribuídos.",
+  ],
+  experience: [
+    {
+      company: "DMK3 Tecnologia",
+      role: "Desenvolvedor Full-Stack",
+      period: "Mai 2025 - Atual",
+      workMode: "Híbrido",
+      stack: ["NestJS", "Node.js", "TypeScript", "TypeORM", "React (Vite)", "MySQL", "Oracle DB", "Docker", "Jest", "Vitest", "Playwright"],
+      highlights: [
+        "Conduzi, como back-end principal, o ciclo completo de um sistema financeiro para o ITESP (órgão do Governo do Estado de São Paulo), da definição técnica ao deploy e close-out.",
+        "Liderei a migração de uma arquitetura legada para NestJS, incluindo a migração do banco de dados de Oracle para MySQL.",
+        "Mapeei features, comportamentos e regras de negócio junto a gestão e design, participando das decisões de arquitetura e do planejamento de sprints (Scrum).",
+        "Garanto qualidade com testes unitários (Jest, Vitest) e e2e (Playwright), e participo ativamente do code review do time.",
+        "Desenvolvi uma API de logs para auditoria de dados abrangendo todos os projetos internos.",
+        "Melhorei o front-end e refatorei o back-end do portal de acesso do cliente, além de contribuir com documentação técnica e de processos.",
+      ],
+    },
+    {
+      company: "Grupo New Way",
+      role: "Desenvolvedor Full-Stack",
+      period: "Out 2021 - Mai 2025",
+      workMode: "Remoto",
+      stack: ["Node.js", "NestJS", "React", "Next.js", "TypeScript", "Microsserviços", "RabbitMQ", "MongoDB", "MySQL", "Redis", "Docker", "Jest", "Cypress", "Testing Library"],
+      highlights: [
+        "Desenvolvi uma plataforma construtora de bots composta por sete microsserviços, com BFF, comunicação entre serviços via filas com RabbitMQ e banco MongoDB.",
+        "Implementei o SigNoz para observabilidade e mapeamento de slow queries, embasando o plano de ação de performance.",
+        "Desenvolvi caixas de contexto, integrações com terceiros e logs para auditoria.",
+        "Participei da definição e da refatoração do front-end de um CRM, migrando a aplicação para Next.js com um novo layout a partir do protótipo do time de design.",
+        "Mantive e evoluí uma plataforma de multicanalidade que centralizava WhatsApp, Instagram e outros canais em uma única tela.",
+        "Escrevi testes automatizados (Jest, Cypress, Testing Library) e atuei no code review como prática recorrente do time.",
+      ],
+    },
+    {
+      company: "NewTab Academy",
+      role: "Estágio em Desenvolvimento",
+      period: "Abr 2021 - Out 2021",
+      workMode: "Remoto",
+      stack: ["JavaScript", "Laravel", "Angular", "MongoDB", "MySQL", "Redis", "RabbitMQ"],
+      highlights: ["Desenvolvi e mantive novas features para uma plataforma de atendimento multicanal."],
+    },
+    {
+      company: "AlgarTech",
+      role: "Analista de Suporte",
+      period: "Abr 2015 - Abr 2021",
+      stack: [],
+      highlights: [
+        "Suporte ao usuário final e atendimento de campo, com administração de usuários e acessos em Active Directory, configuração de perfis Windows e suporte a sistemas internos para clientes como KPMG, CPTM, Serasa e Mary Kay.",
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: "AutoSim",
+      role: "Freelancer Full-Stack · 6 meses",
+      description: "Plataforma de compra e venda de carros.",
+      stack: ["React Native (Expo)", "Next.js", "NestJS", "Node.js", "MongoDB", "Redux", "Context API"],
+      highlights: [
+        "Atuei de forma autônoma nas três frentes do produto: mobile, front-end e back-end.",
+        "Conduzi a migração do back-end principal para NestJS (v2), elevando a legibilidade e a manutenibilidade do código.",
+        "Desenvolvi o app em React Native (Expo, Redux, Context API) e o front-end em Next.js, com foco em performance e refatoração em todas as camadas.",
+      ],
+    },
+  ],
+  skills: [
+    { label: "Linguagens", items: ["JavaScript", "TypeScript", "Java", "Kotlin", "PHP", "HTML", "CSS/SCSS"] },
+    { label: "Back-end", items: ["NestJS", "Node.js", "Express", "Spring Boot", "Microsserviços", "BFF", "RabbitMQ", "REST APIs"] },
+    {
+      label: "Front-end",
+      items: ["React", "Next.js", "React Native", "Vue.js", "Redux", "Context API", "Zustand", "Tailwind CSS", "Styled Components", "Material UI", "Ant Design"],
+    },
+    { label: "Bancos de dados", items: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Oracle"] },
+    { label: "Testes e qualidade", items: ["Jest", "Vitest", "Cypress", "Playwright", "Testing Library", "Testes unitários e e2e", "Code review"] },
+    {
+      label: "DevOps e ferramentas",
+      items: ["Docker", "Docker Compose", "Git", "GitLab", "Bitbucket", "AWS", "SigNoz", "ESLint", "Prettier", "NeoVim", "Linux"],
+    },
+    { label: "Metodologias", items: ["Scrum", "Kanban", "Trabalho remoto e distribuído"] },
+  ],
+  education: [
+    {
+      course: "Análise e Desenvolvimento de Sistemas",
+      institution: "Unicid",
+      period: "Jan 2025 - Jun 2026",
+    },
+  ],
+};
