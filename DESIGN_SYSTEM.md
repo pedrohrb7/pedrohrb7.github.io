@@ -51,7 +51,7 @@ Grade de 4px (escala padrão do Tailwind). Valores usados:
 | `space.lg` | 32px (`8`) |
 | `space.xl` | 48px / 64px (`12` / `16`) - espaçamento entre seções |
 
-Largura de conteúdo: token `container.content` (`--container-content`, 1024px / `64rem`), usado como `max-w-content` no header, no `main` e no footer. Parágrafos longos continuam limitados a `max-w-prose` para a linha não ficar comprida demais. Margem lateral: 16px no mobile, 24px a partir de `sm`. Menu de seções: 24px entre itens, 32px a partir de `lg`.
+Largura de conteúdo: token `container.content` (`--container-content`, 1024px / `64rem`), usado como `max-w-content` no header, no `main` e no footer. Todas as seções usam a largura inteira do container, inclusive os parágrafos do "Sobre", para alinharem pela mesma borda. Margem lateral: 16px no mobile, 24px a partir de `sm`. Menu de seções: 24px entre itens, 32px a partir de `lg`.
 
 ## Breakpoints
 

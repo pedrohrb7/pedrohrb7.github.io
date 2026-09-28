@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <main id="main" className="mx-auto max-w-content px-4 sm:px-6">
         <Hero locale={locale} content={content} />
         <Section id="about" title={ui.sections.about}>
-          <div className="max-w-prose space-y-4 text-lg leading-relaxed text-muted">
+          <div className="space-y-4 text-lg leading-relaxed text-muted">
             {content.about.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}

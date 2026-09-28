@@ -29,7 +29,7 @@ Antes o `SectionNav` não indicava onde o visitante estava.
 ## 3. Largura do conteúdo
 
 - O container da página (header, conteúdo e footer) passou de 768px para 1024px (token `--container-content`, classe `max-w-content`; 896px numa primeira rodada, aumentado depois a pedido), e o menu de seções ganhou mais espaço entre itens (24px, 32px a partir de `lg`), para os itens não ficarem espremidos entre o nome e os controles.
-- Parágrafos longos do "Sobre" continuam em `max-w-prose`.
+- Os parágrafos do "Sobre" deixaram de usar `max-w-prose` e ocupam a largura inteira, alinhados com as outras seções (antes terminavam ~200px antes da borda com o container em 1024px).
 
 ## Critérios de aceite
 

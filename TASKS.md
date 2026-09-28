@@ -21,7 +21,7 @@
 
 ## Concluídas
 
-- [x] Largura do conteúdo de 768px para 1024px, como token do design system (`--container-content` / `max-w-content`), e mais espaço entre os itens do menu - `docs/features/ux-enhancements/` (2026-09-28)
+- [x] Largura do conteúdo de 768px para 1024px, como token do design system (`--container-content` / `max-w-content`), mais espaço entre os itens do menu e parágrafos do "Sobre" na largura inteira, alinhados com as outras seções - `docs/features/ux-enhancements/` (2026-09-28)
 - [x] Lista de opções do seletor de tema ilegível no tema escuro (texto claro sobre o fundo branco nativo): cores explícitas no `<select>` e nas opções, com e2e - `docs/features/ux-enhancements/` (2026-09-28)
 - [x] Melhorias de UX: escolha manual de tema (Sistema/Claro/Escuro, `<select>` pronto para mais temas, sem flash) e destaque da seção atual no menu - `docs/features/ux-enhancements/` (2026-09-28)
 - [x] Container: `nginx.conf` com gzip, como o GitHub Pages (sem isso o Lighthouse local dava Performance 83 no mobile) (2026-09-28)
