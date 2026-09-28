@@ -41,6 +41,15 @@
 - **Motivo:** Recrutadores pedem PDF; gerar no build garante que nunca diverge do site.
 - **Levado para:** `TASKS.md` (Próximas), `PRD.md` (Escopo)
 
+### Como gerar o PDF do currículo no build?
+
+- **Status:** resolvida
+- **Decisão:** `@react-pdf/renderer`, rodando em Node no pós-build, com um documento próprio que lê `getContent(locale)` e `profile`.
+- **Data:** 2026-09-28
+- **Motivo:** Não exige Chromium no build (o `Dockerfile` continua leve), é mais rápido e usa menos memória, e não publica uma rota de impressão extra no site. Custo aceito: layout do PDF separado dos componentes do site (primitivas `Document`/`Page`/`View`/`Text`, sem Tailwind) e fontes Geist registradas como TTF.
+- **Alternativa descartada:** página de impressão `/pt/cv/` e `/en/cv/` convertida com `page.pdf()` do Playwright.
+- **Levado para:** `docs/features/resume-pdf/`
+
 ### Usar domínio próprio?
 
 - **Status:** resolvida

@@ -50,9 +50,14 @@ O currículo hoje existe apenas como documento (`resume.md`) e perfil do GitHub/
 
 | Módulo | Na v1? | Spec |
 |---|---|---|
-| Página do portfolio (seções + i18n) | Sim | `docs/modules/portfolio/spec.md` |
-| Detalhe de projetos (páginas por projeto, imagens) | Não | - |
-| Currículo em PDF (um por idioma, gerado no build a partir de `src/content/`) | Sim (próxima entrega) | a criar: `docs/modules/resume-pdf/spec.md` |
+| Página do portfolio (seções + i18n) | Sim | `docs/features/portfolio/spec.md` |
+| Currículo em PDF (um por idioma, gerado no build a partir de `src/content/`) | Sim (próxima entrega) | `docs/features/resume-pdf/spec.md` |
+| SEO e assets (favicon, Open Graph, sitemap, robots, Lighthouse) | Sim (próxima entrega) | `docs/features/seo-assets/spec.md` |
+| Seção de projetos rica (imagem, repositório, demo) | Não (bloqueada pela escolha de projetos) | `docs/features/projects-showcase/spec.md` |
+| Melhorias de UX (tema manual, seção atual no menu) | Não | `docs/features/ux-enhancements/spec.md` |
+| Detalhe de projetos (páginas por projeto) | Não | - |
+
+Status e mapa de todas as features: `docs/features/README.md`.
 
 ## Restrições e questões em aberto
 
