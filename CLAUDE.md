@@ -36,4 +36,4 @@ Sobe o build estático servido por nginx em `http://localhost:8080`. Para desenv
 
 ## Referência
 
-`PRD.md` - o quê e por quê · `CONSTRAINTS.md` - limites rígidos · `DESIGN_SYSTEM.md` - tokens/convenções de UI · `TASKS.md` - trabalho atual · `OPEN_QUESTIONS.md` - decisões em aberto · `DEPLOY.md` - como publicar
+`PRD.md` - o quê e por quê · `CONSTRAINTS.md` - limites rígidos · `DESIGN_SYSTEM.md` - tokens/convenções de UI · `TASKS.md` - trabalho atual · `OPEN_QUESTIONS.md` - decisões (abertas e resolvidas, cada uma com status) · `DEPLOY.md` - como publicar

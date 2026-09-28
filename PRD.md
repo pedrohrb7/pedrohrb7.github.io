@@ -23,7 +23,8 @@ O currículo hoje existe apenas como documento (`resume.md`) e perfil do GitHub/
 
 - Blog ou CMS.
 - Formulário de contato com backend (contato é por e-mail e redes).
-- Download de currículo em PDF na v1 (veja `OPEN_QUESTIONS.md`).
+- Domínio próprio (o site fica em `pedrohrb7.github.io`).
+- Telefone ou outros dados pessoais além de e-mail e perfis públicos.
 
 ## Critérios de sucesso
 
@@ -51,7 +52,7 @@ O currículo hoje existe apenas como documento (`resume.md`) e perfil do GitHub/
 |---|---|---|
 | Página do portfolio (seções + i18n) | Sim | `docs/modules/portfolio/spec.md` |
 | Detalhe de projetos (páginas por projeto, imagens) | Não | - |
-| Currículo em PDF | Não | - |
+| Currículo em PDF (um por idioma, gerado no build a partir de `src/content/`) | Sim (próxima entrega) | a criar: `docs/modules/resume-pdf/spec.md` |
 
 ## Restrições e questões em aberto
 

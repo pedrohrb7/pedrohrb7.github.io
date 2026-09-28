@@ -16,7 +16,7 @@
 
 ## Conformidade e segurança
 
-- Não publicar dados pessoais além de nome, e-mail e perfis públicos (GitHub, LinkedIn).
+- Não publicar dados pessoais além de nome, e-mail e perfis públicos (GitHub, LinkedIn). Isso vale também para o currículo em PDF: telefone nunca é publicado.
 - Nenhum segredo é necessário; o repositório é público.
 
 ## Explicitamente não é restrição
