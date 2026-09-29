@@ -10,4 +10,5 @@ export const lightColors = {
   border: "#e7e5e4",
   accent: "#0f766e",
   "accent-fg": "#ffffff",
+  overlay: "#1c1917",
 } as const;

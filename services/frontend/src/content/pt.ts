@@ -32,6 +32,13 @@ export const pt: Content = {
       goTo: "Ir para o projeto {n}",
       hint: "Deslize ou use as setas",
     },
+    projectDetails: {
+      open: "Ver detalhes",
+      openAriaLabel: "Ver detalhes do projeto {name}",
+      close: "Fechar detalhes",
+      hashPrefix: "projeto-",
+      stackByLayer: "Stack por camada",
+    },
     resumeCta: "Baixar currículo (PDF)",
     stackLabel: "Stack",
     notFound: {
@@ -96,6 +103,57 @@ export const pt: Content = {
     },
   ],
   projects: [
+    {
+      name: "Plataforma Financeira",
+      slug: "plataforma-financeira",
+      role: "DMK3 · Full-Stack",
+      description:
+        "Sistema de gestão financeira de um órgão do Governo do Estado de São Paulo: compras, pagamentos, estornos, devoluções e ressarcimentos, com rastreabilidade de ponta a ponta.",
+      stack: ["NestJS", "Fastify", "TypeScript", "TypeORM", "MySQL", "React", "Vite", "Ant Design", "TanStack Query", "Docker", "Jest"],
+      highlights: [
+        "Atuei como back-end principal e também no front-end, conduzindo o ciclo completo da definição técnica ao deploy.",
+        "Traduzi as regras financeiras do órgão em fluxos e requisitos do sistema junto à gestão, e validei essas regras antes de cada liberação.",
+        "Integrei o sistema à API de logs de auditoria e reduzi a imagem Docker do front-end de 832 MB para cerca de 180 MB.",
+      ],
+      details: {
+        caseStudy: [
+          {
+            heading: "Contexto e desafio",
+            body: [
+              "Um órgão público com vários processos administrativos precisava estruturar digitalmente a sua gestão financeira: compras, pagamentos e movimentações internas, incluindo estornos, devoluções e ressarcimentos.",
+              "Era um ambiente de alta criticidade e impacto orçamentário. O sistema precisava padronizar os fluxos financeiros, dar rastreabilidade a cada pagamento e consolidar as informações para a gestão, com controle rigoroso sobre cada movimentação.",
+            ],
+          },
+          {
+            heading: "Minha atuação",
+            body: [
+              "Fui o desenvolvedor back-end principal e atuei também no front-end, conduzindo o sistema da definição técnica ao deploy e à entrega final.",
+              "Além do código, levantei as regras financeiras com as áreas envolvidas e as traduzi em fluxos e requisitos, ajudei a priorizar o backlog e a conduzir as cerimônias Scrum, e validei as regras com testes funcionais antes de cada liberação.",
+            ],
+          },
+          {
+            heading: "Arquitetura e decisões",
+            body: [
+              "O back-end é uma API em NestJS sobre Fastify, organizada em módulos por domínio (depósitos, prestação de contas, devoluções), com TypeORM e migrações versionadas no MySQL, autenticação por JWT e documentação da API em Swagger.",
+              "Operações pesadas ficam fora da requisição: as exportações de relatórios (PDF, CSV e planilha) são processadas por uma fila própria no banco, com nova tentativa em caso de falha e limpeza agendada dos arquivos. A rastreabilidade vem da integração com a API de logs de auditoria da empresa.",
+              "O front-end é uma aplicação React com Vite e Ant Design, dados via TanStack Query e formulários validados com React Hook Form e Zod. O back-end tem uma suíte de testes unitários em Jest, e as duas aplicações rodam em containers Docker.",
+            ],
+          },
+          {
+            heading: "Impacto e resultados",
+            body: [
+              "O fluxo financeiro do órgão passou a ser digital e padronizado, com mais controle orçamentário, rastreabilidade das movimentações e informações consolidadas para a tomada de decisão.",
+              "No front-end, a revisão do build Docker reduziu a imagem de produção de 832 MB para cerca de 180 MB.",
+            ],
+          },
+        ],
+        stackByLayer: [
+          { label: "Back-end", items: ["NestJS", "Fastify", "TypeScript", "TypeORM", "JWT", "Swagger", "Jest"] },
+          { label: "Front-end", items: ["React", "TypeScript", "Vite", "Ant Design", "TanStack Query", "Zustand", "React Hook Form", "Zod"] },
+          { label: "Dados e infra", items: ["MySQL", "Docker"] },
+        ],
+      },
+    },
     {
       name: "AutoSim",
       role: "Freelancer Full-Stack · 6 meses",

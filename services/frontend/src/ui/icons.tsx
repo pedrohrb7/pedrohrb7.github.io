@@ -43,6 +43,14 @@ export function ArrowRightIcon() {
   );
 }
 
+export function CloseIcon() {
+  return (
+    <Icon>
+      <path d="M18 6 6 18M6 6l12 12" />
+    </Icon>
+  );
+}
+
 export function CheckIcon({ size = 14 }: { size?: number }) {
   return (
     <Icon size={size}>

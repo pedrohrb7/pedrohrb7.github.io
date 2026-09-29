@@ -12,6 +12,15 @@
     }
   }
 
+  /*
+   * The page behind an open modal (project details drawer) doesn't scroll. No scrollbar-gutter: with classic
+   * scrollbars the reserved gutter would leave a strip between the drawer and the screen edge; the page shifting by
+   * half a scrollbar under the dimmed backdrop is the lesser evil.
+   */
+  html:has(dialog:modal) {
+    overflow: hidden;
+  }
+
   body {
     @apply bg-background font-sans text-fg antialiased;
   }

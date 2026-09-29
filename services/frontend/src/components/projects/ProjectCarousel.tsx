@@ -45,24 +45,8 @@ export function ProjectCarousel({ count, children }: { count: number; children: 
 }
 
 export function ProjectCarouselTrack({ labels, slides }: { labels: ProjectCarouselLabels; slides: ReactNode[] }) {
-  const { count, index, trackRef, setIndex } = useCarousel();
+  const { count, trackRef, setIndex } = useCarousel();
   const multiple = count > 1;
-
-  // Adaptive height: the track follows the current project's card, so a short card doesn't leave the gap of the
-  // tallest one before the indicators. Without JS the track keeps the tallest card's height (the natural layout).
-  // Watching the card also catches reflows (resize, font loading).
-  useEffect(() => {
-    const track = trackRef.current;
-    const slide = track && slidesOf(track)[index];
-    if (!track || !slide || !multiple) return;
-    const fit = () => {
-      track.style.height = `${slide.offsetHeight}px`;
-    };
-    fit();
-    const observer = new ResizeObserver(fit);
-    observer.observe(slide);
-    return () => observer.disconnect();
-  }, [trackRef, index, multiple]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -97,8 +81,9 @@ export function ProjectCarouselTrack({ labels, slides }: { labels: ProjectCarous
       tabIndex={multiple ? 0 : undefined}
       aria-label={multiple ? labels.track : undefined}
       role={multiple ? "region" : undefined}
-      // overflow-y-hidden: with the adaptive height, taller cards are clipped instead of making the track scroll vertically.
-      className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth rounded-lg transition-[height] duration-300 [scrollbar-width:none] motion-reduce:scroll-auto motion-reduce:transition-none [&::-webkit-scrollbar]:hidden"
+      // Slides stretch to the tallest one (flex default), so every card has the same height; the track is as tall as
+      // that card and never needs to scroll vertically.
+      className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth rounded-lg [scrollbar-width:none] motion-reduce:scroll-auto [&::-webkit-scrollbar]:hidden"
     >
       {slides.map((slide, position) => (
         <div
@@ -106,7 +91,8 @@ export function ProjectCarouselTrack({ labels, slides }: { labels: ProjectCarous
           role={multiple ? "group" : undefined}
           aria-roledescription={multiple ? labels.slideRoleDescription : undefined}
           aria-label={multiple ? fillTemplate(labels.slideLabel, { n: position + 1, total: count }) : undefined}
-          className={`shrink-0 snap-start self-start ${multiple ? "w-5/6 md:w-full" : "w-full"}`}
+          // flex: the card inside fills the stretched slide.
+          className={`flex shrink-0 snap-start ${multiple ? "w-5/6 md:w-full" : "w-full"}`}
         >
           {slide}
         </div>

@@ -57,6 +57,17 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 - 6 rodadas mobile em `/pt/`: 91, 95, 98, 94, 95, 94 (mediana 94,5), TBT 150-270 ms, LCP 2,6-2,7 s, CLS 0.
 - Primeira mediana abaixo da meta (por meio ponto). A página ficou maior com o segundo projeto e a variação continua vindo do TBT. O refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md` mediu o teto sem o JS do Next (100, LCP 1,2 s, TBT 0), mas a mudança de arquitetura foi descartada: a nota segue oscilando em torno de 95.
 
+## 2026-09-29 - container local, com a estrutura do project-details
+
+- Código do drawer entra no chunk do site mesmo sem projeto com detalhes: de ~3,9 para ~4,9 KiB gzip. Nenhum drawer é renderizado ainda (o conteúdo entra depois).
+- 6 rodadas mobile em `/pt/`: 94, 98, 96, 96, 97, 99 (mediana 96,5), TBT 89-175 ms, LCP 1,9-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100. Mesma faixa das medições anteriores.
+- Medir de novo quando os estudos de caso entrarem: o texto dos drawers vai no HTML da home e aumenta a hidratação.
+
+## 2026-09-29 - container local, com o primeiro estudo de caso (Plataforma Financeira)
+
+- Terceiro projeto no carrossel, com o drawer de detalhes. HTML de `/pt/` de ~17 para ~21,5 KB gzip.
+- 6 rodadas mobile em `/pt/`: 96, 95, 98, 96, 95, 96 (mediana 96), TBT 97-148 ms, LCP 2,3-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100. Mesma faixa das medições anteriores.
+
 ## Como rodar
 
 ```
@@ -66,3 +77,5 @@ CHROME_PATH=$(cd frontend && node -e 'import("@playwright/test").then(m=>console
 ```
 
 Para desktop, acrescente `--preset=desktop`. Para o site publicado, troque a URL por `https://pedrohrb7.github.io/pt/`.
+
+No WSL, o `chrome-launcher` do Lighthouse supõe um Chrome do Windows e cria, a cada rodada, uma pasta chamada `C:\Users\<usuário>\AppData\Local\lighthouse.<número>` no diretório atual (o Chrome do Playwright é Linux e toma o caminho como relativo). Rode o comando a partir de uma pasta temporária (ex.: `cd /tmp`), não de dentro do repositório, ou apague essas pastas depois.

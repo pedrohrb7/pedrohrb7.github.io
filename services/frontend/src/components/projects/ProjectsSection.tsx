@@ -29,7 +29,14 @@ export function ProjectsSection({ content }: ProjectsSectionProps) {
         <ProjectCarouselTrack
           labels={labels}
           slides={projects.map((project, index) => (
-            <ProjectCard key={project.name} project={project} index={index} total={total} stackLabel={ui.stackLabel} />
+            <ProjectCard
+              key={project.name}
+              project={project}
+              index={index}
+              total={total}
+              stackLabel={ui.stackLabel}
+              detailsLabels={ui.projectDetails}
+            />
           ))}
         />
         <ProjectCarouselIndicators labels={labels} />

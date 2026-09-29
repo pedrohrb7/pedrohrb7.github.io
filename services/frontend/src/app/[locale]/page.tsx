@@ -8,11 +8,11 @@ import { SectionNav } from "@/components/layout/SectionNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
-import { SkillGroups } from "@/components/skills/SkillGroups";
 import { ThemeSelect } from "@/components/theme/ThemeSelect";
 import { getContent } from "@/content";
 import { isLocale } from "@/lib/i18n";
 import { Section } from "@/ui/Section";
+import { TagGroups } from "@/ui/TagGroups";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -49,7 +49,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </Section>
         <ProjectsSection content={content} />
         <Section id="skills" title={ui.sections.skills}>
-          <SkillGroups groups={content.skills} />
+          <TagGroups groups={content.skills} />
         </Section>
         <Section id="education" title={ui.sections.education}>
           <EducationList items={content.education} />

@@ -70,13 +70,16 @@ describe("projects carousel (desktop)", () => {
     await expectCounter("02 / 03");
   });
 
-  it("adapts its height to the current project", async () => {
+  it("gives every card the height of the tallest one, with the tags at the bottom", () => {
     renderSection(three);
-    // "Alfa" has 1 highlight and "Beta" 3, so their cards have different heights.
-    await expect.poll(() => track().clientHeight).toBe(slides()[0].offsetHeight);
-    await userEvent.click(next());
-    await expect.poll(() => track().clientHeight, { timeout: 3000 }).toBe(slides()[1].offsetHeight);
-    expect(slides()[1].offsetHeight).toBeGreaterThan(slides()[0].offsetHeight);
+    // "Alfa" has 1 highlight and "Beta" 3: without stretching, their cards would have different heights.
+    const cards = within(track()).getAllByRole("article");
+    const heights = cards.map((card) => card.getBoundingClientRect().height);
+    expect(new Set(heights).size).toBe(1);
+    expect(track().clientHeight).toBe(Math.round(heights[0]));
+
+    const tagsBottom = (card: HTMLElement) => within(card).getByRole("list", { name: /^Stack:/ }).getBoundingClientRect().bottom;
+    expect(tagsBottom(cards[0])).toBe(tagsBottom(cards[1]));
   });
 
   it("follows a manual scroll (swipe or trackpad)", async () => {

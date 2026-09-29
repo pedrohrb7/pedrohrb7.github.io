@@ -15,9 +15,13 @@
   --color-border: light-dark(#e7e5e4, #292524);
   --color-accent: light-dark(#0f766e, #2dd4bf);
   --color-accent-fg: light-dark(#ffffff, #042f2e);
+  /* Dims the page behind a modal (drawer backdrop), always used with opacity: backdrop:bg-overlay/50. */
+  --color-overlay: light-dark(#1c1917, #000000);
 
   /* Page content width (header, main, footer): max-w-content. */
   --container-content: 64rem;
+  /* Project details drawer width from md up: max-w-drawer. */
+  --container-drawer: 35rem;
 }
 
 @theme inline {

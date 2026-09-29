@@ -16,29 +16,33 @@ test.describe("projects carousel", () => {
     await page.goto("/pt/");
     const section = page.getByRole("region", { name: "Projetos", exact: true });
     await expect(section).toHaveAttribute("aria-roledescription", "carrossel");
-    await expect(section.getByRole("group")).toHaveCount(2);
+    await expect(section.getByRole("group")).toHaveCount(3);
 
     const counter = section.getByText(/^\d{2} \/ \d{2}$/);
     const next = section.getByRole("button", { name: "Próximo projeto" });
     const previous = section.getByRole("button", { name: "Projeto anterior" });
-    await expect(counter).toHaveText("01 / 02");
+    await expect(counter).toHaveText("01 / 03");
     await expect(previous).toBeDisabled();
 
     await next.click();
-    await expect(counter).toHaveText("02 / 02");
+    await expect(counter).toHaveText("02 / 03");
+    await expect.poll(() => inTrack(section.getByRole("group", { name: "2 de 3" }))).toBe(true);
+
+    await section.getByRole("button", { name: "Ir para o projeto 3" }).click();
+    await expect(counter).toHaveText("03 / 03");
     await expect(next).toBeDisabled();
-    await expect.poll(() => inTrack(section.getByRole("group", { name: "2 de 2" }))).toBe(true);
+    await expect.poll(() => inTrack(section.getByRole("group", { name: "3 de 3" }))).toBe(true);
 
     await section.getByRole("button", { name: "Ir para o projeto 1" }).click();
-    await expect(counter).toHaveText("01 / 02");
-    await expect.poll(() => inTrack(section.getByRole("group", { name: "1 de 2" }))).toBe(true);
+    await expect(counter).toHaveText("01 / 03");
+    await expect.poll(() => inTrack(section.getByRole("group", { name: "1 de 3" }))).toBe(true);
   });
 
   test("the English page is translated", async ({ page }) => {
     await page.goto("/en/");
     const section = page.getByRole("region", { name: "Projects", exact: true });
     await expect(section).toHaveAttribute("aria-roledescription", "carousel");
-    await expect(section.getByRole("group", { name: "1 of 2" })).toBeVisible();
+    await expect(section.getByRole("group", { name: "1 of 3" })).toBeVisible();
     await expect(section.getByRole("button", { name: "Next project" })).toBeVisible();
   });
 

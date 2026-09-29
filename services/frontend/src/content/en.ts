@@ -32,6 +32,13 @@ export const en: Content = {
       goTo: "Go to project {n}",
       hint: "Swipe or use the arrows",
     },
+    projectDetails: {
+      open: "View details",
+      openAriaLabel: "View {name} project details",
+      close: "Close details",
+      hashPrefix: "project-",
+      stackByLayer: "Stack by layer",
+    },
     resumeCta: "Download resume (PDF)",
     stackLabel: "Stack",
     notFound: {
@@ -96,6 +103,57 @@ export const en: Content = {
     },
   ],
   projects: [
+    {
+      name: "Financial Platform",
+      slug: "plataforma-financeira",
+      role: "DMK3 · Full-Stack",
+      description:
+        "Financial management system for a São Paulo State Government agency: purchases, payments, chargebacks, returns and reimbursements, traceable end to end.",
+      stack: ["NestJS", "Fastify", "TypeScript", "TypeORM", "MySQL", "React", "Vite", "Ant Design", "TanStack Query", "Docker", "Jest"],
+      highlights: [
+        "Worked as the main back-end developer and also on the front-end, owning the full cycle from technical definition to deploy.",
+        "Turned the agency's financial rules into system flows and requirements with management, and validated those rules before every release.",
+        "Integrated the system with the audit logging API and cut the front-end Docker image from 832 MB to about 180 MB.",
+      ],
+      details: {
+        caseStudy: [
+          {
+            heading: "Context and challenge",
+            body: [
+              "A public agency with many administrative processes needed to bring its financial management into a digital system: purchases, payments and internal transactions, including chargebacks, returns and reimbursements.",
+              "It was a critical environment with budget impact. The system had to standardize the financial flows, make every payment traceable and consolidate information for management, with strict control over every transaction.",
+            ],
+          },
+          {
+            heading: "My role",
+            body: [
+              "I was the main back-end developer and also worked on the front-end, taking the system from technical definition to deploy and final delivery.",
+              "Beyond the code, I gathered the financial rules with the teams involved and turned them into flows and requirements, helped prioritize the backlog and run the Scrum ceremonies, and validated the rules with functional tests before every release.",
+            ],
+          },
+          {
+            heading: "Architecture and decisions",
+            body: [
+              "The back-end is a NestJS API on Fastify, organized in domain modules (deposits, expense reports, returns), with TypeORM and versioned migrations on MySQL, JWT authentication and Swagger API docs.",
+              "Heavy work runs outside the request: report exports (PDF, CSV and spreadsheet) are processed by a database-backed queue, with retries on failure and scheduled cleanup of the files. Traceability comes from the integration with the company's audit logging API.",
+              "The front-end is a React app with Vite and Ant Design, data through TanStack Query and forms validated with React Hook Form and Zod. The back-end has a Jest unit test suite, and both apps run in Docker containers.",
+            ],
+          },
+          {
+            heading: "Impact and results",
+            body: [
+              "The agency's financial flow became digital and standardized, with tighter budget control, traceable transactions and consolidated information for decision making.",
+              "On the front-end, reworking the Docker build cut the production image from 832 MB to about 180 MB.",
+            ],
+          },
+        ],
+        stackByLayer: [
+          { label: "Back-end", items: ["NestJS", "Fastify", "TypeScript", "TypeORM", "JWT", "Swagger", "Jest"] },
+          { label: "Front-end", items: ["React", "TypeScript", "Vite", "Ant Design", "TanStack Query", "Zustand", "React Hook Form", "Zod"] },
+          { label: "Data and infra", items: ["MySQL", "Docker"] },
+        ],
+      },
+    },
     {
       name: "AutoSim",
       role: "Full-Stack Freelancer · 6 months",

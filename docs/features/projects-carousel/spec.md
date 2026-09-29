@@ -13,8 +13,8 @@ Apresenta a seção Projetos como carrossel: um projeto por vez, navegável por 
 
 - Cabeçalho da seção: rótulo à esquerda; à direita, contador `01 / 03` (mono, `text-muted`) e botões anterior/próximo com ícones SVG inline, no estilo dos controles do header (borda, `radius.md`, alvo >= 44x44px), `disabled` nas pontas.
 - Trilho: rolagem horizontal nativa com CSS scroll-snap, um card por vez. No mobile, o card ocupa ~85% da largura para o próximo aparecer na borda e indicar que dá para deslizar; a partir de `md`, o card ocupa a largura toda. Barra de rolagem escondida, sem perder a rolagem.
-- Card: índice `[01]` em mono no acento, nome (h3), papel/período em mono à direita, descrição, destaques e tags de stack (`TagList`) logo depois dos destaques; links de repositório/demo com `↗` e imagem no topo quando existirem. Sem borda de hover no card inteiro (ele não é clicável) e com texto selecionável. Cada card tem a altura do próprio conteúdo.
-- Altura adaptativa: o trilho acompanha a altura do card atual (transição de 300 ms, desligada com `prefers-reduced-motion`), para um card curto não deixar o vão do mais alto antes dos indicadores. Sem JS, o trilho fica com a altura do card mais alto.
+- Card: índice `[01]` em mono no acento, nome (h3), papel/período em mono à direita, descrição, destaques e tags de stack (`TagList`) logo depois dos destaques; links de repositório/demo com `↗` e imagem no topo quando existirem. Sem borda de hover no card inteiro (ele não é clicável) e com texto selecionável.
+- Altura igual (desde 2026-09-29, pedido do Pedro): todos os cards têm a altura do mais alto, em todas as telas, com as tags presas no rodapé. É CSS puro (os slides esticam no flex), então vale também sem JS. Substitui a altura adaptativa de 2026-09-28 (o trilho acompanhava o card atual). Consequência aceita: no celular, o card mais curto fica com espaço vazio acima das tags (até ~260px com os projetos de 2026-09-29).
 - Rodapé do carrossel: indicadores (barras) clicáveis, o atual no acento; à direita, a dica "Deslize ou use as setas".
 - Nada de autoplay.
 

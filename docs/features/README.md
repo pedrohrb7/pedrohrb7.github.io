@@ -17,7 +17,7 @@ Mapa das funcionalidades do site: o que já existe e os próximos passos. Cada f
 | [structured-data](structured-data/spec.md)     | Backlog              | Dados estruturados JSON-LD (`ProfilePage`/`Person`) nas páginas de idioma      | -                                          |
 | [projects-carousel](projects-carousel/spec.md) | Concluída (no ar)    | Seção Projetos como carrossel (scroll-snap, setas, indicadores, sem biblioteca) | -                                          |
 | [copy-email](copy-email/spec.md)               | Concluída (no ar)    | E-mail em campo com botão de copiar no hero e no Contato, sem `mailto:`        | -                                          |
-| [project-details](project-details/spec.md)     | Próxima              | Drawer com estudo de caso e stack por camada, aberto pelo card do projeto       | -                                          |
+| [project-details](project-details/spec.md)     | Concluída            | Drawer com estudo de caso e stack por camada, aberto pelo card do projeto       | -                                          |
 
 ## Status
 
