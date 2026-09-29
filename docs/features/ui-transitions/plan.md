@@ -1,6 +1,6 @@
 # Plano - Transições de interface
 
-Status: **Em andamento** (fase 1 concluída em 2026-09-29, falta publicar; fases 2 a 5 em backlog)
+Status: **Em andamento** (fases 1 e 3 concluídas em 2026-09-29, falta publicar; fases 2, 4 e 5 em backlog)
 
 Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do menor risco e custo para o maior.
 
@@ -19,11 +19,16 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [ ] Seta do "Ver detalhes" no hover, "Copiado!" com fade, `active:scale-95` nas setas do carrossel.
 - [ ] Atualizar os testes de componente que dependem de a lista estar visível imediatamente (esperar o fim da transição ou rodar com movimento reduzido).
 
-## Fase 3 - Troca de tema (poucas linhas de JS)
+## Fase 3 - Troca de tema (poucas linhas de JS) (concluída em 2026-09-29)
 
-- [ ] `document.startViewTransition` no `choose` do `ThemeSelect`, com `applyTheme` síncrono dentro do callback; queda para a troca direta sem suporte ou com `prefers-reduced-motion`.
-- [ ] Decidir entre fade simples e revelação circular a partir do botão.
-- [ ] Garantir que a carga da página (script anti-flash) nunca dispara a transição; e2e de tema existentes continuam passando.
+- [x] `transitionTheme` em `src/lib/theme.ts`: roda a troca dentro de `document.startViewTransition` e marca o `<html>` com `data-theme-transition` enquanto ela dura (só a última transição tira a marca, se o usuário trocar de novo no meio); sem a API ou com `prefers-reduced-motion`, só aplica o tema. Teste unitário com documento falso.
+- [x] `ThemeSelect.choose`: fecha a lista com `flushSync` antes de a transição capturar o estado antigo (senão a lista some junto com o fade) e chama `applyTheme` direto no callback (o `useEffect` continua cuidando das mudanças vindas de outras abas, sem transição).
+- [x] Decidido o fade simples (decisão do Pedro), não a revelação circular. Fade cruzado de 500 ms (`ease-in-out`) nos dois lados, escopado por `html[data-theme-transition]` no `globals.css`: o fade em sequência da troca de idioma, aplicado ao tema, mostraria a tela vazia no meio.
+- [x] A carga da página não dispara a transição (só uma escolha do usuário chama `transitionTheme`); e2e de tema existentes passando.
+- [x] E2E (`test/e2e/transitions.spec.ts`): escolher Escuro roda o fade de 500 ms (animações dos pseudo-elementos `::view-transition-old/new(root)`), a lista já está fechada, a marca sai no fim e o tema fica aplicado; com movimento reduzido, troca imediata. Conferido também pelo teclado e em capturas no meio do fade (animação desacelerada), desktop claro -> escuro e 360px escuro -> claro, sem erro no console.
+- [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 95,5, CLS 0.
+- [x] Duração ajustada de 250 para 500 ms (`ease-in-out`) a pedido do Pedro, que achou a troca instantânea demais. Conferido no servidor de dev e no e2e que a transição roda com a nova duração.
+- [ ] Conferir no Safari e no Firefox e no site publicado depois do deploy.
 
 ## Fase 4 - Entrada das seções (só CSS)
 

@@ -25,11 +25,12 @@ Hoje o site só anima a cor de links e botões no hover (`transition-colors`) e 
 
 ## 2. Troca de tema
 
-- Ao escolher claro, escuro ou sistema, as cores passam com um fade em vez de trocar de uma vez.
-- Como: `document.startViewTransition()` no `ThemeSelect`, com a mudança de `data-theme` dentro do callback. Hoje o tema é aplicado num `useEffect` depois da renderização (`useEffect(() => applyTheme(theme), [theme])`); dentro da transição, a troca precisa ser síncrona (chamar `applyTheme` no próprio `choose`, ou `flushSync`), senão o navegador captura o estado antigo duas vezes e não há fade.
-- Sem suporte à API (Firefox antigo), cai na troca direta de hoje.
-- Não pode afetar o script anti-flash (`ThemeScript`): a transição só roda numa escolha do usuário, nunca na carga.
-- Variação possível para avaliar na implementação: revelação circular a partir do botão do seletor (`clip-path` no `::view-transition-new(root)`), em vez do fade simples.
+- Ao escolher claro, escuro ou sistema, as cores passam com um fade cruzado de 500 ms (`ease-in-out`) em vez de trocar de uma vez. Começou com 250 ms, que o Pedro achou instantâneo demais: numa mudança que pinta a tela inteira, soava como um piscar.
+- Como: `transitionTheme` (`src/lib/theme.ts`) roda a troca dentro de `document.startViewTransition()`. A troca de `data-theme` precisa ser síncrona dentro do callback (`applyTheme` no próprio `choose` do `ThemeSelect`, não no `useEffect`), senão o navegador captura o estado antigo duas vezes e não há fade. A lista do seletor fecha antes (`flushSync`), para não aparecer no fade.
+- O tema usa um fade cruzado, e não o fade em sequência da troca de idioma: o layout é o mesmo e só as cores mudam, e o fade em sequência mostraria a tela vazia no meio. As regras ficam escopadas por `html[data-theme-transition]`, marca que o `transitionTheme` põe enquanto a transição roda.
+- Sem suporte à API (Firefox antigo) ou com `prefers-reduced-motion`, a troca é imediata, como antes.
+- Não afeta o script anti-flash (`ThemeScript`): a transição só roda numa escolha do usuário, nunca na carga nem numa troca vinda de outra aba.
+- Revelação circular a partir do botão foi considerada e descartada (decisão do Pedro): mais chamativa que o resto do site.
 
 ## 3. Entrada das seções ao rolar
 

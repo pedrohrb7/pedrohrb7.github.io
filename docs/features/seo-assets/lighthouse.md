@@ -73,6 +73,11 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 - Container, 6 rodadas mobile em `/pt/`: 93, 94, 97, 96, 94, 94 (mediana 94), TBT 168-214 ms, CLS 0. Abaixo da mediana de 96 da medição anterior do mesmo dia, então foi feita uma comparação direta.
 - Comparação alternada (A com a regra `@view-transition`, B sem, mesmo build e mesmo servidor `serve`, 5 rodadas cada, intercaladas): A 95, 96, 97, 95, 93 (mediana 95, TBT mediano 173 ms); B 98, 92, 96, 97, 96 (mediana 96, TBT mediano 198 ms). Faixas sobrepostas e TBT melhor em A: a regra não tem efeito mensurável na carga (ela só age numa navegação entre páginas). A diferença é a variação de sempre do TBT nesta máquina.
 
+## 2026-09-29 - transição na troca de tema (ui-transitions, fase 3)
+
+- Poucas linhas a mais no `ThemeSelect` e em `src/lib/theme.ts`; a transição só roda numa escolha do usuário, não na carga.
+- Container, 6 rodadas mobile em `/pt/`: 95, 95, 94, 97, 98, 96 (mediana 95,5), TBT 129-182 ms, LCP 1,9-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100.
+
 ## Como rodar
 
 ```

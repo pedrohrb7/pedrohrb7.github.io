@@ -68,3 +68,16 @@
 ::view-transition-new(root) {
   animation: page-fade-in 180ms ease-out 80ms both;
 }
+
+/*
+ * Theme change (transitionTheme in src/lib/theme.ts, which sets data-theme-transition while it runs): same page,
+ * only the colors change, so a plain cross-fade. The sequential page fade above would flash an empty screen.
+ * Longer than the other transitions on purpose: the whole screen changes color, and at 250 ms it read as a blink.
+ */
+html[data-theme-transition]::view-transition-old(root) {
+  animation: page-fade-out 500ms ease-in-out both;
+}
+
+html[data-theme-transition]::view-transition-new(root) {
+  animation: page-fade-in 500ms ease-in-out both;
+}

@@ -43,6 +43,32 @@ export function applyTheme(theme: Theme, root: HTMLElement = document.documentEl
   else root.dataset.theme = theme;
 }
 
+// Set on <html> while a theme change animates, so globals.css gives it its own cross-fade (docs/features/ui-transitions/).
+export const themeTransitionAttribute = "data-theme-transition";
+
+let runningThemeTransition: ViewTransition | null = null;
+
+// Runs a theme change as a view transition: the page cross-fades from the old colors to the new ones. `update` must
+// change the theme synchronously, since the browser captures the new state right after it returns. Without the View
+// Transitions API or with reduced motion, it just runs `update`.
+export function transitionTheme(update: () => void, doc: Document = document) {
+  const reduceMotion = doc.defaultView?.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  if (reduceMotion || typeof doc.startViewTransition !== "function") {
+    update();
+    return;
+  }
+  const root = doc.documentElement;
+  root.setAttribute(themeTransitionAttribute, "");
+  const transition = doc.startViewTransition(update);
+  runningThemeTransition = transition;
+  // A second change before the first ends skips the first; only the last one clears the attribute.
+  transition.finished.finally(() => {
+    if (runningThemeTransition !== transition) return;
+    runningThemeTransition = null;
+    root.removeAttribute(themeTransitionAttribute);
+  });
+}
+
 // Inlined in <head> by ThemeScript: runs before the first paint, so a stored theme never flashes the system one.
 export const themeInitScript = `try{var t=localStorage.getItem(${JSON.stringify(themeStorageKey)});if(${JSON.stringify(
   themes.filter((theme) => theme !== defaultTheme),

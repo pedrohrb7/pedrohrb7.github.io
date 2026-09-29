@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, useSyncExternalStore, type KeyboardEvent } from "react";
+import { flushSync } from "react-dom";
 import {
   applyTheme,
   defaultTheme,
@@ -9,6 +10,7 @@ import {
   themeChangeEvent,
   themeStorageKey,
   themes,
+  transitionTheme,
   type Theme,
 } from "@/lib/theme";
 import type { Content } from "@/types/content";
@@ -66,9 +68,14 @@ export function ThemeSelect({ labels }: ThemeSelectProps) {
   };
 
   const choose = (choice: Theme) => {
-    storeTheme(choice);
-    setOpen(false);
+    // Closed before the transition captures the old state, so the list doesn't fade out with the page.
+    flushSync(() => setOpen(false));
     buttonRef.current?.focus();
+    // applyTheme right away, not through the effect below: the transition needs the new colors when `update` returns.
+    transitionTheme(() => {
+      applyTheme(choice);
+      storeTheme(choice);
+    });
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {

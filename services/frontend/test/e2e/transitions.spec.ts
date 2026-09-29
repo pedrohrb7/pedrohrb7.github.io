@@ -20,6 +20,63 @@ async function switchToEnglish(page: Page) {
   await expect(page).toHaveURL(/\/en\/$/);
 }
 
+// The view transition's pseudo-elements animate on <html>; their animations show whether a transition ran and which.
+const rootTransitionAnimations = (page: Page) =>
+  page.evaluate(() =>
+    document.documentElement
+      .getAnimations({ subtree: true })
+      .map((animation) => ({
+        pseudo: (animation.effect as KeyframeEffect).pseudoElement,
+        duration: (animation.effect as KeyframeEffect).getTiming().duration,
+      }))
+      .filter(({ pseudo }) => pseudo?.startsWith("::view-transition-")),
+  );
+
+async function chooseTheme(page: Page, option: string) {
+  await page.getByRole("combobox", { name: "Tema" }).click();
+  await page.getByRole("listbox", { name: "Tema" }).getByRole("option", { name: option }).click();
+}
+
+const background = (page: Page) => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+
+test.describe("theme change transition", () => {
+  test("cross-fades the colors and ends on the chosen theme", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "light" });
+    const page = await context.newPage();
+    await page.goto("/pt/");
+    await chooseTheme(page, "Escuro");
+
+    // Both sides of the cross-fade run for 500 ms (the theme's own timing, not the language switch's sequence).
+    const animations = await rootTransitionAnimations(page);
+    expect(animations).toEqual(
+      expect.arrayContaining([
+        { pseudo: "::view-transition-old(root)", duration: 500 },
+        { pseudo: "::view-transition-new(root)", duration: 500 },
+      ]),
+    );
+    await expect(page.locator("html")).toHaveAttribute("data-theme-transition", "");
+    // The list closed before the old state was captured.
+    await expect(page.getByRole("listbox", { name: "Tema" })).toBeHidden();
+
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme-transition");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    expect(await background(page)).toBe("rgb(12, 10, 9)");
+    expect(await rootTransitionAnimations(page)).toEqual([]);
+    await context.close();
+  });
+
+  test("changes at once with reduced motion", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "light", reducedMotion: "reduce" });
+    const page = await context.newPage();
+    await page.goto("/pt/");
+    await chooseTheme(page, "Escuro");
+    expect(await rootTransitionAnimations(page)).toEqual([]);
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme-transition");
+    expect(await background(page)).toBe("rgb(12, 10, 9)");
+    await context.close();
+  });
+});
+
 test.describe("language switch transition", () => {
   test("fades from one language to the other", async ({ page }) => {
     await recordPageReveal(page);
