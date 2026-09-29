@@ -26,8 +26,8 @@ test.describe("icons", () => {
 
 test.describe("social image", () => {
   for (const { locale, alt } of [
-    { locale: "pt", alt: "Pedro Borges - Desenvolvedor Full-Stack" },
-    { locale: "en", alt: "Pedro Borges - Full-Stack Developer" },
+    { locale: "pt", alt: "Pedro Borges - Desenvolvedor Full-Stack · Mobile" },
+    { locale: "en", alt: "Pedro Borges - Mobile · Full-Stack Developer" },
   ]) {
     test(`/${locale}/ has an Open Graph and Twitter image in its language`, async ({ page, request }) => {
       await page.goto(`/${locale}/`);
