@@ -77,3 +77,4 @@
   - Selecionar repositórios existentes do GitHub. Candidatos: `java-ecommerce` / `backommerce-api` (Java/Spring Boot), `patas-conectadas-api` + `patas-conectadas-front` (full-stack TypeScript), `authentication-api-template` (NestJS + JWT), `kanban-dashboard`, `rust_webapp`, `smoothvim`
   - Construir 1-2 projetos-vitrine novos
 - **Tendência:** Revisitar quando algum repositório tiver README, demo e código que represente bem o nível atual
+- **Atualização (2026-09-28):** entrou o Accountability (projeto pessoal em andamento, repositório privado, sem demo), com as informações geradas a partir do próprio repositório. Segue aberta a escolha de projetos com repositório público e demo.

@@ -1,6 +1,18 @@
 import type { Theme } from "@/lib/theme";
 import type { CopyFieldLabels } from "@/ui/CopyField";
 
+// Templates use {n} and {total}; filled by fillTemplate (src/lib/carousel.ts).
+export type ProjectCarouselLabels = {
+  roleDescription: string;
+  slideRoleDescription: string;
+  slideLabel: string;
+  track: string;
+  previous: string;
+  next: string;
+  goTo: string;
+  hint: string;
+};
+
 export type Experience = {
   company: string;
   role: string;
@@ -42,6 +54,7 @@ export type Content = {
     contactHeadline: string;
     contactBody: string;
     copyEmail: CopyFieldLabels;
+    projectsCarousel: ProjectCarouselLabels;
     resumeCta: string;
     stackLabel: string;
     notFound: { title: string; body: string; backHome: string };

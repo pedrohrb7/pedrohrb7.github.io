@@ -9,13 +9,13 @@ Mapa das funcionalidades do site: o que já existe e os próximos passos. Cada f
 
 | Feature                                        | Status               | Resumo                                                                         | Depende de                                 |
 | ---------------------------------------------- | -------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
-| [portfolio](portfolio/spec.md)                 | Em andamento         | Página única por idioma com as seções do currículo e seletor PT/EN (no ar)     | -                                          |
+| [portfolio](portfolio/spec.md)                 | Concluída (no ar)    | Página única por idioma com as seções do currículo e seletor PT/EN             | -                                          |
 | [resume-pdf](resume-pdf/spec.md)               | Concluída (no ar)    | Currículo em PDF por idioma gerado no build a partir de `src/content/`         | -                                          |
 | [seo-assets](seo-assets/spec.md)               | Concluída (no ar)    | Favicon, imagem Open Graph, `sitemap.xml`, `robots.txt` e auditoria Lighthouse | -                                          |
 | [projects-showcase](projects-showcase/spec.md) | Bloqueada            | Seção de projetos com imagem, repositório e demo                               | Questão de projetos em `OPEN_QUESTIONS.md` |
 | [ux-enhancements](ux-enhancements/spec.md)     | Concluída (no ar)    | Escolha manual de tema e destaque da seção atual no menu                       | -                                          |
 | [structured-data](structured-data/spec.md)     | Backlog              | Dados estruturados JSON-LD (`ProfilePage`/`Person`) nas páginas de idioma      | -                                          |
-| [projects-carousel](projects-carousel/spec.md) | Próxima              | Seção Projetos como carrossel (scroll-snap, setas, indicadores, sem biblioteca) | -                                          |
+| [projects-carousel](projects-carousel/spec.md) | Concluída            | Seção Projetos como carrossel (scroll-snap, setas, indicadores, sem biblioteca) | -                                          |
 | [copy-email](copy-email/spec.md)               | Concluída            | E-mail em campo com botão de copiar no hero e no Contato, sem `mailto:`        | -                                          |
 
 ## Status

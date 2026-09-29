@@ -33,8 +33,9 @@ Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`). No modo dev o botão
 ## Testes
 
 ```
-npm test                          # unitários/componentes (Vitest + Testing Library)
-npx playwright install chromium   # uma vez, baixa o navegador
+npx playwright install chromium   # uma vez, baixa o navegador (usado pelo npm test e pelo e2e)
+npm test                          # Vitest: unitários em jsdom + componentes no Chromium (*.browser.test.tsx)
+npx vitest run --project unit     # só os unitários, sem navegador
 npm run test:e2e                  # Playwright contra o build estático (faz build e sobe o servidor sozinho)
 npm run lint
 npm run typecheck

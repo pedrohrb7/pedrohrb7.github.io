@@ -27,6 +27,22 @@ export function ChevronDownIcon() {
   );
 }
 
+export function ArrowLeftIcon() {
+  return (
+    <Icon>
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </Icon>
+  );
+}
+
+export function ArrowRightIcon() {
+  return (
+    <Icon>
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </Icon>
+  );
+}
+
 export function CheckIcon({ size = 14 }: { size?: number }) {
   return (
     <Icon size={size}>

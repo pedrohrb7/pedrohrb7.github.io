@@ -7,7 +7,7 @@ import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { SectionNav } from "@/components/layout/SectionNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { ProjectList } from "@/components/projects/ProjectList";
+import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { SkillGroups } from "@/components/skills/SkillGroups";
 import { ThemeSelect } from "@/components/theme/ThemeSelect";
 import { getContent } from "@/content";
@@ -47,9 +47,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Section id="experience" title={ui.sections.experience}>
           <ExperienceList items={content.experience} stackLabel={ui.stackLabel} />
         </Section>
-        <Section id="projects" title={ui.sections.projects}>
-          <ProjectList items={content.projects} stackLabel={ui.stackLabel} />
-        </Section>
+        <ProjectsSection content={content} />
         <Section id="skills" title={ui.sections.skills}>
           <SkillGroups groups={content.skills} />
         </Section>

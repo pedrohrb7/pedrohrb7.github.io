@@ -15,7 +15,7 @@ Página única por idioma com as seções: hero (título, nome, localização, l
 
 ## Conteúdo
 
-- Fonte: `services/frontend/src/content/{pt,en}.ts`, derivado do `resume.md` do repositório de perfil `pedrohrb7/pedrohrb7`.
+- Fonte: `services/frontend/src/content/{pt,en}.ts`. Foi derivado do `resume.md` do repositório de perfil `pedrohrb7/pedrohrb7`, mas não é sincronizado com ele (veja o `plan.md`).
 - Parágrafos longos do currículo foram quebrados em tópicos (`highlights`) por experiência para leitura rápida.
 - Telefone não é publicado (veja `OPEN_QUESTIONS.md`).
 

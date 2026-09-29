@@ -13,6 +13,7 @@
 - Tema: `src/lib/theme.ts` (lista de temas, `localStorage`, script anti-flash), `src/components/theme/` (`ThemeScript` no `<head>` dos três layouts raiz, `ThemeSelect` no header, `ThemeIcon`). As cores de cada tema estão em `tokens.css` via `light-dark()`.
 - `src/lib/active-section.ts` - regra de qual seção está em leitura, usada pelo `SectionNav` (componente cliente) para o `aria-current`.
 - `src/lib/geist-fonts.ts` - caminhos da Geist em TTF (pacote `geist`) para o PDF e para `next/og`, que não aceitam o woff2 do `next/font`.
+- `src/components/projects/` - `ProjectsSection` (seção), `ProjectCard` e `ProjectCarousel` (carrossel em partes com contexto: trilho, controles no cabeçalho, indicadores); lógica pura em `src/lib/carousel.ts`. Com um projeto, vira card simples.
 - `src/ui/icons.tsx` - ícones SVG inline compartilhados. `src/ui/CopyField.tsx` - valor com botão de copiar (e-mail no hero e no Contato).
 - SEO: `public/icon.svg` (favicon), `src/app/apple-touch-icon.png/route.tsx` e `src/app/[locale]/og-image.png/route.tsx` (imagens geradas no build com `next/og`), `src/app/sitemap.ts` e `src/app/robots.ts`. `src/lib/site-metadata.ts` guarda `siteIcons` (usado pelos três layouts raiz) e o caminho da imagem OG (usado no `generateMetadata` de `[locale]`).
 
@@ -28,7 +29,8 @@
 
 ## Testes
 
-- Testes unitários/componentes ficam ao lado do código (`*.test.ts(x)`), rodando em jsdom.
+- Testes unitários/componentes ficam ao lado do código (`*.test.ts(x)`), rodando em jsdom (projeto `unit` do Vitest).
+- Componentes que dependem de layout ou rolagem reais (ex.: carrossel) têm testes `*.browser.test.tsx`, rodando no Chromium com o CSS do site (projeto `browser`, `@vitest/browser-playwright`). Use `page`/`userEvent` de `vitest/browser` e `expect.poll` para esperar rolagens suaves. `npm test` roda os dois projetos e precisa do Chromium do Playwright instalado. Arquivos gerados vão para `.vitest/` (ignorada); o Vite só deixa gravar dentro do projeto.
 - `test/e2e/` (Playwright, projetos desktop e mobile) roda contra o build estático servido por `serve`, o mesmo artefato do GitHub Pages. Rode antes de considerar pronta qualquer mudança de layout ou interação.
 
 ## Pegadinhas

@@ -47,6 +47,16 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 - A meta é atingida na mediana, mas sem folga, e uma rodada de `/pt/` ficou em 94. A folga depende do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`.
 - Para comparar com versões futuras, rode cada página mobile 3 vezes e use a mediana.
 
+## 2026-09-28 - container local, após copy-email e projects-carousel
+
+- `copy-email`: 3 rodadas mobile em `/pt/`: 95, 95, 97 (mediana 95), CLS 0.
+- `projects-carousel` (código do site de ~2,3 para ~3,9 KiB gzip): 6 rodadas mobile em `/pt/`: 96, 94, 94, 95, 98, 97 (mediana 95,5), TBT 160-200 ms, CLS 0. Mesma faixa das medições anteriores; Accessibility, Best Practices e SEO 100.
+
+## 2026-09-28 - container local, com o segundo projeto (Accountability)
+
+- 6 rodadas mobile em `/pt/`: 91, 95, 98, 94, 95, 94 (mediana 94,5), TBT 150-270 ms, LCP 2,6-2,7 s, CLS 0.
+- Primeira mediana abaixo da meta (por meio ponto). A página ficou maior com o segundo projeto e a variação continua vindo do TBT. Prioridade do `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md` sobe.
+
 ## Como rodar
 
 ```

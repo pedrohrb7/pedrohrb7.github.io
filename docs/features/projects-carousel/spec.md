@@ -7,13 +7,14 @@ Apresenta a seção Projetos como carrossel: um projeto por vez, navegável por 
 ## Relação com outras features
 
 - O conteúdo dos projetos (quais entram, links de repositório/demo, imagens) é de `docs/features/projects-showcase/`. Este carrossel funciona com o tipo `Project` atual e mostra links e imagem quando `projects-showcase` os adicionar.
-- Hoje só existe o AutoSim. Com um projeto, o carrossel vira um card simples (sem controles), então a entrega pode acontecer antes dos novos projetos, testada com projetos de exemplo.
+- Com um projeto, o carrossel vira um card simples (sem controles). Desde 2026-09-28 o conteúdo tem dois projetos (AutoSim e Accountability), então o carrossel aparece no site.
 
 ## Interface
 
 - Cabeçalho da seção: rótulo à esquerda; à direita, contador `01 / 03` (mono, `text-muted`) e botões anterior/próximo com ícones SVG inline, no estilo dos controles do header (borda, `radius.md`, alvo >= 44x44px), `disabled` nas pontas.
 - Trilho: rolagem horizontal nativa com CSS scroll-snap, um card por vez. No mobile, o card ocupa ~85% da largura para o próximo aparecer na borda e indicar que dá para deslizar; a partir de `md`, o card ocupa a largura toda. Barra de rolagem escondida, sem perder a rolagem.
-- Card: índice `[01]` em mono no acento, nome (h3), papel/período em mono à direita, descrição, destaques e tags de stack (`TagList`); links de repositório/demo com `↗` e imagem no topo quando existirem. Sem borda de hover no card inteiro (ele não é clicável) e com texto selecionável.
+- Card: índice `[01]` em mono no acento, nome (h3), papel/período em mono à direita, descrição, destaques e tags de stack (`TagList`) logo depois dos destaques; links de repositório/demo com `↗` e imagem no topo quando existirem. Sem borda de hover no card inteiro (ele não é clicável) e com texto selecionável. Cada card tem a altura do próprio conteúdo.
+- Altura adaptativa: o trilho acompanha a altura do card atual (transição de 300 ms, desligada com `prefers-reduced-motion`), para um card curto não deixar o vão do mais alto antes dos indicadores. Sem JS, o trilho fica com a altura do card mais alto.
 - Rodapé do carrossel: indicadores (barras) clicáveis, o atual no acento; à direita, a dica "Deslize ou use as setas".
 - Nada de autoplay.
 

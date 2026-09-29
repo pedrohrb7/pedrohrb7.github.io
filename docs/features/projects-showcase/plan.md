@@ -6,6 +6,10 @@ Status: **Bloqueada** (aguarda a questão de projetos em `OPEN_QUESTIONS.md`). A
 
 - [ ] Resolver a questão de projetos em `OPEN_QUESTIONS.md` (repositórios existentes ou projetos-vitrine novos).
 - [ ] Para cada projeto escolhido: README, demo publicada e screenshot.
+- [x] Accountability adicionado ao conteúdo nos dois idiomas, depois do AutoSim (2026-09-28). Repositório privado e sem demo, então sem links; screenshot sugerido (Perfil > Cadastros, 2560x1440) e texto alternativo guardados abaixo para quando a imagem for implementada.
+  - Alt (PT): "Tela de cadastros do Accountability com a lista de contas bancárias e a renda mensal do usuário."
+  - Alt (EN): "Accountability registrations screen showing the user's bank accounts and monthly income."
+  - Destaque alternativo, fora por ora para manter quatro: "Implementei a exclusão de conta com exportação dos dados do usuário em PDF e confirmação por código, executada automaticamente em segundo plano após 2 horas." / "Implemented account deletion with a PDF export of the user's data and code confirmation, with automatic background execution after 2 hours."
 
 ## Fase 1 - Modelo de conteúdo
 
