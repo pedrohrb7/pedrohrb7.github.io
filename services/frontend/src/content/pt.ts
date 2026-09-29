@@ -40,8 +40,8 @@ export const pt: Content = {
       backHome: "Voltar ao início",
     },
   },
-  title: "Desenvolvedor Full-Stack",
-  location: "São Paulo - SP · aberto a remoto/híbrido",
+  title: "Desenvolvedor Full-Stack · Mobile",
+  location: "São Paulo - SP",
   about: [
     "Desenvolvedor Full-Stack com atuação no ciclo completo de desenvolvimento de software, do back-end ao front-end. Tenho autonomia para conduzir demandas do início ao fim, com experiência na modernização de arquiteturas legadas, implementação de microsserviços e migração de sistemas.",
     "Trabalho principalmente com o ecossistema JavaScript/TypeScript (NestJS, Node.js, React, Next.js e React Native) e também desenvolvo em Java com Spring Boot no back-end. Atuo com bancos como MySQL, MongoDB e Postgres, containerização com Docker e deploy em cloud (AWS). Cultivo cultura de qualidade com testes automatizados e code review como prática de time, em ambientes ágeis remotos e distribuídos.",

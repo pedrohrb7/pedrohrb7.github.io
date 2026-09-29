@@ -28,7 +28,18 @@ Não há `.env`.
 npm run dev
 ```
 
-Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`). No modo dev o botão "Baixar currículo (PDF)" dá 404, porque os PDFs só são gerados no `npm run build`; para testá-lo use `npm run build && npm run preview` ou o container. Ou, pela raiz do projeto, o build de produção via nginx: `cd services && docker-compose up frontend` (em `http://localhost:8080`).
+Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`), com hot reload. No modo dev o botão "Baixar currículo (PDF)" dá 404, porque os PDFs só são gerados no `npm run build`; para testá-lo use `npm run build && npm run preview` ou o container de produção.
+
+Pelo Docker, a partir de `services/`:
+
+```
+docker compose up frontend-dev       # dev com hot reload em http://localhost:3000 (código montado, sem Node no host)
+docker compose up -d --build         # build de produção via nginx em http://localhost:8080 (igual ao GitHub Pages)
+```
+
+O `frontend-dev` usa o estágio `dev` do `Dockerfile`, com `node_modules` e `.next` em volumes do container (binários do Alpine, não os do host), e roda como o usuário `node` (uid 1000). Se `package.json` mudar, reconstrua com `docker compose build frontend-dev`. O de produção só muda com `--build`, porque o texto entra no HTML durante o build.
+
+Pare o servidor de dev (`npm run dev` ou `frontend-dev`) antes de `npm run test:e2e`: o e2e usa a porta 3000 e, fora do CI, reaproveita o que já estiver nela, testando o modo dev em vez do build estático.
 
 ## Testes
 

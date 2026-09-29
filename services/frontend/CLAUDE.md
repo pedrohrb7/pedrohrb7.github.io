@@ -50,6 +50,8 @@
 - Controles que só funcionam com JS (botão de copiar, controles do carrossel) levam o atributo `data-requires-js`: um `<noscript><style>` no `<head>` de `[locale]` os esconde sem JavaScript. Não os renderize só depois da hidratação (ex.: com estado `mounted`), porque isso muda o layout e gera CLS.
 - Um novo layout raiz ou a `global-not-found` precisam de `icons: siteIcons` nos metadados; sem `app/layout.tsx` não há onde declarar os ícones uma vez só.
 - Turbopack não suporta `import.meta.resolve`. Arquivos lidos no build (fontes, `public/icon.svg`) são localizados a partir de `process.cwd()`, que é `services/frontend` no `next build`, nos scripts do npm e no Vitest.
+- `next dev` rodado por um agente (Claude Code) acrescenta um bloco `nextjs-agent-rules` a este `CLAUDE.md` (`node_modules/next/dist/server/lib/generate-agent-files.js`, só quando detecta agente). Se aparecer como efeito de um teste seu, restaure o arquivo com `git restore`; não edite o bloco à mão. O serviço `frontend-dev` não dispara isso (o container não tem as variáveis de agente).
+- Servidor de dev ligado (`npm run dev` ou `frontend-dev`) ocupa a porta 3000, a mesma que o e2e usa; fora do CI o Playwright reaproveita o servidor existente e testaria o modo dev. Pare o dev antes do e2e.
 - O container (`Dockerfile` + `nginx.conf`) imita o GitHub Pages: redirect `/pt` -> `/pt/` relativo (`absolute_redirect off`, senão perde a porta 8080), `404.html` para rotas inexistentes e gzip nos arquivos de texto (sem ele o Lighthouse local não é comparável ao de produção). Mudou o comportamento de um, confira o outro.
 
 ## Referência

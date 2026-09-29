@@ -1,6 +1,23 @@
 services:
+  # Production-like: static build served by nginx, same behavior as GitHub Pages. Rebuild to see changes:
+  #   docker compose up -d --build
   frontend:
     build:
       context: ./frontend
     ports:
       - "8080:80"
+
+  # Development with hot reload (next dev). Not started by a plain `docker compose up`; run:
+  #   docker compose up frontend-dev
+  frontend-dev:
+    profiles: ["dev"]
+    build:
+      context: ./frontend
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      # Keep the container's own node_modules (Alpine native binaries) and build cache instead of the host's.
+      - /app/node_modules
+      - /app/.next

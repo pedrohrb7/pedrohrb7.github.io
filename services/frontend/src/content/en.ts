@@ -40,8 +40,8 @@ export const en: Content = {
       backHome: "Back to home",
     },
   },
-  title: "Full-Stack Developer",
-  location: "São Paulo, Brazil · open to remote/hybrid",
+  title: "Mobile · Full-Stack Developer",
+  location: "São Paulo, Brazil",
   about: [
     "Full-Stack developer working across the whole software development lifecycle, from back-end to front-end. I own work end to end, with experience modernizing legacy architectures, building microservices and migrating systems.",
     "I work mainly in the JavaScript/TypeScript ecosystem (NestJS, Node.js, React, Next.js and React Native), and I also build back-ends in Java with Spring Boot. I work with databases such as MySQL, MongoDB and Postgres, containerization with Docker and cloud deployment on AWS. I foster a quality culture through automated testing and code review as a team practice, in remote, distributed agile teams.",
