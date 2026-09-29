@@ -26,7 +26,7 @@
 - Não há `stores/`: o site não tem estado global.
 - Sem biblioteca de componentes (shadcn/ui, Radix, MUI...): componentes próprios sobre os tokens. Se uma feature precisar de um componente interativo complexo, adicione só ele pela CLI do shadcn, adaptado aos nossos tokens (veja "Adotar shadcn/ui no frontend?" no `OPEN_QUESTIONS.md` da raiz).
 - Texto visível nunca fica hardcoded em componente: vai em `Content` (campo `ui` para rótulos de interface) e é preenchido em `pt.ts` e `en.ts`. O TypeScript acusa se um idioma ficar sem o campo.
-- Links internos de troca de idioma usam `<a>` e não `next/link`: mudar de idioma troca o `<html lang>` e deve ser uma navegação de documento completa.
+- Links internos de troca de idioma usam `<a>` e não `next/link`: mudar de idioma troca o `<html lang>` e deve ser uma navegação de documento completa. É essa navegação completa que ganha o fade da View Transition entre documentos (`@view-transition` no `globals.css`); a regra precisa estar no CSS da página de origem e da de destino, por isso vale para todo layout raiz que importa o `globals.css`.
 
 ## Testes
 

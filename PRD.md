@@ -60,6 +60,7 @@ O currículo hoje existe apenas como documento (`resume.md`) e perfil do GitHub/
 | E-mail com botão de copiar (hero e Contato) | Sim | `docs/features/copy-email/spec.md` |
 | Detalhes do projeto em drawer (estudo de caso e stack por camada) | Sim | `docs/features/project-details/spec.md` |
 | Detalhe de projetos (páginas por projeto, proposta em `wireframe/dark-nexus-project.html`) | Não (substituída pelo drawer) | - |
+| Transições de interface (idioma, tema, entrada das seções, microinterações, modal e drawer) | Em andamento (troca de idioma pronta; o resto em backlog) | `docs/features/ui-transitions/spec.md` |
 
 Status e mapa de todas as features: `docs/features/README.md`.
 

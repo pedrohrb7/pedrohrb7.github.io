@@ -33,3 +33,38 @@
     @apply bg-accent text-accent-fg;
   }
 }
+
+/*
+ * Page transitions (docs/features/ui-transitions/): switching language is a full navigation between /pt/ and /en/,
+ * and both pages opt in, so the browser fades from one to the other instead of flashing. Browsers without
+ * cross-document view transitions (Firefox today) just navigate as before. Off with prefers-reduced-motion.
+ *
+ * Old and new fade in sequence, not at the same time: the pages differ a lot (the new one opens at the top, and every
+ * label changes language, header included), and a plain cross-fade would show both texts on top of each other halfway
+ * through.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out 100ms ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in 180ms ease-out 80ms both;
+}
