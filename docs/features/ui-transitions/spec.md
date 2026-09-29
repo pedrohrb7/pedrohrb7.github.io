@@ -45,11 +45,11 @@ Hoje o site só anima a cor de links e botões no hover (`transition-colors`) e 
 
 ## 4. Microinterações
 
-- **Seletor de tema:** a lista abre com fade e um leve deslize/escala a partir do botão. Hoje ela alterna o atributo `hidden`; com `@starting-style` e `transition-behavior: allow-discrete` dá para animar a entrada sem trocar o mecanismo.
-- **"Ver detalhes":** a seta desliza alguns pixels para a direita no hover (`group-hover:translate-x`).
-- **Botão de copiar e-mail:** o "Copiado!" e o ✓ entram com fade em vez de trocar de uma vez.
-- **Setas do carrossel:** resposta ao clique com uma leve redução de escala (`active:scale-95`).
-- Tudo CSS, dentro dos componentes que já existem.
+- **Seletor de tema:** a lista abre com fade e um deslize de 4px a partir do botão, em 150 ms (`@starting-style`, mantendo o atributo `hidden`). O fechamento continua imediato.
+- **"Ver detalhes":** a seta anda 4px para a direita no hover, em 150 ms.
+- **Botão de copiar e-mail:** o "Copiado!" (ou "Não foi possível copiar") e o ícone entram com fade de 150 ms (token `animate-fade-in`), só depois do primeiro clique; na carga da página o botão só aparece.
+- **Setas do carrossel:** reduzem para 95% enquanto pressionadas.
+- Tudo CSS, dentro dos componentes que já existem. Os efeitos de movimento usam `motion-safe:`, então nem existem com `prefers-reduced-motion`.
 
 ## 5. Modal e drawer
 

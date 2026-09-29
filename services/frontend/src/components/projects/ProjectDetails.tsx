@@ -93,10 +93,13 @@ export function ProjectDetails({ hash, number, name, role, labels, children }: P
         onClick={open}
         // -ml-3: the text lines up with the card's content. -mb-3: the 44px target overlaps the card's padding, so the
         // text sits as far from the card's bottom edge as from the divider above it.
-        className="-mb-3 -ml-3 inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-3 text-sm font-medium text-accent transition-colors hover:bg-accent/10"
+        className="group -mb-3 -ml-3 inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-3 text-sm font-medium text-accent transition-colors hover:bg-accent/10"
       >
         {labels.open}
-        <ArrowRightIcon />
+        {/* The arrow nudges toward where the drawer comes from. */}
+        <span className="transition-transform duration-150 ease-out motion-safe:group-hover:translate-x-1">
+          <ArrowRightIcon />
+        </span>
       </button>
       <dialog
         ref={dialogRef}

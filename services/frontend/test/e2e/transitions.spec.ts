@@ -102,3 +102,92 @@ test.describe("language switch transition", () => {
     });
   });
 });
+
+// Microinteractions last 150 ms, less than a round trip to the page; slowing Chromium's animations down 10x lets the
+// test see them running instead of racing them.
+async function slowAnimations(page: Page) {
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send("Animation.enable");
+  await cdp.send("Animation.setPlaybackRate", { playbackRate: 0.1 });
+}
+
+// Running CSS animations and transitions on one element, by name (animation) or property (transition).
+const running = (page: Page, selector: string) =>
+  page.locator(selector).first().evaluate((element) =>
+    element
+      .getAnimations()
+      .map((animation) =>
+        animation instanceof CSSAnimation ? animation.animationName : (animation as CSSTransition).transitionProperty,
+      ),
+  );
+
+test.describe("microinteractions", () => {
+  test.use({ permissions: ["clipboard-read", "clipboard-write"] });
+
+  test("the theme list fades and slides in when it opens", async ({ page }) => {
+    await page.goto("/pt/");
+    await slowAnimations(page);
+    await page.getByRole("combobox", { name: "Tema" }).click();
+    expect(await running(page, '[role="listbox"]')).toEqual(expect.arrayContaining(["opacity", "translate"]));
+  });
+
+  test("the copy button's new label fades in, but not on page load", async ({ page }) => {
+    await page.goto("/pt/");
+    const button = page.locator("#top").getByRole("button", { name: "Copiar e-mail" });
+    expect(await button.locator("> span").evaluate((label) => label.getAnimations().length)).toBe(0);
+    await slowAnimations(page);
+    await button.click();
+    await expect(button).toHaveText("Copiado!");
+    expect(await button.locator("> span").evaluate((label) => label.getAnimations().map((a) => (a as CSSAnimation).animationName))).toEqual(["fade-in"]);
+  });
+
+  test("the details arrow nudges right on hover", async ({ page, isMobile }) => {
+    test.skip(isMobile, "hover is a pointer interaction");
+    await page.goto("/pt/");
+    const open = page.getByRole("button", { name: "Ver detalhes do projeto Plataforma Financeira" });
+    await open.hover();
+    // Tailwind 4's translate-* utilities set the `translate` property, not `transform`.
+    await expect.poll(() => open.locator("> span").evaluate((arrow) => getComputedStyle(arrow).translate)).toBe("4px");
+  });
+
+  test("the carousel arrows shrink slightly while pressed", async ({ page }) => {
+    await page.goto("/pt/");
+    const next = page.getByRole("button", { name: "Próximo projeto" });
+    await next.hover();
+    await page.mouse.down();
+    await expect.poll(() => next.evaluate((button) => getComputedStyle(button).scale)).toBe("0.95");
+    await page.mouse.up();
+    await expect.poll(() => next.evaluate((button) => getComputedStyle(button).scale)).toBe("none");
+  });
+
+  test.describe("with reduced motion", () => {
+    test.use({ reducedMotion: "reduce" });
+
+    test("none of them move", async ({ page, isMobile }) => {
+      await page.goto("/pt/");
+      await slowAnimations(page);
+      await page.getByRole("combobox", { name: "Tema" }).click();
+      expect(await running(page, '[role="listbox"]')).toEqual([]);
+      await page.keyboard.press("Escape");
+
+      const copy = page.locator("#top").getByRole("button", { name: "Copiar e-mail" });
+      await copy.click();
+      await expect(copy).toHaveText("Copiado!");
+      expect(await copy.locator("> span").evaluate((label) => label.getAnimations().length)).toBe(0);
+
+      const next = page.getByRole("button", { name: "Próximo projeto" });
+      await next.hover();
+      await page.mouse.down();
+      await page.waitForTimeout(100);
+      expect(await next.evaluate((button) => getComputedStyle(button).scale)).not.toBe("0.95");
+      await page.mouse.up();
+
+      if (!isMobile) {
+        const open = page.getByRole("button", { name: "Ver detalhes do projeto Plataforma Financeira" });
+        await open.hover();
+        await page.waitForTimeout(100);
+        expect(await open.locator("> span").evaluate((arrow) => getComputedStyle(arrow).translate)).toBe("none");
+      }
+    });
+  });
+});

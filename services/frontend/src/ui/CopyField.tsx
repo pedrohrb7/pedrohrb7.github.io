@@ -23,6 +23,8 @@ const resetAfterMs = 2000;
 // (data-requires-js) and the text can still be selected and copied by hand.
 export function CopyField({ value, labels }: CopyFieldProps) {
   const [status, setStatus] = useState<Status>("idle");
+  // Whether the button was used: the label only fades in on changes, not when the page loads.
+  const [touched, setTouched] = useState(false);
 
   useEffect(() => {
     if (status === "idle") return;
@@ -31,6 +33,7 @@ export function CopyField({ value, labels }: CopyFieldProps) {
   }, [status]);
 
   const copy = async () => {
+    setTouched(true);
     try {
       // Throws when the Clipboard API is missing (insecure context) or permission is denied.
       await navigator.clipboard.writeText(value);
@@ -49,10 +52,14 @@ export function CopyField({ value, labels }: CopyFieldProps) {
         data-requires-js
         aria-label={labels.copyAriaLabel}
         onClick={copy}
-        className="flex min-h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded px-3 text-sm font-medium text-accent transition-colors hover:bg-accent/10"
+        className="flex min-h-9 shrink-0 cursor-pointer items-center rounded px-3 text-sm font-medium text-accent transition-colors hover:bg-accent/10"
       >
-        {status === "copied" ? <CheckIcon /> : <CopyIcon />}
-        <span>{status === "copied" ? labels.copied : status === "failed" ? labels.failed : labels.copy}</span>
+        {/* Keyed by status, so each change mounts it again and fades in. Not before the first click: on page load
+            the button just shows. */}
+        <span key={status} className={`flex items-center gap-1.5 ${touched ? "motion-safe:animate-fade-in" : ""}`}>
+          {status === "copied" ? <CheckIcon /> : <CopyIcon />}
+          <span>{status === "copied" ? labels.copied : status === "failed" ? labels.failed : labels.copy}</span>
+        </span>
       </button>
       <span className="sr-only" aria-live="polite">
         {status === "copied" ? labels.copied : status === "failed" ? labels.failed : ""}

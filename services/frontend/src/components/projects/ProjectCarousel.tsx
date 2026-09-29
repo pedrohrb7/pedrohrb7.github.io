@@ -102,7 +102,7 @@ export function ProjectCarouselTrack({ labels, slides }: { labels: ProjectCarous
 }
 
 const controlClass =
-  "flex size-11 cursor-pointer items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-muted";
+  "flex size-11 cursor-pointer items-center justify-center rounded-md border border-border text-muted transition-[color,border-color,scale] hover:border-accent hover:text-accent motion-safe:enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-muted";
 
 export function ProjectCarouselControls({ labels }: { labels: ProjectCarouselLabels }) {
   const { count, index, goTo } = useCarousel();

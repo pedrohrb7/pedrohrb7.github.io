@@ -78,6 +78,11 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 - Poucas linhas a mais no `ThemeSelect` e em `src/lib/theme.ts`; a transição só roda numa escolha do usuário, não na carga.
 - Container, 6 rodadas mobile em `/pt/`: 95, 95, 94, 97, 98, 96 (mediana 95,5), TBT 129-182 ms, LCP 1,9-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100.
 
+## 2026-09-29 - microinterações (ui-transitions, fase 2)
+
+- Só CSS e um estado a mais no `CopyField`.
+- Container, 6 rodadas mobile em `/pt/`: 96, 99, 99, 97, 97, 94 (mediana 97), TBT 81-187 ms, LCP 1,8-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100.
+
 ## Como rodar
 
 ```

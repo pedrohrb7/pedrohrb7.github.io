@@ -22,6 +22,9 @@
   --container-content: 64rem;
   /* Project details drawer width from md up: max-w-drawer. */
   --container-drawer: 35rem;
+
+  /* Short entrance for content that swaps in place ("Copiado!"): animate-fade-in. Keyframes in globals.css. */
+  --animate-fade-in: fade-in 150ms ease-out;
 }
 
 @theme inline {

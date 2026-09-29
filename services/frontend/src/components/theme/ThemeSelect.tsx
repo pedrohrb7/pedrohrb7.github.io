@@ -145,7 +145,8 @@ export function ThemeSelect({ labels }: ThemeSelectProps) {
         role="listbox"
         aria-label={labels.label}
         hidden={!open}
-        className="absolute top-full right-0 z-20 mt-2 min-w-40 rounded-md border border-border bg-surface p-1 text-sm"
+        // Opens with a short fade and slide from the button (@starting-style: starting:). Closing stays instant.
+        className="absolute top-full right-0 z-20 mt-2 min-w-40 origin-top-right rounded-md border border-border bg-surface p-1 text-sm transition-[opacity,translate] duration-150 ease-out starting:-translate-y-1 starting:opacity-0 motion-reduce:transition-none"
       >
         {themes.map((option, index) => {
           const selected = option === theme;

@@ -1,6 +1,6 @@
 # Plano - Transições de interface
 
-Status: **Em andamento** (fases 1 e 3 concluídas em 2026-09-29, falta publicar; fases 2, 4 e 5 em backlog)
+Status: **Em andamento** (fases 1, 2 e 3 concluídas em 2026-09-29, falta publicar; fases 4 e 5 em backlog)
 
 Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do menor risco e custo para o maior.
 
@@ -13,11 +13,15 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Lighthouse: sem efeito mensurável (comparação alternada com e sem a regra, 5 rodadas cada: medianas 95 e 96, faixas sobrepostas). Detalhes em `docs/features/seo-assets/lighthouse.md`.
 - [ ] Conferir no Safari e no Firefox (só o Chromium está instalado aqui) e no site publicado depois do deploy.
 
-## Fase 2 - Microinterações (só CSS)
+## Fase 2 - Microinterações (só CSS) (concluída em 2026-09-29)
 
-- [ ] Lista do seletor de tema com entrada animada (`@starting-style` + `allow-discrete`), mantendo o atributo `hidden`.
-- [ ] Seta do "Ver detalhes" no hover, "Copiado!" com fade, `active:scale-95` nas setas do carrossel.
-- [ ] Atualizar os testes de componente que dependem de a lista estar visível imediatamente (esperar o fim da transição ou rodar com movimento reduzido).
+- [x] Lista do seletor de tema: entra com fade e deslize de 4px em 150 ms (`starting:` do Tailwind, que gera `@starting-style`), mantendo o atributo `hidden`. Só a entrada anima; o fechamento continua imediato (não foi preciso `allow-discrete`).
+- [x] Seta do "Ver detalhes" anda 4px para a direita no hover (150 ms); "Copiado!"/"Não foi possível copiar" e o ícone entram com fade de 150 ms (token novo `animate-fade-in`), só depois do primeiro clique, nunca na carga; setas do carrossel reduzem para 95% enquanto pressionadas.
+- [x] Movimento reduzido: os efeitos de movimento usam `motion-safe:` (só existem quando o movimento é permitido). Um override `motion-reduce:` perdia para a regra normal pela ordem do CSS gerado e deixava as setas encolhendo.
+- [x] Nenhum teste de componente dependia da lista aparecer na hora (Playwright e Testing Library consideram visível um elemento com opacidade baixa).
+- [x] E2E (`test/e2e/transitions.spec.ts`, "microinteractions"): cada efeito roda no navegador (animações desaceleradas 10x pelo protocolo do Chrome, para não correr contra 150 ms) e nenhum roda com movimento reduzido. Estável em 3 rodadas seguidas; suíte completa passando. Capturas conferidas (lista no meio da entrada, seta no hover, "Copiado!").
+- [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 97, CLS 0.
+- [ ] Conferir no Safari e no Firefox e no site publicado depois do deploy.
 
 ## Fase 3 - Troca de tema (poucas linhas de JS) (concluída em 2026-09-29)
 
