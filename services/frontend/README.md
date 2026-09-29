@@ -33,11 +33,11 @@ Serve em `http://localhost:3000` (acesse `/pt/` ou `/en/`), com hot reload. No m
 Pelo Docker, a partir de `services/`:
 
 ```
-docker compose up frontend-dev       # dev com hot reload em http://localhost:3000 (código montado, sem Node no host)
+docker compose up --build -V frontend-dev   # dev com hot reload em http://localhost:3000 (código montado, sem Node no host)
 docker compose up -d --build         # build de produção via nginx em http://localhost:8080 (igual ao GitHub Pages)
 ```
 
-O `frontend-dev` usa o estágio `dev` do `Dockerfile`, com `node_modules` e `.next` em volumes do container (binários do Alpine, não os do host), e roda como o usuário `node` (uid 1000). Se `package.json` mudar, reconstrua com `docker compose build frontend-dev`. O de produção só muda com `--build`, porque o texto entra no HTML durante o build.
+O `frontend-dev` usa o estágio `dev` do `Dockerfile`, com `node_modules` e `.next` em volumes do container (binários do Alpine, não os do host), e roda como o usuário `node` (uid 1000). Se `package.json` ou `package-lock.json` mudar, reconstrua com `docker compose up --build -V frontend-dev`: sem o `-V` (`--renew-anon-volumes`) o Compose reaproveita o volume de `node_modules` do container anterior e a imagem nova é ignorada (sintoma: o dev cai ao gerar a imagem OG com `Could not load the "sharp" module`). O de produção só muda com `--build`, porque o texto entra no HTML durante o build.
 
 Pare o servidor de dev (`npm run dev` ou `frontend-dev`) antes de `npm run test:e2e`: o e2e usa a porta 3000 e, fora do CI, reaproveita o que já estiver nela, testando o modo dev em vez do build estático.
 

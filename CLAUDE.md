@@ -16,7 +16,7 @@ Veja `PRD.md` para o contexto completo do produto.
 
 ```
 cd services && docker compose up -d --build      # build estático via nginx em http://localhost:8080
-cd services && docker compose up frontend-dev    # dev com hot reload em http://localhost:3000
+cd services && docker compose up --build -V frontend-dev   # dev com hot reload em http://localhost:3000
 ```
 
 O primeiro imita o GitHub Pages e só reflete mudanças com `--build`. O segundo (perfil `dev`, não sobe num `docker compose up` simples) roda `next dev` com o código montado; o mesmo vale para `npm run dev` dentro de `services/frontend/` (veja o README do serviço). Não há `.env`, banco de dados nem seed.

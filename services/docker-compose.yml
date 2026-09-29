@@ -8,7 +8,9 @@ services:
       - "8080:80"
 
   # Development with hot reload (next dev). Not started by a plain `docker compose up`; run:
-  #   docker compose up frontend-dev
+  #   docker compose up --build -V frontend-dev
+  # -V (--renew-anon-volumes) matters: without it the node_modules volume below survives a rebuild and hides the new
+  # image's dependencies.
   frontend-dev:
     profiles: ["dev"]
     build:
