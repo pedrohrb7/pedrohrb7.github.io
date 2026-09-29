@@ -68,6 +68,14 @@
 - **Atualização (2026-09-28):** o primeiro caso apareceu (lista do seletor de tema estilizada). Em vez do Select do shadcn/Radix (~25 KiB gzip), foi feito um listbox próprio (~2,3 KiB gzip), por causa do refactor de JavaScript em aberto (`docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`). Para componentes simples, o componente próprio segue preferível enquanto a meta de Performance estiver apertada.
 - **Levado para:** `services/frontend/CLAUDE.md` (Convenções)
 
+### Mudar a arquitetura para recuperar folga de Performance?
+
+- **Status:** resolvida
+- **Decisão:** Não. Manter o Next.js com o App Router como está: sem migrar para outro gerador (ex.: Astro), sem remover o runtime do HTML no pós-build e sem orçamento de Lighthouse no CI.
+- **Data:** 2026-09-28
+- **Motivo:** Decisão do Pedro depois da medição do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`: não há ganho barato dentro do Next (o peso é React DOM + runtime + hidratação), e o ganho real (Performance 100, LCP 1,2 s, TBT 0) exigiria mudar a arquitetura.
+- **Consequência aceita:** Performance mobile oscila em torno da meta de 95 do `PRD.md` (91-98 nas medições). Novas seções ou componentes cliente tendem a derrubar a nota; medir antes de entregar (mediana de 3 rodadas).
+
 ### Quais projetos pessoais/open source entram na seção de Projetos?
 
 - **Status:** aberta

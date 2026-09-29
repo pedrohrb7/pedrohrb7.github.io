@@ -1,6 +1,6 @@
 # Reduzir o JavaScript da primeira carga
 
-- **Status:** Proposed
+- **Status:** Dropped (2026-09-28): a etapa 1 não tem ganho possível dentro do Next e o Pedro decidiu não mudar a arquitetura (sem migração, sem remover o runtime, sem orçamento no CI). Veja "Resultado" no fim.
 - **Opened:** 2026-09-28
 - **Scope:** `services/frontend` (build do Next, componentes cliente `ThemeSelect`, `SectionNav` e `LocaleRedirect`, possivelmente `package.json`/`next.config.ts`)
 
@@ -55,3 +55,27 @@ Em etapas, medindo (mediana de 3 rodadas mobile por página, no site publicado) 
 - Mudanças de conteúdo ou de design.
 - Otimização de imagens e fontes (já não pesam: LCP é texto e as fontes são pré-carregadas).
 - Performance do desktop (já em 100).
+
+## Resultado (2026-09-28)
+
+### Etapa 1 - ganhos baratos dentro do Next: nenhum
+
+- `browserslist`: o padrão do Next 16 já é moderno (`chrome 111, edge 111, firefox 111, safari 16.4`); configurar não muda nada.
+- JavaScript legado (~16 KiB, `Array.prototype.at`, `flat`, `flatMap`, `Object.fromEntries`, `Object.hasOwn`, `trimStart`/`trimEnd`): polyfills dentro do chunk pré-compilado do React/Next (`0bma92pht_c97.js`), fora do alcance do `browserslist`.
+- JavaScript não usado (~65 KiB): todo nos dois chunks do framework (React DOM e runtime do App Router). O código do site é ~3,9 KiB gzip.
+- O custo real é a hidratação: uma tarefa longa de ~220 ms no chunk do React DOM, que percorre a página inteira (cresce com o conteúdo, como na entrada do segundo projeto). O App Router não tem hidratação parcial nem opção de página sem JavaScript.
+
+### Medição do teto (experimento descartável)
+
+Mesmo `out/` servido pelo `nginx.conf` do projeto, com e sem os scripts do Next (chunks e payload RSC inline), 3 rodadas mobile de Lighthouse em `/pt/`:
+
+| Variante | Performance | FCP | LCP | TBT | JavaScript | HTML (gzip) |
+|---|---|---|---|---|---|---|
+| Atual | 95, 95, 96 | 0,9 s | 2,6 s | 140-150 ms | 159 KiB | 17 KB |
+| Sem o JS do Next | 100, 100, 100 | 0,8 s | 1,2 s | 0 ms | 0 KiB | 7,5 KB |
+
+O payload RSC embutido era ~51 KB dos 87 KB do HTML de `/pt/` (sem compressão).
+
+### Decisão
+
+Opções apresentadas: migrar para Astro, manter o Next removendo o runtime no pós-build, ou manter como está com orçamento de Lighthouse no CI. Decisão do Pedro: manter como está, sem migração. Consequência aceita: Performance mobile oscilando em torno da meta de 95 (91-98 nas medições), sem folga para novas seções ou componentes. Se isso mudar, a medição acima é o ponto de partida e as opções continuam descritas em "Proposed change".

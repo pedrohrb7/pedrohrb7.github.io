@@ -44,7 +44,7 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 | `/en/` | desktop | 100 | 100 | 100 | 100 |
 
 - Mobile: LCP 2,0-2,3 s, TBT 130-220 ms, FCP 0,9-1,3 s. A variação de Performance vem quase toda do TBT (JavaScript do Next e do header).
-- A meta é atingida na mediana, mas sem folga, e uma rodada de `/pt/` ficou em 94. A folga depende do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`.
+- A meta é atingida na mediana, mas sem folga, e uma rodada de `/pt/` ficou em 94. Veja o refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md` (descartado).
 - Para comparar com versões futuras, rode cada página mobile 3 vezes e use a mediana.
 
 ## 2026-09-28 - container local, após copy-email e projects-carousel
@@ -55,7 +55,7 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 ## 2026-09-28 - container local, com o segundo projeto (Accountability)
 
 - 6 rodadas mobile em `/pt/`: 91, 95, 98, 94, 95, 94 (mediana 94,5), TBT 150-270 ms, LCP 2,6-2,7 s, CLS 0.
-- Primeira mediana abaixo da meta (por meio ponto). A página ficou maior com o segundo projeto e a variação continua vindo do TBT. Prioridade do `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md` sobe.
+- Primeira mediana abaixo da meta (por meio ponto). A página ficou maior com o segundo projeto e a variação continua vindo do TBT. O refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md` mediu o teto sem o JS do Next (100, LCP 1,2 s, TBT 0), mas a mudança de arquitetura foi descartada: a nota segue oscilando em torno de 95.
 
 ## Como rodar
 

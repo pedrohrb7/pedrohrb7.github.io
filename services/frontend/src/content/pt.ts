@@ -113,10 +113,9 @@ export const pt: Content = {
       description: "Aplicação multiusuário de controle financeiro pessoal, com contas bancárias, lançamentos e parcelamentos a receber.",
       stack: ["TypeScript", "React", "Vite", "Tailwind CSS", "Express", "TypeORM", "MySQL", "Docker"],
       highlights: [
-        "Atuei de forma autônoma em todas as frentes do produto: planejamento, design, back-end e front-end.",
+        "Atuo de forma autônoma em todas as frentes do produto: planejamento, design, back-end e front-end.",
         "Estruturei o projeto como monorepo com a API, a web e o app mobile em submodules separados, orquestrados por Docker Compose para subir MySQL, API e web com um comando.",
-        "Implementei autenticação sem depender de e-mail: cadastro por código de convite, recuperação por códigos de backup, refresh token rotativo em cookie httpOnly e rate limiting por IP e por conta.",
-        "Conduzi o desenvolvimento com TDD (Jest, Testing Library e Supertest), com testes e2e da API rodando contra um banco MySQL dedicado.",
+        "Estou conduzindo o desenvolvimento com TDD (Jest, Testing Library e Supertest), com testes e2e da API rodando contra um banco MySQL dedicado.",
       ],
     },
   ],
@@ -131,7 +130,7 @@ export const pt: Content = {
     { label: "Testes e qualidade", items: ["Jest", "Vitest", "Cypress", "Playwright", "Testing Library", "Testes unitários e e2e", "Code review"] },
     {
       label: "DevOps e ferramentas",
-      items: ["Docker", "Docker Compose", "Git", "GitLab", "Bitbucket", "AWS", "SigNoz", "ESLint", "Prettier", "NeoVim", "Linux"],
+      items: ["Docker", "Docker Compose", "Git", "GitLab", "Github", "Bitbucket", "AWS", "SigNoz", "ESLint", "Prettier", "NeoVim", "Linux"],
     },
     { label: "Metodologias", items: ["Scrum", "Kanban", "Trabalho remoto e distribuído"] },
   ],

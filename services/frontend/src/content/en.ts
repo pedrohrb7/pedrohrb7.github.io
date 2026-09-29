@@ -113,9 +113,8 @@ export const en: Content = {
       description: "Multi-user personal finance app for tracking bank accounts, transactions and installments owed by others.",
       stack: ["TypeScript", "React", "Vite", "Tailwind CSS", "Express", "TypeORM", "MySQL", "Docker"],
       highlights: [
-        "Worked independently across every part of the product: planning, design, back-end and front-end.",
+        "Work independently across every part of the product: planning, design, back-end and front-end.",
         "Structured the project as a monorepo with the API, web and mobile app in separate submodules, orchestrated with Docker Compose to start MySQL, the API and the web app with one command.",
-        "Implemented authentication with no email dependency: invite-code sign-up, backup-code recovery, rotating refresh tokens in httpOnly cookies and rate limiting per IP and per account.",
         "Led development with TDD (Jest, Testing Library and Supertest), with API e2e tests running against a dedicated MySQL database.",
       ],
     },
@@ -131,7 +130,7 @@ export const en: Content = {
     { label: "Testing and quality", items: ["Jest", "Vitest", "Cypress", "Playwright", "Testing Library", "Unit and e2e testing", "Code review"] },
     {
       label: "DevOps and tooling",
-      items: ["Docker", "Docker Compose", "Git", "GitLab", "Bitbucket", "AWS", "SigNoz", "ESLint", "Prettier", "NeoVim", "Linux"],
+      items: ["Docker", "Docker Compose", "Git", "GitLab", "Github", "Bitbucket", "AWS", "SigNoz", "ESLint", "Prettier", "NeoVim", "Linux"],
     },
     { label: "Methodologies", items: ["Scrum", "Kanban", "Remote and distributed work"] },
   ],

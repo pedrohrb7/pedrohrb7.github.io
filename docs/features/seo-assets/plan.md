@@ -1,6 +1,6 @@
 # Plano - SEO e assets
 
-Status: **Concluída** (2026-09-28, publicada). Performance mobile no site publicado fica no limite da meta (mediana 95-96); a margem depende do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`.
+Status: **Concluída** (2026-09-28, publicada). Performance mobile no site publicado fica no limite da meta (mediana 95-96); o refactor para ganhar folga foi descartado (veja "Mudar a arquitetura para recuperar folga de Performance?" no `OPEN_QUESTIONS.md`).
 
 ## Fase 1 - Ícones e Open Graph (concluída em 2026-09-28)
 
