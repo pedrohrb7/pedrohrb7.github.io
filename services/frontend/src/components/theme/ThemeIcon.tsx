@@ -1,23 +1,6 @@
 import type { ReactNode } from "react";
 import type { Theme } from "@/lib/theme";
-
-function Icon({ size = 16, children }: { size?: number; children: ReactNode }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {children}
-    </svg>
-  );
-}
+import { Icon } from "@/ui/icons";
 
 const themePaths: Record<Theme, ReactNode> = {
   system: (
@@ -37,20 +20,4 @@ const themePaths: Record<Theme, ReactNode> = {
 
 export function ThemeIcon({ theme }: { theme: Theme }) {
   return <Icon>{themePaths[theme]}</Icon>;
-}
-
-export function ChevronDownIcon() {
-  return (
-    <Icon size={12}>
-      <path d="m6 9 6 6 6-6" />
-    </Icon>
-  );
-}
-
-export function CheckIcon() {
-  return (
-    <Icon size={14}>
-      <path d="M20 6 9 17l-5-5" />
-    </Icon>
-  );
 }

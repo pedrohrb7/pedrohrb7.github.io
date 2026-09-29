@@ -21,7 +21,7 @@ export const en: Content = {
     },
     contactHeadline: "Let's talk",
     contactBody: "I'm open to remote or hybrid opportunities. Reach me by email or through the links below.",
-    emailCta: "Send an email",
+    copyEmail: { copy: "Copy", copyAriaLabel: "Copy email", copied: "Copied!", failed: "Couldn't copy" },
     resumeCta: "Download resume (PDF)",
     stackLabel: "Stack",
     notFound: {

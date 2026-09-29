@@ -6,7 +6,7 @@ Transforma a seção Projetos de uma lista de texto em vitrine: cada projeto pod
 
 ## Bloqueio
 
-Depende da questão "Quais projetos pessoais/open source entram na seção de Projetos?" em `OPEN_QUESTIONS.md`. Sem projetos públicos escolhidos, a feature não entrega valor.
+Depende da questão "Quais projetos pessoais/open source entram na seção de Projetos?" em `OPEN_QUESTIONS.md`. Sem projetos públicos escolhidos, a feature não entrega valor. A apresentação (carrossel) é uma feature separada, que não depende desta: `docs/features/projects-carousel/`.
 
 ## Conteúdo
 
@@ -20,13 +20,13 @@ Depende da questão "Quais projetos pessoais/open source entram na seção de Pr
 
 ## Interface
 
-- Card atual (`ProjectList`) mantido; imagem no topo do card quando existir, com proporção fixa para não causar layout shift.
-- Links com `ButtonLink` `external`.
-- Imagens estáticas em `public/`, otimizadas antes do commit (WebP/AVIF, largura máxima do conteúdo em 2x), já que `next/image` roda sem otimização no export.
+- Os cards aparecem no carrossel de `docs/features/projects-carousel/`; esta feature só acrescenta os links e a imagem ao card.
+- Links de repositório/demo com `↗`, abrindo em nova aba (`ButtonLink` `external` ou link de texto no mesmo padrão).
+- Imagens no topo do card, com proporção fixa para não causar layout shift; estáticas em `public/`, otimizadas antes do commit (WebP/AVIF, largura do conteúdo em 2x), já que `next/image` roda sem otimização no export.
 
 ## Critérios de aceite
 
-- Projeto com e sem links/imagem renderiza corretamente nos dois idiomas.
+- Projeto com e sem links/imagem renderiza corretamente nos dois idiomas, dentro do carrossel.
 - Nenhum overflow horizontal em 360px.
 - Imagens com `alt`, `width` e `height`; Lighthouse continua >= 95.
 - Teste de componente cobrindo os campos opcionais.

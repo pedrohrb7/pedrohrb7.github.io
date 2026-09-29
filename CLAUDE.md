@@ -36,4 +36,4 @@ Sobe o build estático servido por nginx em `http://localhost:8080`. Para desenv
 
 ## Referência
 
-`PRD.md` - o quê e por quê · `docs/features/` - spec e plano de cada feature, com índice e status em `docs/features/README.md` · `docs/backlog/` - bugs (`bugs/`) e refactors (`refactor/`) em aberto, um arquivo datado por item a partir do `TEMPLATE.md` · `CONSTRAINTS.md` - limites rígidos · `DESIGN_SYSTEM.md` - tokens/convenções de UI · `OPEN_QUESTIONS.md` - decisões (abertas e resolvidas, cada uma com status) · `DEPLOY.md` - como publicar
+`PRD.md` - o quê e por quê · `docs/features/` - spec e plano de cada feature, com índice e status em `docs/features/README.md` · `docs/backlog/` - bugs (`bugs/`) e refactors (`refactor/`) em aberto, um arquivo datado por item a partir do `TEMPLATE.md` · `wireframe/` - propostas de layout em HTML (referência visual de estrutura; conteúdo fictício, e tokens, fontes e ícones que não valem: a fonte da verdade é o `DESIGN_SYSTEM.md`) · `CONSTRAINTS.md` - limites rígidos · `DESIGN_SYSTEM.md` - tokens/convenções de UI · `OPEN_QUESTIONS.md` - decisões (abertas e resolvidas, cada uma com status) · `DEPLOY.md` - como publicar

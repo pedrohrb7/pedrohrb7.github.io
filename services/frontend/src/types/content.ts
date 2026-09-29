@@ -1,4 +1,5 @@
 import type { Theme } from "@/lib/theme";
+import type { CopyFieldLabels } from "@/ui/CopyField";
 
 export type Experience = {
   company: string;
@@ -40,7 +41,7 @@ export type Content = {
     sections: Record<SectionId, string>;
     contactHeadline: string;
     contactBody: string;
-    emailCta: string;
+    copyEmail: CopyFieldLabels;
     resumeCta: string;
     stackLabel: string;
     notFound: { title: string; body: string; backHome: string };

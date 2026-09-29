@@ -1,6 +1,7 @@
 import { profile } from "@/content";
 import type { Content } from "@/types/content";
 import { ButtonLink } from "@/ui/ButtonLink";
+import { CopyField } from "@/ui/CopyField";
 
 type ContactBlockProps = {
   ui: Content["ui"];
@@ -12,9 +13,7 @@ export function ContactBlock({ ui }: ContactBlockProps) {
       <p className="text-2xl font-semibold tracking-tight sm:text-3xl">{ui.contactHeadline}</p>
       <p className="mt-3 max-w-prose leading-relaxed text-muted">{ui.contactBody}</p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <ButtonLink href={`mailto:${profile.email}`} variant="primary">
-          {profile.email}
-        </ButtonLink>
+        <CopyField value={profile.email} labels={ui.copyEmail} />
         <ButtonLink href={profile.github.url} external>
           github.com/{profile.github.handle}
         </ButtonLink>

@@ -1,6 +1,6 @@
 # Plano - Seção de projetos rica
 
-Status: **Bloqueada** (aguarda a questão de projetos em `OPEN_QUESTIONS.md`)
+Status: **Bloqueada** (aguarda a questão de projetos em `OPEN_QUESTIONS.md`). A apresentação em carrossel é a feature `docs/features/projects-carousel/`, que não depende desta.
 
 ## Fase 0 - Seleção
 
@@ -15,8 +15,8 @@ Status: **Bloqueada** (aguarda a questão de projetos em `OPEN_QUESTIONS.md`)
 
 ## Fase 2 - Interface
 
-- [ ] Imagem e links no card de `ProjectList`.
-- [ ] Teste de componente e e2e (desktop e mobile, sem overflow).
+- [ ] Links de repositório/demo e imagem no card do carrossel (`docs/features/projects-carousel/`).
+- [ ] Teste de componente com e sem links/imagem; e2e sem overflow em 360px.
 - [ ] Revisar tokens no `DESIGN_SYSTEM.md` se surgir algo novo (ex.: proporção de imagem).
 
 ## Fase 3 - Fechamento

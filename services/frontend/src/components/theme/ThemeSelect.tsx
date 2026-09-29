@@ -12,7 +12,8 @@ import {
   type Theme,
 } from "@/lib/theme";
 import type { Content } from "@/types/content";
-import { CheckIcon, ChevronDownIcon, ThemeIcon } from "./ThemeIcon";
+import { CheckIcon, ChevronDownIcon } from "@/ui/icons";
+import { ThemeIcon } from "./ThemeIcon";
 
 function subscribe(onChange: () => void) {
   const onStorage = (event: StorageEvent) => {

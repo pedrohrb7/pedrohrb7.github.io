@@ -15,6 +15,8 @@ Mapa das funcionalidades do site: o que já existe e os próximos passos. Cada f
 | [projects-showcase](projects-showcase/spec.md) | Bloqueada            | Seção de projetos com imagem, repositório e demo                               | Questão de projetos em `OPEN_QUESTIONS.md` |
 | [ux-enhancements](ux-enhancements/spec.md)     | Concluída (no ar)    | Escolha manual de tema e destaque da seção atual no menu                       | -                                          |
 | [structured-data](structured-data/spec.md)     | Backlog              | Dados estruturados JSON-LD (`ProfilePage`/`Person`) nas páginas de idioma      | -                                          |
+| [projects-carousel](projects-carousel/spec.md) | Próxima              | Seção Projetos como carrossel (scroll-snap, setas, indicadores, sem biblioteca) | -                                          |
+| [copy-email](copy-email/spec.md)               | Concluída            | E-mail em campo com botão de copiar no hero e no Contato, sem `mailto:`        | -                                          |
 
 ## Status
 

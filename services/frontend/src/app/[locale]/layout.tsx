@@ -56,6 +56,11 @@ export default async function LocaleLayout({ children, params }: LocaleParams & 
     <html lang={htmlLang[locale]} className={fontVariables} suppressHydrationWarning>
       <head>
         <ThemeScript />
+        {/* Controls that only work with JavaScript (copy buttons, carousel controls) render in the HTML to avoid a
+            layout shift on hydration, and are hidden here when JavaScript is off. */}
+        <noscript>
+          <style>{"[data-requires-js]{display:none!important}"}</style>
+        </noscript>
       </head>
       <body>{children}</body>
     </html>
