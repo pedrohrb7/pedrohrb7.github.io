@@ -54,7 +54,7 @@ export const en: Content = {
       workMode: "Hybrid",
       stack: ["NestJS", "Node.js", "TypeScript", "TypeORM", "React (Vite)", "MySQL", "Oracle DB", "Docker", "Jest", "Vitest", "Playwright"],
       highlights: [
-        "Led, as the main back-end developer, the full lifecycle of a financial system for ITESP (a São Paulo State Government agency), from technical definition to deploy and close-out.",
+        "Led, as the main back-end developer, the full lifecycle of a financial system for a São Paulo State Government agency, from technical definition to deploy and close-out.",
         "Led the migration from a legacy architecture to NestJS, including moving the database from Oracle to MySQL.",
         "Mapped features, system behavior and business rules with management and design, taking part in architecture decisions and sprint planning (Scrum).",
         "Ensure quality with unit tests (Jest, Vitest) and e2e tests (Playwright), and actively take part in the team's code review.",
@@ -69,7 +69,7 @@ export const en: Content = {
       workMode: "Remote",
       stack: ["Node.js", "NestJS", "React", "Next.js", "TypeScript", "Microservices", "RabbitMQ", "MongoDB", "MySQL", "Redis", "Docker", "Jest", "Cypress", "Testing Library"],
       highlights: [
-        "Built a bot-builder platform made of seven microservices, with a BFF, RabbitMQ queues for service-to-service communication and MongoDB.",
+        "Evolved and maintained a bot-builder platform made of seven microservices, with a BFF, RabbitMQ queues for service-to-service communication and MongoDB.",
         "Introduced SigNoz for observability and slow query mapping, grounding the performance action plan.",
         "Developed context boxes, third-party integrations and audit logs.",
         "Helped define and refactor a CRM front-end, migrating it to Next.js with a new layout based on the design team's prototype.",

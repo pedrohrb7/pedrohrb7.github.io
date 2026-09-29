@@ -54,7 +54,7 @@ export const pt: Content = {
       workMode: "Híbrido",
       stack: ["NestJS", "Node.js", "TypeScript", "TypeORM", "React (Vite)", "MySQL", "Oracle DB", "Docker", "Jest", "Vitest", "Playwright"],
       highlights: [
-        "Conduzi, como back-end principal, o ciclo completo de um sistema financeiro para o ITESP (órgão do Governo do Estado de São Paulo), da definição técnica ao deploy e close-out.",
+        "Conduzi, como back-end principal, o ciclo completo de um sistema financeiro para um órgão do Governo do Estado de São Paulo, da definição técnica ao deploy e close-out.",
         "Liderei a migração de uma arquitetura legada para NestJS, incluindo a migração do banco de dados de Oracle para MySQL.",
         "Mapeei features, comportamentos e regras de negócio junto a gestão e design, participando das decisões de arquitetura e do planejamento de sprints (Scrum).",
         "Garanto qualidade com testes unitários (Jest, Vitest) e e2e (Playwright), e participo ativamente do code review do time.",
@@ -69,7 +69,7 @@ export const pt: Content = {
       workMode: "Remoto",
       stack: ["Node.js", "NestJS", "React", "Next.js", "TypeScript", "Microsserviços", "RabbitMQ", "MongoDB", "MySQL", "Redis", "Docker", "Jest", "Cypress", "Testing Library"],
       highlights: [
-        "Desenvolvi uma plataforma construtora de bots composta por sete microsserviços, com BFF, comunicação entre serviços via filas com RabbitMQ e banco MongoDB.",
+        "Atuei na evolução e manutenção de uma plataforma construtora de bots composta por sete microsserviços, com BFF, comunicação entre serviços via filas com RabbitMQ e banco MongoDB.",
         "Implementei o SigNoz para observabilidade e mapeamento de slow queries, embasando o plano de ação de performance.",
         "Desenvolvi caixas de contexto, integrações com terceiros e logs para auditoria.",
         "Participei da definição e da refatoração do front-end de um CRM, migrando a aplicação para Next.js com um novo layout a partir do protótipo do time de design.",
