@@ -1,6 +1,6 @@
 # Plano - E-mail com botão de copiar
 
-Status: **Concluída** (2026-09-28, falta publicar)
+Status: **Concluída** (2026-09-28, publicada)
 
 ## Fase 1 - Implementação (concluída em 2026-09-28)
 
@@ -16,4 +16,4 @@ Status: **Concluída** (2026-09-28, falta publicar)
 - [x] Capturas de tela: hero e Contato, claro e escuro, desktop e 360px, sem overflow. Corrigido um desalinhamento de 2px (campo com 46px contra 44px dos botões).
 - [x] Lighthouse no container (mediana de 3 rodadas mobile em `/pt/`): Performance 95, CLS 0, o resto 100.
 - [x] `DESIGN_SYSTEM.md`, índice em `docs/features/README.md` e escopo do `PRD.md` atualizados.
-- [ ] Conferir no site publicado depois do deploy.
+- [x] Conferir no site publicado depois do deploy (2026-09-29, funcionando em produção).

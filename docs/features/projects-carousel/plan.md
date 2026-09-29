@@ -1,6 +1,6 @@
 # Plano - Carrossel de projetos
 
-Status: **Concluída** (2026-09-28, falta publicar). Ativo no site desde a entrada do Accountability (segundo projeto).
+Status: **Concluída** (2026-09-28, publicada). Ativo no site desde a entrada do Accountability (segundo projeto).
 
 ## Fase 1 - Lógica e rótulos (concluída em 2026-09-28)
 
@@ -31,4 +31,4 @@ Status: **Concluída** (2026-09-28, falta publicar). Ativo no site desde a entra
 ## Fase 4 - Fechamento (concluída em 2026-09-28)
 
 - [x] `DESIGN_SYSTEM.md` (padrão do carrossel), índice em `docs/features/README.md` e escopo do `PRD.md`.
-- [ ] Conferir no site publicado depois do deploy.
+- [x] Conferir no site publicado depois do deploy (2026-09-29, funcionando em produção).

@@ -58,7 +58,8 @@ O currículo hoje existe apenas como documento (`resume.md`) e perfil do GitHub/
 | Dados estruturados JSON-LD (`ProfilePage`/`Person`) | Não (backlog) | `docs/features/structured-data/spec.md` |
 | Carrossel de projetos | Sim | `docs/features/projects-carousel/spec.md` |
 | E-mail com botão de copiar (hero e Contato) | Sim | `docs/features/copy-email/spec.md` |
-| Detalhe de projetos (páginas por projeto, proposta em `wireframe/dark-nexus-project.html`) | Não | - |
+| Detalhes do projeto em drawer (estudo de caso e stack por camada) | Sim (próxima) | `docs/features/project-details/spec.md` |
+| Detalhe de projetos (páginas por projeto, proposta em `wireframe/dark-nexus-project.html`) | Não (substituída pelo drawer) | - |
 
 Status e mapa de todas as features: `docs/features/README.md`.
 

@@ -76,6 +76,14 @@
 - **Motivo:** Decisão do Pedro depois da medição do refactor `docs/backlog/refactor/2026-09-28-reduzir-js-primeira-carga.md`: não há ganho barato dentro do Next (o peso é React DOM + runtime + hidratação), e o ganho real (Performance 100, LCP 1,2 s, TBT 0) exigiria mudar a arquitetura.
 - **Consequência aceita:** Performance mobile oscila em torno da meta de 95 do `PRD.md` (91-98 nas medições). Novas seções ou componentes cliente tendem a derrubar a nota; medir antes de entregar (mediana de 3 rodadas).
 
+### Como mostrar os detalhes de cada projeto?
+
+- **Status:** resolvida
+- **Decisão:** Drawer por cima da home, aberto por um botão "Ver detalhes" no card: à direita no desktop, bottom sheet no mobile, com link direto por hash (`#projeto-<slug>`). Conteúdo: estudo de caso em texto e stack por camada. Sem JavaScript, o botão some. Feito com `<dialog>` nativo e componente próprio, sem o Drawer do shadcn (Radix/vaul).
+- **Data:** 2026-09-29
+- **Motivo:** Decisão do Pedro, entre página própria por projeto, detalhes expandidos no card, modal e drawer. O `<dialog>` nativo já dá foco preso, Esc, fundo inerte e volta do foco sem biblioteca; a Performance mobile está no limite da meta (veja a questão acima), então vale a mesma regra do seletor de tema: componente próprio para o que é simples.
+- **Levado para:** `docs/features/project-details/`
+
 ### Quais projetos pessoais/open source entram na seção de Projetos?
 
 - **Status:** aberta
