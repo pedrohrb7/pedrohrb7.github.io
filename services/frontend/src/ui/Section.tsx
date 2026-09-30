@@ -17,7 +17,8 @@ export function Section({ id, title, aside, roleDescription, children }: Section
       id={id}
       aria-labelledby={headingId}
       aria-roledescription={roleDescription}
-      className="scroll-mt-20 border-t border-border py-12 sm:py-16"
+      //: the label row and the content fade in as they scroll into view (globals.css).
+      className="scroll-mt-20 border-t border-border py-12 *:reveal-on-scroll sm:py-16"
     >
       <div className="mb-8 flex items-center justify-between gap-4">
         <h2 id={headingId} className="font-mono text-sm font-medium tracking-wide text-accent uppercase">

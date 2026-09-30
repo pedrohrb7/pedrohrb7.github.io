@@ -51,6 +51,9 @@ const drawer = () => screen.getByRole("dialog", { name: "Alfa" });
 const queryDrawer = () => screen.queryByRole("dialog");
 const closeButton = () => within(drawer()).getByRole("button", { name: "Fechar detalhes" });
 const box = () => drawer().getBoundingClientRect();
+// Closing is immediate (the dialog is no longer open or modal), but it stays on screen while it slides out.
+const dialogElement = () => document.querySelector("dialog") as HTMLDialogElement;
+const gone = () => expect.poll(queryDrawer).toBeNull();
 
 // Each test starts on a clean URL: pushState entries from a previous test would otherwise leak.
 beforeEach(() => window.history.replaceState(null, "", window.location.pathname));
@@ -95,8 +98,9 @@ describe("project details drawer (desktop)", () => {
     renderSection();
     await userEvent.click(openButton());
     await userEvent.click(closeButton());
-    expect(queryDrawer()).toBeNull();
+    expect(dialogElement().open).toBe(false);
     expect(openButton()).toHaveFocus();
+    await gone();
     await expect.poll(() => window.location.hash).toBe("");
   });
 
@@ -104,7 +108,8 @@ describe("project details drawer (desktop)", () => {
     renderSection();
     await userEvent.click(openButton());
     await userEvent.keyboard("{Escape}");
-    expect(queryDrawer()).toBeNull();
+    expect(dialogElement().open).toBe(false);
+    await gone();
     await expect.poll(() => window.location.hash).toBe("");
   });
 
@@ -116,7 +121,8 @@ describe("project details drawer (desktop)", () => {
 
     // The backdrop: left of the drawer.
     await userEvent.click(drawer(), { position: { x: -200, y: 200 } });
-    expect(queryDrawer()).toBeNull();
+    expect(dialogElement().open).toBe(false);
+    await gone();
   });
 
   it("closes with the browser's Back and keeps the page", async () => {
@@ -164,6 +170,44 @@ describe("project details drawer (desktop)", () => {
     renderSection();
     await new Promise((resolve) => setTimeout(resolve, 200));
     expect(queryDrawer()).toBeNull();
+  });
+
+  it("slides out to the right and clears the backdrop before hiding", async () => {
+    renderSection();
+    await userEvent.click(openButton());
+    await expect.poll(() => getComputedStyle(drawer()).translate).toBe("0px");
+    await userEvent.click(closeButton());
+
+    // Still shown and in the top layer, moving off screen, while the backdrop clears.
+    const dialog = dialogElement();
+    expect(getComputedStyle(dialog).display).toBe("flex");
+    expect(dialog.getAnimations().map((animation) => (animation as CSSTransition).transitionProperty)).toContain(
+      "translate",
+    );
+    expect(getComputedStyle(dialog).transitionDuration).toBe("0.2s");
+    await expect.poll(() => getComputedStyle(dialog).display).toBe("none");
+    expect(getComputedStyle(dialog).translate).toBe("100%");
+  });
+
+  it("opens again while it is still sliding out", async () => {
+    renderSection();
+    await userEvent.click(openButton());
+    await userEvent.keyboard("{Escape}");
+    // Frozen halfway out, so the reopening surely happens during the exit. Esc gave the focus back to the button, so
+    // Enter is how a visitor reopens it this fast.
+    const dialog = dialogElement();
+    dialog.getAnimations().forEach((animation) => animation.pause());
+    expect(getComputedStyle(dialog).display).toBe("flex");
+    expect(openButton()).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+
+    expect(drawer()).toBeVisible();
+    expect(dialogElement().matches(":modal")).toBe(true);
+    await expect.poll(() => getComputedStyle(drawer()).translate).toBe("0px");
+    expect(window.location.hash).toBe("#projeto-alfa");
+    await userEvent.keyboard("{Escape}");
+    await gone();
+    await expect.poll(() => window.location.hash).toBe("");
   });
 
   it("keeps the page from scrolling while open", async () => {

@@ -89,8 +89,8 @@ test.describe("language switch transition", () => {
 
     await switchToEnglish(page);
     expect(await revealedWithTransition(page)).toBe(true);
-    // The transition ends with the new page fully shown.
-    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0);
+    // The transition ends with the new page fully shown (the sections' scroll-driven entrances stay, by design).
+    await expect.poll(() => rootTransitionAnimations(page)).toEqual([]);
     await expect(page.getByRole("heading", { level: 2, name: "Experience" })).toBeVisible();
   });
 
@@ -192,6 +192,111 @@ test.describe("microinteractions", () => {
         await page.waitForTimeout(100);
         expect(await open.locator("> span").evaluate((arrow) => getComputedStyle(arrow).translate)).toBe("none");
       }
+    });
+  });
+});
+
+// Phase 5: the project details drawer slides in (300 ms) and back out (200 ms), the backdrop fading with it.
+test.describe("project details drawer", () => {
+  const drawerHash = "/pt/#projeto-plataforma-financeira";
+  // Transitions on the dialog and on its ::backdrop (subtree: the backdrop's come with pseudoElement "::backdrop").
+  const drawerTransitions = (page: Page) =>
+    page.locator("dialog").evaluate((dialog) =>
+      dialog.getAnimations({ subtree: true }).map((animation) => {
+        const { pseudoElement } = animation.effect as KeyframeEffect;
+        return `${pseudoElement ?? ""}${(animation as CSSTransition).transitionProperty}`;
+      }),
+    );
+
+  test("slides out and clears the backdrop when it closes", async ({ page }) => {
+    await page.goto(drawerHash);
+    const drawer = page.getByRole("dialog", { name: "Plataforma Financeira" });
+    await expect(drawer).toBeVisible();
+    await expect.poll(() => drawerTransitions(page)).toEqual([]);
+
+    await slowAnimations(page);
+    await page.keyboard.press("Escape");
+    expect(await drawerTransitions(page)).toEqual(
+      expect.arrayContaining(["translate", "::backdropbackground-color"]),
+    );
+    expect(await page.locator("dialog").evaluate((dialog) => getComputedStyle(dialog).display)).toBe("flex");
+    await expect(drawer).toBeHidden({ timeout: 10_000 });
+    await expect(page).toHaveURL(/\/pt\/$/);
+  });
+
+  test("the close button shrinks slightly while pressed", async ({ page }) => {
+    await page.goto(drawerHash);
+    const close = page.getByRole("button", { name: "Fechar detalhes" });
+    await close.hover();
+    await page.mouse.down();
+    await expect.poll(() => close.evaluate((button) => getComputedStyle(button).scale)).toBe("0.95");
+    await page.mouse.up();
+  });
+
+  test.describe("with reduced motion", () => {
+    test.use({ reducedMotion: "reduce" });
+
+    test("opens and closes at once", async ({ page }) => {
+      await page.goto("/pt/");
+      await slowAnimations(page);
+      await page.getByRole("button", { name: "Ver detalhes do projeto Plataforma Financeira" }).click();
+      const drawer = page.getByRole("dialog", { name: "Plataforma Financeira" });
+      await expect(drawer).toBeVisible();
+      expect(await drawerTransitions(page)).toEqual([]);
+      expect(await page.locator("dialog").evaluate((dialog) => getComputedStyle(dialog).translate)).toMatch(/^0px/);
+
+      const close = page.getByRole("button", { name: "Fechar detalhes" });
+      await close.hover();
+      await page.mouse.down();
+      await page.waitForTimeout(100);
+      expect(await close.evaluate((button) => getComputedStyle(button).scale)).not.toBe("0.95");
+      await page.mouse.up();
+
+      expect(await page.locator("dialog").evaluate((dialog) => getComputedStyle(dialog).display)).toBe("none");
+    });
+  });
+});
+
+// Phase 4: each section's label and content fade in and rise as they scroll into view (a scroll-driven animation, so
+// its state depends only on the scroll position). Nothing above the last 120px of the viewport may be left faded.
+test.describe("section entrance", () => {
+  // Section children whose top is inside the viewport, above its last 120px, and that are not fully opaque.
+  const fadedInView = (page: Page) =>
+    page.evaluate(() =>
+      [...document.querySelectorAll("main section[id] > *")].flatMap((child) => {
+        const { top, bottom } = child.getBoundingClientRect();
+        const opacity = Number(getComputedStyle(child).opacity);
+        return top < innerHeight - 121 && bottom > 0 && opacity < 0.999 ? [`${child.parentElement?.id}: ${opacity}`] : [];
+      }),
+    );
+
+  test("animates the sections' children with the scroll, never the hero", async ({ page }) => {
+    await page.goto("/pt/");
+    expect(await running(page, "#experience > :last-child")).toEqual(["section-enter"]);
+    expect(await running(page, "#experience")).toEqual([]);
+    expect(await page.locator("#top").evaluate((hero) => hero.getAnimations({ subtree: true }).length)).toBe(0);
+    // Below the fold, not reached yet: still fully faded.
+    expect(await page.locator("#contact > :last-child").evaluate((child) => getComputedStyle(child).opacity)).toBe("0");
+  });
+
+  test("leaves nothing faded where the reader stops: load, menu jumps and the end of the page", async ({ page }) => {
+    await page.goto("/pt/");
+    expect(await fadedInView(page)).toEqual([]);
+    for (const id of ["about", "experience", "projects", "skills", "education", "contact"]) {
+      await page.evaluate((hash) => (window.location.hash = hash), id);
+      await expect.poll(() => fadedInView(page), { message: `after jumping to #${id}` }).toEqual([]);
+    }
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect.poll(() => fadedInView(page)).toEqual([]);
+  });
+
+  test.describe("with reduced motion", () => {
+    test.use({ reducedMotion: "reduce" });
+
+    test("shows every section as is", async ({ page }) => {
+      await page.goto("/pt/");
+      expect(await page.evaluate(() => document.getAnimations().length)).toBe(0);
+      expect(await page.locator("#contact > :last-child").evaluate((child) => getComputedStyle(child).opacity)).toBe("1");
     });
   });
 });

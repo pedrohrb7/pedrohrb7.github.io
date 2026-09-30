@@ -98,3 +98,29 @@ html[data-theme-transition]::view-transition-new(root) {
   mix-blend-mode: normal;
   animation: theme-sweep 700ms linear both;
 }
+
+/*
+ * Section entrance (docs/features/ui-transitions/, phase 4; used by src/ui/Section.tsx on each direct child, so the
+ * <section> box itself never moves: the SectionNav highlight and the menu jumps read it). Tied to scroll, not to
+ * time: each child fades in and rises 16px over the first 120px after its top enters the viewport, so anything
+ * 120px or more above the bottom edge is always fully shown, whatever way the page got there (menu jump, reload,
+ * Back). A length, not a percentage of the element: on a tall list a percentage would leave it faded while being read.
+ * Only where scroll-driven animations exist: elsewhere the `animation` shorthand alone would run once on load.
+ */
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@utility reveal-on-scroll {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: section-enter linear both;
+      /* After the shorthand, which resets it. */
+      animation-timeline: view();
+      animation-range: entry 0 entry 120px;
+    }
+  }
+}

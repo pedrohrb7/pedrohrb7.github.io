@@ -1,6 +1,6 @@
 # Plano - Transições de interface
 
-Status: **Em andamento** (fases 1, 2 e 3 concluídas e publicadas em 2026-09-29; fases 4 e 5 em backlog)
+Status: **Em andamento** (fases 1, 2 e 3 concluídas e publicadas em 2026-09-29; fases 4 e 5 concluídas em 2026-09-29, falta publicar; falta o fechamento)
 
 Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do menor risco e custo para o maior.
 
@@ -40,18 +40,30 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Conferido no site publicado (2026-09-29): o CSS no ar tem a varredura (`theme-sweep`), validado pelo Pedro.
 - [ ] Conferir no Safari e no Firefox.
 
-## Fase 4 - Entrada das seções (só CSS)
+## Fase 4 - Entrada das seções (só CSS) (concluída em 2026-09-29)
 
-- [ ] Animação com `animation-timeline: view()` nas seções abaixo do hero, dentro de `@supports`, sem nada acima da dobra.
-- [ ] Conferir o salto pelo menu (seção não pode ficar transparente parada), o destaque do `SectionNav` e a leitura sem JS.
+- [x] Utilitário `reveal-on-scroll` no `globals.css` (`@keyframes section-enter`: de `opacity: 0` e 16px abaixo), com `animation-timeline: view()` e `animation-range: entry 0 entry 120px`, dentro de `@supports (animation-timeline: view())` e de `prefers-reduced-motion: no-preference`. O `Section` aplica nos filhos diretos (`*:reveal-on-scroll`); o hero não usa `Section`.
+- [x] Filhos, não a seção: a caixa da `<section>` não se move, então o destaque do `SectionNav` (que lê a posição da seção) e os saltos do menu ficam como antes; o e2e do destaque continua passando.
+- [x] Faixa em pixels, não em porcentagem: numa lista alta a porcentagem deixaria o texto esmaecido durante a leitura.
+- [x] Conferido no navegador, desktop e mobile: nenhum filho de seção esmaecido acima dos últimos 120px da tela na carga, depois de cada salto do menu (as seis seções) e no fim da página; captura no meio da entrada da Experiência. Sem JS funciona igual (é só CSS).
+- [x] E2E (`test/e2e/transitions.spec.ts`, "section entrance"): filhos das seções com a animação e hero sem, conteúdo abaixo da dobra esmaecido, nada esmaecido onde o leitor para (carga, saltos, fim da página), e nada animado com movimento reduzido. O e2e da troca de idioma esperava zero animações na página no fim do fade; agora espera só o fim da View Transition (as animações ligadas à rolagem existem sempre).
+- [x] Lighthouse: 6 rodadas no container (mediana 94,5) e comparação A/B alternada com e sem a entrada (medianas 96 e 96, mesmo TBT, LCP oscilando igual nos dois). Sem efeito mensurável. Detalhes em `docs/features/seo-assets/lighthouse.md`.
+- [ ] Conferir no Safari (26+) e no Firefox (sem suporte: seções só aparecem) e no site publicado depois do deploy.
 
-## Fase 5 - Modal e drawer (só CSS)
+## Fase 5 - Modal e drawer (só CSS) (concluída em 2026-09-29)
 
-- [ ] Saída do drawer: painel desliza de volta (direita no desktop, baixo no celular) e o fundo clareia em ~200 ms, com `transition-behavior: allow-discrete` em `display` e `overlay`; entrada continua como está (300 ms).
-- [ ] Avaliar o fade do corpo do drawer logo depois do painel; manter só se melhorar a leitura.
-- [ ] `active:scale-95` no botão de fechar.
-- [ ] Conferir que foco, hash e Voltar continuam certos (o `close()` acontece antes do fim da animação), que a página não pula ao sair a trava de rolagem e que reabrir durante a saída funciona. Estender `ProjectDetails.browser.test.tsx` e `test/e2e/project-details.spec.ts`, incluindo movimento reduzido.
-- [ ] Padrão de modal centralizado (fade + escala 0,96 -> 1, 200 ms na entrada e 150 ms na saída) registrado no `DESIGN_SYSTEM.md`, para o primeiro modal que surgir.
+- [x] Saída do drawer: o estado fechado do `<dialog>` agora é fora da tela (`translate-y-full`, `md:translate-x-full`) com o fundo transparente, então a mesma transição roda nos dois sentidos: entra em 300 ms `ease-out` (`starting:`), sai em 200 ms `ease-in`. `transition-discrete` em `display` e `overlay` mantém o dialog fechado na tela e no top layer até o fim. Classes agrupadas com comentário numa constante (`drawerClassName`) em `ProjectDetails.tsx`, sem JS novo.
+- [x] Movimento reduzido: toda classe de transição em `motion-safe:`, durações incluídas. Na primeira versão o `duration-*` estava sem prefixo e fazia a `transition-property` padrão (`all`) animar o painel mesmo com movimento reduzido; um probe no navegador pegou antes de fechar a fase, e agora há e2e para isso.
+- [x] Fade do corpo do drawer avaliado em captura no meio da entrada (animação desacelerada 20x) e descartado: o conteúdo chega junto com o painel e lê como uma folha só; um fade atrasado mostraria o painel vazio deslizando e só adiaria a leitura.
+- [x] Botão de fechar vai a 95% enquanto pressionado (`motion-safe:active:scale-95`, `transition-[color,scale]`).
+- [x] Conferido no navegador: o `close()` continua imediato, então foco (volta ao botão) e hash/Voltar não esperam a animação; a página não pula quando a trava de rolagem sai (posição e largura iguais antes, durante e depois, desktop e mobile); reabrir durante a saída funciona. Durante os 200 ms da saída o fundo ainda cobre a página, então um clique no botão só acerta depois; com o teclado (Esc devolve o foco ao botão, Enter reabre) reabre no meio da saída.
+- [x] Testes: `ProjectDetails.browser.test.tsx` checa o fechamento imediato (`open` falso) e o sumiço depois da saída, a saída em 200 ms com o painel terminando fora da tela, e a reabertura pelo teclado com a saída congelada no meio. `test/e2e/transitions.spec.ts` ("project details drawer"): painel e fundo animam na saída, botão de fechar encolhe, e com movimento reduzido nada anima. Suíte completa passando 3 vezes seguidas.
+- [x] Padrão de modal centralizado (fade + escala 0,96 -> 1, 200 ms na entrada e 150 ms na saída) registrado no `DESIGN_SYSTEM.md`, para o primeiro modal que surgir.
+- [ ] Conferir no Safari e no Firefox (o Firefox não tem `overlay`: na saída o dialog deixa o top layer na hora, e o fundo some sem transição) e no site publicado depois do deploy.
+
+## Ajuste - Abertura do drawer mais lenta (2026-09-29)
+
+- [x] A pedido do Pedro, que achou a abertura rápida e direta: entrada do drawer (painel e fundo) de 300 ms `ease-out` para 700 ms com a curva `ease-sheet` (`cubic-bezier(0.32, 0.72, 0, 1)`, token novo em `tokens.css`): sai rápido e assenta devagar. A saída continua em 200 ms `ease-in`. Conferido no navegador (duração e curva calculadas no painel e no `::backdrop`, desktop e mobile); e2e do drawer passando.
 
 ## Fechamento
 

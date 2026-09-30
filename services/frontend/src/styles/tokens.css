@@ -23,6 +23,9 @@
   /* Project details drawer width from md up: max-w-drawer. */
   --container-drawer: 35rem;
 
+  /* Deceleration of the project drawer's entrance: fast start, long settle, like a sheet. ease-sheet. */
+  --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+
   /* Short entrance for content that swaps in place ("Copiado!"): animate-fade-in. Keyframes in globals.css. */
   --animate-fade-in: fade-in 150ms ease-out;
 }

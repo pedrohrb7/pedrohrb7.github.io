@@ -83,6 +83,12 @@ Mesma versão do Lighthouse e do Chromium, contra o GitHub Pages, com o build qu
 - Só CSS e um estado a mais no `CopyField`.
 - Container, 6 rodadas mobile em `/pt/`: 96, 99, 99, 97, 97, 94 (mediana 97), TBT 81-187 ms, LCP 1,8-2,7 s, CLS 0. Accessibility, Best Practices e SEO 100.
 
+## 2026-09-29 - entrada das seções ao rolar (ui-transitions, fase 4)
+
+- Só CSS (animação ligada à rolagem nos filhos das seções). O elemento de LCP (parágrafo do Sobre) fica dentro de uma seção animada, então foi feita uma comparação direta.
+- Container, 6 rodadas mobile em `/pt/`: 95, 93, 95, 95, 94, 93 (mediana 94,5), TBT 140-217 ms, LCP 2,6-2,8 s, CLS 0. Accessibility, Best Practices e SEO 100.
+- Comparação alternada (A com a entrada, B sem, mesmo servidor `serve`, 5 rodadas cada, intercaladas): A 95, 98, 96, 96, 96 (mediana 96, TBT 131-153 ms); B 97, 96, 98, 96, 96 (mediana 96, TBT 143-158 ms). LCP entre 1,9 e 2,6 s nos dois lados, com a mesma oscilação. Sem efeito mensurável; a mediana mais baixa no container é a variação de sempre desta máquina.
+
 ## Como rodar
 
 ```
