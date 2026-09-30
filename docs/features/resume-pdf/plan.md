@@ -36,4 +36,4 @@ Status: **Concluída** (2026-09-28, publicada)
 
 - [x] A pedido do Pedro, os dois PDFs passam a se chamar `pedro-borges-fullstack-developer.pdf`, cada um na pasta do idioma: `/pt/pedro-borges-fullstack-developer.pdf` e `/en/pedro-borges-fullstack-developer.pdf` (`resumePdfFileName` e `resumePdfPath` em `src/lib/resume-pdf.ts`; o script grava em `out/<idioma>/`). Nomes antigos removidos, sem cópia.
 - [x] E2E atualizado (`href` por idioma, nome do download e resposta `application/pdf`); build, lint, typecheck, unitários e e2e completos passando. Conferido que o PDF de `/pt/` é o PT (`pt-BR`) e o de `/en/` é o EN.
-- [ ] Conferir no site publicado depois do deploy.
+- [x] Conferido no site publicado (2026-09-29): `/pt/` e `/en/pedro-borges-fullstack-developer.pdf` respondem 200 com `application/pdf`, o botão de `/pt/` aponta para o arquivo novo e `/pedro-borges-curriculo.pdf` dá 404. Validado também pelo Pedro.

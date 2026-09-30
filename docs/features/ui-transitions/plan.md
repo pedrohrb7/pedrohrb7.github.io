@@ -1,6 +1,6 @@
 # Plano - Transições de interface
 
-Status: **Em andamento** (fases 1, 2 e 3 concluídas em 2026-09-29, falta publicar; fases 4 e 5 em backlog)
+Status: **Em andamento** (fases 1, 2 e 3 concluídas e publicadas em 2026-09-29; fases 4 e 5 em backlog)
 
 Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do menor risco e custo para o maior.
 
@@ -11,7 +11,8 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] `view-transition-name` no header avaliado e descartado: com o fade cruzado, os textos do menu em PT e EN apareciam um sobre o outro; com o fade em sequência, o nome próprio não muda nada, então saiu para simplificar.
 - [x] E2E (`test/e2e/transitions.spec.ts`, desktop e mobile): a troca PT -> EN revela a página com transição (evento `pagereveal`), a primeira carga não anima, a animação termina e, com `reducedMotion: "reduce"`, a troca não tem transição. Suíte completa passando.
 - [x] Lighthouse: sem efeito mensurável (comparação alternada com e sem a regra, 5 rodadas cada: medianas 95 e 96, faixas sobrepostas). Detalhes em `docs/features/seo-assets/lighthouse.md`.
-- [ ] Conferir no Safari e no Firefox (só o Chromium está instalado aqui) e no site publicado depois do deploy.
+- [x] Conferido no site publicado (2026-09-29, validado pelo Pedro).
+- [ ] Conferir no Safari e no Firefox (só o Chromium está instalado aqui).
 
 ## Fase 2 - Microinterações (só CSS) (concluída em 2026-09-29)
 
@@ -21,7 +22,8 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Nenhum teste de componente dependia da lista aparecer na hora (Playwright e Testing Library consideram visível um elemento com opacidade baixa).
 - [x] E2E (`test/e2e/transitions.spec.ts`, "microinteractions"): cada efeito roda no navegador (animações desaceleradas 10x pelo protocolo do Chrome, para não correr contra 150 ms) e nenhum roda com movimento reduzido. Estável em 3 rodadas seguidas; suíte completa passando. Capturas conferidas (lista no meio da entrada, seta no hover, "Copiado!").
 - [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 97, CLS 0.
-- [ ] Conferir no Safari e no Firefox e no site publicado depois do deploy.
+- [x] Conferido no site publicado (2026-09-29, validado pelo Pedro).
+- [ ] Conferir no Safari e no Firefox.
 
 ## Fase 3 - Troca de tema (poucas linhas de JS) (concluída em 2026-09-29)
 
@@ -33,8 +35,10 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 95,5, CLS 0.
 - [x] Duração ajustada de 250 para 500 ms (`ease-in-out`) a pedido do Pedro, que achou a troca instantânea demais. Conferido no servidor de dev e no e2e que a transição roda com a nova duração.
 - [x] Trocado o fade pela varredura diagonal (decisão do Pedro depois de comparar oito variantes num protótipo): 700 ms, `linear`, só CSS no `globals.css` (máscara em degradê na captura nova, captura antiga parada, `mix-blend-mode: normal`). Nenhuma mudança no `transitionTheme` além dos comentários. E2E ajustado: só a captura nova anima, por 700 ms (o navegador ainda anima o `::view-transition-group(root)` por padrão, sem efeito visível). Capturas no meio da varredura (animação desacelerada 20x) conferidas em desktop claro -> escuro e mobile escuro -> claro: faixa suave, sem clarão. Lint, typecheck, unitários e e2e de transições passando.
+- [x] E2E da troca de tema estabilizado: lia as animações uma única vez logo depois do clique e, com a máquina carregada, às vezes antes de a transição (assíncrona) começar, recebendo lista vazia (1 falha em ~360 execuções). Agora desacelera as animações 10x e espera com `expect.poll`; 510 execuções seguidas sem falha.
 - [ ] Lighthouse depois da varredura (a máscara só existe durante a troca, então não deve afetar a carga).
-- [ ] Conferir no Safari e no Firefox e no site publicado depois do deploy.
+- [x] Conferido no site publicado (2026-09-29): o CSS no ar tem a varredura (`theme-sweep`), validado pelo Pedro.
+- [ ] Conferir no Safari e no Firefox.
 
 ## Fase 4 - Entrada das seções (só CSS)
 

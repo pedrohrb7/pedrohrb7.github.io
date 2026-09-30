@@ -44,17 +44,23 @@ test.describe("theme change transition", () => {
     const context = await browser.newContext({ colorScheme: "light" });
     const page = await context.newPage();
     await page.goto("/pt/");
+    // The view transition starts asynchronously after the click; slowed down, a busy machine can't miss it by reading
+    // too early or too late.
+    const restoreAnimations = await slowAnimations(page);
     await chooseTheme(page, "Escuro");
 
     // Only the new snapshot animates (the 700 ms sweep of its mask); the old one stays still underneath, instead of
     // fading out as in the language switch.
+    await expect
+      .poll(() => rootTransitionAnimations(page))
+      .toContainEqual({ pseudo: "::view-transition-new(root)", duration: 700 });
     const animations = await rootTransitionAnimations(page);
-    expect(animations).toContainEqual({ pseudo: "::view-transition-new(root)", duration: 700 });
     expect(animations.map(({ pseudo }) => pseudo)).not.toContain("::view-transition-old(root)");
     await expect(page.locator("html")).toHaveAttribute("data-theme-transition", "");
     // The list closed before the old state was captured.
     await expect(page.getByRole("listbox", { name: "Tema" })).toBeHidden();
 
+    await restoreAnimations();
     await expect(page.locator("html")).not.toHaveAttribute("data-theme-transition");
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     expect(await background(page)).toBe("rgb(12, 10, 9)");
@@ -101,11 +107,12 @@ test.describe("language switch transition", () => {
 });
 
 // Microinteractions last 150 ms, less than a round trip to the page; slowing Chromium's animations down 10x lets the
-// test see them running instead of racing them.
+// test see them running instead of racing them. Returns a function that puts them back to normal speed.
 async function slowAnimations(page: Page) {
   const cdp = await page.context().newCDPSession(page);
   await cdp.send("Animation.enable");
   await cdp.send("Animation.setPlaybackRate", { playbackRate: 0.1 });
+  return () => cdp.send("Animation.setPlaybackRate", { playbackRate: 1 });
 }
 
 // Running CSS animations and transitions on one element, by name (animation) or property (transition).

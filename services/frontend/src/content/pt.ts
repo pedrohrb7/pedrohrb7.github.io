@@ -80,7 +80,6 @@ export const pt: Content = {
         "Implementei o SigNoz para observabilidade e mapeamento de slow queries, embasando o plano de ação de performance.",
         "Desenvolvi caixas de contexto, integrações com terceiros e logs para auditoria.",
         "Participei da definição e da refatoração do front-end de um CRM, migrando a aplicação para Next.js com um novo layout a partir do protótipo do time de design.",
-        "Mantive e evoluí uma plataforma de multicanalidade que centralizava WhatsApp, Instagram e outros canais em uma única tela.",
         "Escrevi testes automatizados (Jest, Cypress, Testing Library) e atuei no code review como prática recorrente do time.",
       ],
     },

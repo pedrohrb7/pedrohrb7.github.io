@@ -80,7 +80,6 @@ export const en: Content = {
         "Introduced SigNoz for observability and slow query mapping, grounding the performance action plan.",
         "Developed context boxes, third-party integrations and audit logs.",
         "Helped define and refactor a CRM front-end, migrating it to Next.js with a new layout based on the design team's prototype.",
-        "Maintained and evolved an omnichannel platform that brought WhatsApp, Instagram and other channels into a single screen.",
         "Wrote automated tests (Jest, Cypress, Testing Library) and did code review as a recurring team practice.",
       ],
     },
