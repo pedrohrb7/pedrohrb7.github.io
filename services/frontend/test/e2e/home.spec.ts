@@ -42,21 +42,23 @@ test.describe("not found page", () => {
 });
 
 test.describe("resume PDF", () => {
+  // Same file name in both languages, each in its locale's folder.
+  const file = "pedro-borges-fullstack-developer.pdf";
   const cases = [
-    { path: "/pt/", name: "Baixar currículo (PDF)", file: "pedro-borges-curriculo.pdf" },
-    { path: "/en/", name: "Download resume (PDF)", file: "pedro-borges-resume.pdf" },
+    { path: "/pt/", name: "Baixar currículo (PDF)" },
+    { path: "/en/", name: "Download resume (PDF)" },
   ];
 
-  for (const { path, name, file } of cases) {
-    test(`downloads the ${file} from ${path}`, async ({ page }) => {
+  for (const { path, name } of cases) {
+    test(`downloads ${path}${file}`, async ({ page }) => {
       await page.goto(path);
       const link = page.getByRole("link", { name });
-      await expect(link).toHaveAttribute("href", `/${file}`);
+      await expect(link).toHaveAttribute("href", `${path}${file}`);
 
       const [download] = await Promise.all([page.waitForEvent("download"), link.click()]);
       expect(download.suggestedFilename()).toBe(file);
 
-      const response = await page.request.get(`/${file}`);
+      const response = await page.request.get(`${path}${file}`);
       expect(response.status()).toBe(200);
       expect(response.headers()["content-type"]).toBe("application/pdf");
       expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");

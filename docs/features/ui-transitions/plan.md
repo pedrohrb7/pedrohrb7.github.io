@@ -32,6 +32,8 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] E2E (`test/e2e/transitions.spec.ts`): escolher Escuro roda o fade de 500 ms (animações dos pseudo-elementos `::view-transition-old/new(root)`), a lista já está fechada, a marca sai no fim e o tema fica aplicado; com movimento reduzido, troca imediata. Conferido também pelo teclado e em capturas no meio do fade (animação desacelerada), desktop claro -> escuro e 360px escuro -> claro, sem erro no console.
 - [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 95,5, CLS 0.
 - [x] Duração ajustada de 250 para 500 ms (`ease-in-out`) a pedido do Pedro, que achou a troca instantânea demais. Conferido no servidor de dev e no e2e que a transição roda com a nova duração.
+- [x] Trocado o fade pela varredura diagonal (decisão do Pedro depois de comparar oito variantes num protótipo): 700 ms, `linear`, só CSS no `globals.css` (máscara em degradê na captura nova, captura antiga parada, `mix-blend-mode: normal`). Nenhuma mudança no `transitionTheme` além dos comentários. E2E ajustado: só a captura nova anima, por 700 ms (o navegador ainda anima o `::view-transition-group(root)` por padrão, sem efeito visível). Capturas no meio da varredura (animação desacelerada 20x) conferidas em desktop claro -> escuro e mobile escuro -> claro: faixa suave, sem clarão. Lint, typecheck, unitários e e2e de transições passando.
+- [ ] Lighthouse depois da varredura (a máscara só existe durante a troca, então não deve afetar a carga).
 - [ ] Conferir no Safari e no Firefox e no site publicado depois do deploy.
 
 ## Fase 4 - Entrada das seções (só CSS)

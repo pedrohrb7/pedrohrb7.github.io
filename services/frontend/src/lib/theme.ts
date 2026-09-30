@@ -43,14 +43,15 @@ export function applyTheme(theme: Theme, root: HTMLElement = document.documentEl
   else root.dataset.theme = theme;
 }
 
-// Set on <html> while a theme change animates, so globals.css gives it its own cross-fade (docs/features/ui-transitions/).
+// Set on <html> while a theme change animates, so globals.css gives it its own diagonal sweep
+// (docs/features/ui-transitions/).
 export const themeTransitionAttribute = "data-theme-transition";
 
 let runningThemeTransition: ViewTransition | null = null;
 
-// Runs a theme change as a view transition: the page cross-fades from the old colors to the new ones. `update` must
-// change the theme synchronously, since the browser captures the new state right after it returns. Without the View
-// Transitions API or with reduced motion, it just runs `update`.
+// Runs a theme change as a view transition: the new colors sweep across the old ones. `update` must change the theme
+// synchronously, since the browser captures the new state right after it returns. Without the View Transitions API or
+// with reduced motion, it just runs `update`.
 export function transitionTheme(update: () => void, doc: Document = document) {
   const reduceMotion = doc.defaultView?.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
   if (reduceMotion || typeof doc.startViewTransition !== "function") {

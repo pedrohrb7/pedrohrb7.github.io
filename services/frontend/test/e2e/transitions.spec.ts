@@ -40,20 +40,17 @@ async function chooseTheme(page: Page, option: string) {
 const background = (page: Page) => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
 
 test.describe("theme change transition", () => {
-  test("cross-fades the colors and ends on the chosen theme", async ({ browser }) => {
+  test("sweeps the new colors across the old ones and ends on the chosen theme", async ({ browser }) => {
     const context = await browser.newContext({ colorScheme: "light" });
     const page = await context.newPage();
     await page.goto("/pt/");
     await chooseTheme(page, "Escuro");
 
-    // Both sides of the cross-fade run for 500 ms (the theme's own timing, not the language switch's sequence).
+    // Only the new snapshot animates (the 700 ms sweep of its mask); the old one stays still underneath, instead of
+    // fading out as in the language switch.
     const animations = await rootTransitionAnimations(page);
-    expect(animations).toEqual(
-      expect.arrayContaining([
-        { pseudo: "::view-transition-old(root)", duration: 500 },
-        { pseudo: "::view-transition-new(root)", duration: 500 },
-      ]),
-    );
+    expect(animations).toContainEqual({ pseudo: "::view-transition-new(root)", duration: 700 });
+    expect(animations.map(({ pseudo }) => pseudo)).not.toContain("::view-transition-old(root)");
     await expect(page.locator("html")).toHaveAttribute("data-theme-transition", "");
     // The list closed before the old state was captured.
     await expect(page.getByRole("listbox", { name: "Tema" })).toBeHidden();

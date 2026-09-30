@@ -1,11 +1,9 @@
 import type { Locale } from "@/lib/i18n";
 
-// Fixed names (no hash) so the link can be shared directly. Generated into out/ by scripts/generate-resume-pdf.ts.
-export const resumePdfFileName: Record<Locale, string> = {
-  pt: "pedro-borges-curriculo.pdf",
-  en: "pedro-borges-resume.pdf",
-};
+// Fixed name (no hash) so the link can be shared directly, the same in every locale: each PDF sits in its locale's
+// folder, next to that locale's pages. Generated into out/<locale>/ by scripts/generate-resume-pdf.ts.
+export const resumePdfFileName = "pedro-borges-fullstack-developer.pdf";
 
 export function resumePdfPath(locale: Locale): string {
-  return `/${resumePdfFileName[locale]}`;
+  return `/${locale}/${resumePdfFileName}`;
 }

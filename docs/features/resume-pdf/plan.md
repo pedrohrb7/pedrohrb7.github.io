@@ -31,3 +31,9 @@ Status: **Concluída** (2026-09-28, publicada)
 - [x] Geração no CI (`.github/workflows/deploy.yml`) confirmada: o deploy só publica o `out/` depois do job de verificação, que roda o build; os PDFs estão no ar.
 - [x] PDFs publicados em https://pedrohrb7.github.io/pedro-borges-curriculo.pdf e `/pedro-borges-resume.pdf` (200, `application/pdf`), botão presente em `/pt/` e `/en/`; download testado pelo Pedro no site publicado.
 - [x] Atualizar `PRD.md` e o índice em `docs/features/README.md`.
+
+## Ajuste - Nome do arquivo (2026-09-29)
+
+- [x] A pedido do Pedro, os dois PDFs passam a se chamar `pedro-borges-fullstack-developer.pdf`, cada um na pasta do idioma: `/pt/pedro-borges-fullstack-developer.pdf` e `/en/pedro-borges-fullstack-developer.pdf` (`resumePdfFileName` e `resumePdfPath` em `src/lib/resume-pdf.ts`; o script grava em `out/<idioma>/`). Nomes antigos removidos, sem cópia.
+- [x] E2E atualizado (`href` por idioma, nome do download e resposta `application/pdf`); build, lint, typecheck, unitários e e2e completos passando. Conferido que o PDF de `/pt/` é o PT (`pt-BR`) e o de `/en/` é o EN.
+- [ ] Conferir no site publicado depois do deploy.

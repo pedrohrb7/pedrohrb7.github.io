@@ -71,13 +71,30 @@
 
 /*
  * Theme change (transitionTheme in src/lib/theme.ts, which sets data-theme-transition while it runs): same page,
- * only the colors change, so a plain cross-fade. The sequential page fade above would flash an empty screen.
- * Longer than the other transitions on purpose: the whole screen changes color, and at 250 ms it read as a blink.
+ * only the colors change, so the new colors sweep diagonally across the old ones, left to right, behind a soft
+ * gradient edge. The old snapshot stays still underneath; the new one is masked by a gradient twice and a half the
+ * page's width, opaque on its left 40% and clear on its right 40%, which slides from "all clear" to "all opaque".
+ * mix-blend-mode goes back to normal: the default plus-lighter would brighten the band where both show.
+ * Longer than the other transitions on purpose: the whole screen changes color, and a short sweep read as a blink.
  */
+@keyframes theme-sweep {
+  from {
+    mask-position: 100% 0;
+  }
+  to {
+    mask-position: 0 0;
+  }
+}
+
 html[data-theme-transition]::view-transition-old(root) {
-  animation: fade-out 500ms ease-in-out both;
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 html[data-theme-transition]::view-transition-new(root) {
-  animation: fade-in 500ms ease-in-out both;
+  mask-image: linear-gradient(115deg, #000 40%, transparent 60%);
+  mask-size: 250% 100%;
+  mask-repeat: no-repeat;
+  mix-blend-mode: normal;
+  animation: theme-sweep 700ms linear both;
 }

@@ -59,7 +59,7 @@ npm run build     # gera out/, incluindo os currículos em PDF (postbuild)
 npm run preview   # serve out/ em http://localhost:3000, igual ao GitHub Pages
 ```
 
-O `postbuild` grava `out/pedro-borges-curriculo.pdf` (PT) e `out/pedro-borges-resume.pdf` (EN) a partir de `src/content/`. Para regerar só os PDFs depois de um build: `npx tsx scripts/generate-resume-pdf.ts`.
+O `postbuild` grava `out/pt/pedro-borges-fullstack-developer.pdf` (PT) e `out/en/pedro-borges-fullstack-developer.pdf` (EN) a partir de `src/content/`. Para regerar só os PDFs depois de um build: `npx tsx scripts/generate-resume-pdf.ts`.
 
 ## Variáveis de ambiente
 

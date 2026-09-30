@@ -2,7 +2,7 @@
 import { existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { locales } from "@/lib/i18n";
-import { resumePdfFileName } from "@/lib/resume-pdf";
+import { resumePdfPath } from "@/lib/resume-pdf";
 import { renderResumePdf } from "@/pdf/render";
 
 const outDir = join(import.meta.dirname, "..", "out");
@@ -12,7 +12,8 @@ if (!existsSync(outDir)) {
 }
 
 for (const locale of locales) {
-  const file = join(outDir, resumePdfFileName[locale]);
+  // out/<locale>/ already exists: next build writes that locale's index.html there.
+  const file = join(outDir, resumePdfPath(locale));
   writeFileSync(file, await renderResumePdf(locale));
   console.log(`Resume PDF (${locale}): ${file}`);
 }

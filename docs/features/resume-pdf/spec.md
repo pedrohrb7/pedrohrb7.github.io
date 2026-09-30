@@ -8,10 +8,10 @@ Gera um currículo em PDF por idioma durante o build, a partir do mesmo conteúd
 
 | Arquivo | Idioma | Linkado em |
 |---|---|---|
-| `out/pedro-borges-curriculo.pdf` | PT | `/pt/` |
-| `out/pedro-borges-resume.pdf` | EN | `/en/` |
+| `out/pt/pedro-borges-fullstack-developer.pdf` | PT | `/pt/` |
+| `out/en/pedro-borges-fullstack-developer.pdf` | EN | `/en/` |
 
-Nomes fixos (sem hash) para que o link possa ser compartilhado diretamente.
+Nome fixo (sem hash) para que o link possa ser compartilhado diretamente, e o mesmo nos dois idiomas: cada PDF fica na pasta do seu idioma, junto das páginas dele. Até 2026-09-29 os arquivos ficavam na raiz com nomes por idioma (`pedro-borges-curriculo.pdf` e `pedro-borges-resume.pdf`); os nomes antigos foram removidos sem cópia (decisão do Pedro), então links antigos compartilhados passam a dar 404.
 
 ## Conteúdo
 
