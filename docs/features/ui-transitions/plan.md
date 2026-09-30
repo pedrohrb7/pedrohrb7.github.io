@@ -1,6 +1,6 @@
 # Plano - Transições de interface
 
-Status: **Em andamento** (fases 1, 2 e 3 concluídas e publicadas em 2026-09-29; fases 4 e 5 concluídas em 2026-09-29, falta publicar; falta o fechamento)
+Status: **Em andamento** (as cinco fases concluídas e publicadas; conferidas no site publicado e validadas no Firefox; falta validar no Safari)
 
 Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do menor risco e custo para o maior.
 
@@ -12,7 +12,8 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] E2E (`test/e2e/transitions.spec.ts`, desktop e mobile): a troca PT -> EN revela a página com transição (evento `pagereveal`), a primeira carga não anima, a animação termina e, com `reducedMotion: "reduce"`, a troca não tem transição. Suíte completa passando.
 - [x] Lighthouse: sem efeito mensurável (comparação alternada com e sem a regra, 5 rodadas cada: medianas 95 e 96, faixas sobrepostas). Detalhes em `docs/features/seo-assets/lighthouse.md`.
 - [x] Conferido no site publicado (2026-09-29, validado pelo Pedro).
-- [ ] Conferir no Safari e no Firefox (só o Chromium está instalado aqui).
+- [x] Validado no Firefox pelo Pedro (2026-09-30).
+- [ ] Conferir no Safari (só o Chromium está instalado aqui).
 
 ## Fase 2 - Microinterações (só CSS) (concluída em 2026-09-29)
 
@@ -23,7 +24,8 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] E2E (`test/e2e/transitions.spec.ts`, "microinteractions"): cada efeito roda no navegador (animações desaceleradas 10x pelo protocolo do Chrome, para não correr contra 150 ms) e nenhum roda com movimento reduzido. Estável em 3 rodadas seguidas; suíte completa passando. Capturas conferidas (lista no meio da entrada, seta no hover, "Copiado!").
 - [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 97, CLS 0.
 - [x] Conferido no site publicado (2026-09-29, validado pelo Pedro).
-- [ ] Conferir no Safari e no Firefox.
+- [x] Validado no Firefox pelo Pedro (2026-09-30).
+- [ ] Conferir no Safari.
 
 ## Fase 3 - Troca de tema (poucas linhas de JS) (concluída em 2026-09-29)
 
@@ -36,9 +38,10 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Duração ajustada de 250 para 500 ms (`ease-in-out`) a pedido do Pedro, que achou a troca instantânea demais. Conferido no servidor de dev e no e2e que a transição roda com a nova duração.
 - [x] Trocado o fade pela varredura diagonal (decisão do Pedro depois de comparar oito variantes num protótipo): 700 ms, `linear`, só CSS no `globals.css` (máscara em degradê na captura nova, captura antiga parada, `mix-blend-mode: normal`). Nenhuma mudança no `transitionTheme` além dos comentários. E2E ajustado: só a captura nova anima, por 700 ms (o navegador ainda anima o `::view-transition-group(root)` por padrão, sem efeito visível). Capturas no meio da varredura (animação desacelerada 20x) conferidas em desktop claro -> escuro e mobile escuro -> claro: faixa suave, sem clarão. Lint, typecheck, unitários e e2e de transições passando.
 - [x] E2E da troca de tema estabilizado: lia as animações uma única vez logo depois do clique e, com a máquina carregada, às vezes antes de a transição (assíncrona) começar, recebendo lista vazia (1 falha em ~360 execuções). Agora desacelera as animações 10x e espera com `expect.poll`; 510 execuções seguidas sem falha.
-- [ ] Lighthouse depois da varredura (a máscara só existe durante a troca, então não deve afetar a carga).
+- [x] Lighthouse depois da varredura: as medições da fase 4 (2026-09-29) já rodaram com a varredura no build, com mediana 96 na comparação A/B e CLS 0 (`docs/features/seo-assets/lighthouse.md`).
 - [x] Conferido no site publicado (2026-09-29): o CSS no ar tem a varredura (`theme-sweep`), validado pelo Pedro.
-- [ ] Conferir no Safari e no Firefox.
+- [x] Validado no Firefox pelo Pedro (2026-09-30).
+- [ ] Conferir no Safari.
 
 ## Fase 4 - Entrada das seções (só CSS) (concluída em 2026-09-29)
 
@@ -48,7 +51,10 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Conferido no navegador, desktop e mobile: nenhum filho de seção esmaecido acima dos últimos 120px da tela na carga, depois de cada salto do menu (as seis seções) e no fim da página; captura no meio da entrada da Experiência. Sem JS funciona igual (é só CSS).
 - [x] E2E (`test/e2e/transitions.spec.ts`, "section entrance"): filhos das seções com a animação e hero sem, conteúdo abaixo da dobra esmaecido, nada esmaecido onde o leitor para (carga, saltos, fim da página), e nada animado com movimento reduzido. O e2e da troca de idioma esperava zero animações na página no fim do fade; agora espera só o fim da View Transition (as animações ligadas à rolagem existem sempre).
 - [x] Lighthouse: 6 rodadas no container (mediana 94,5) e comparação A/B alternada com e sem a entrada (medianas 96 e 96, mesmo TBT, LCP oscilando igual nos dois). Sem efeito mensurável. Detalhes em `docs/features/seo-assets/lighthouse.md`.
-- [ ] Conferir no Safari (26+) e no Firefox (sem suporte: seções só aparecem) e no site publicado depois do deploy.
+- [x] No ar (conferido em 2026-09-30): o CSS publicado tem a entrada das seções (`section-enter`) e o HTML de `/pt/` aplica `reveal-on-scroll`.
+- [x] Conferido no site publicado pelo Pedro (2026-09-30).
+- [x] Validado no Firefox pelo Pedro (2026-09-30).
+- [ ] Conferir no Safari (26+).
 
 ## Fase 5 - Modal e drawer (só CSS) (concluída em 2026-09-29)
 
@@ -59,7 +65,10 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 - [x] Conferido no navegador: o `close()` continua imediato, então foco (volta ao botão) e hash/Voltar não esperam a animação; a página não pula quando a trava de rolagem sai (posição e largura iguais antes, durante e depois, desktop e mobile); reabrir durante a saída funciona. Durante os 200 ms da saída o fundo ainda cobre a página, então um clique no botão só acerta depois; com o teclado (Esc devolve o foco ao botão, Enter reabre) reabre no meio da saída.
 - [x] Testes: `ProjectDetails.browser.test.tsx` checa o fechamento imediato (`open` falso) e o sumiço depois da saída, a saída em 200 ms com o painel terminando fora da tela, e a reabertura pelo teclado com a saída congelada no meio. `test/e2e/transitions.spec.ts` ("project details drawer"): painel e fundo animam na saída, botão de fechar encolhe, e com movimento reduzido nada anima. Suíte completa passando 3 vezes seguidas.
 - [x] Padrão de modal centralizado (fade + escala 0,96 -> 1, 200 ms na entrada e 150 ms na saída) registrado no `DESIGN_SYSTEM.md`, para o primeiro modal que surgir.
-- [ ] Conferir no Safari e no Firefox (o Firefox não tem `overlay`: na saída o dialog deixa o top layer na hora, e o fundo some sem transição) e no site publicado depois do deploy.
+- [x] No ar (conferido em 2026-09-30): o CSS publicado tem a saída animada, o botão de fechar a 95% e a entrada de 700 ms com `ease-sheet`.
+- [x] Conferido no site publicado pelo Pedro (2026-09-30).
+- [x] Validado no Firefox pelo Pedro (2026-09-30).
+- [ ] Conferir no Safari.
 
 ## Ajuste - Abertura do drawer mais lenta (2026-09-29)
 
@@ -67,6 +76,7 @@ Cada fase é independente e pode ser entregue sozinha. A ordem sugerida vai do m
 
 ## Fechamento
 
-- [ ] E2E com `reducedMotion: "reduce"` para cada transição e sem erro no console nos navegadores sem suporte.
-- [ ] Lighthouse no container (mediana de 3 rodadas mobile em `/pt/`) e registro em `docs/features/seo-assets/lighthouse.md`.
-- [ ] Padrões de movimento no `DESIGN_SYSTEM.md` (durações, curva, regra do `prefers-reduced-motion`), índice em `docs/features/README.md` e escopo do `PRD.md`.
+- [x] E2E com `reducedMotion: "reduce"` para cada transição (`test/e2e/transitions.spec.ts`): troca de idioma, troca de tema, microinterações, drawer e entrada das seções.
+- [x] Sem erro no console nos navegadores sem suporte: validado no Firefox pelo Pedro (2026-09-30).
+- [x] Lighthouse no container registrado em `docs/features/seo-assets/lighthouse.md` a cada fase; a última medição (fase 4, com todas as transições no build) teve mediana 96 na comparação A/B, CLS 0.
+- [x] Padrões de movimento no `DESIGN_SYSTEM.md` (durações, curvas, exceções, regra do `prefers-reduced-motion`), índice em `docs/features/README.md` e escopo do `PRD.md` atualizados (2026-09-30).

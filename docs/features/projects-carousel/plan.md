@@ -38,4 +38,4 @@ Status: **Concluída** (2026-09-28, publicada). Ativo no site desde a entrada do
 - [x] Pedido do Pedro: todos os cards com a mesma altura, em todas as telas (a diferença entre o mais alto e o mais baixo era de 56-82px no desktop e até 264px no celular). Saiu a altura adaptativa (`ResizeObserver` no trilho); os slides esticam no flex e o card empurra as tags para o rodapé com `mt-auto`.
 - [x] O botão "Ver detalhes" (`docs/features/project-details/`) ficava colado nas tags quando quebrava de linha: agora tem uma linha própria, depois de um divisor, com o texto a 26px do divisor e da borda de baixo. Sem JS, a linha inteira some (`data-requires-js` nela, não só no botão).
 - [x] Teste em Chromium de altura adaptativa trocado por altura igual com as tags alinhadas no rodapé; e2e e capturas (desktop, 360px, sem JS) conferidos.
-- [ ] Conferir no site publicado depois do deploy.
+- [x] Conferido no site publicado pelo Pedro (2026-09-30).

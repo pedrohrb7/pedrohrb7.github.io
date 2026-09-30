@@ -1,6 +1,6 @@
 # Plano - Detalhes do projeto em drawer
 
-Status: **Concluída** (2026-09-29, falta publicar). Primeiro projeto com detalhes: Plataforma Financeira (DMK3). AutoSim e Accountability seguem sem drawer por enquanto.
+Status: **Concluída** (2026-09-29, publicada). Primeiro projeto com detalhes: Plataforma Financeira (DMK3). AutoSim e Accountability seguem sem drawer por enquanto.
 
 ## Fase 1 - Modelo e lógica (concluída em 2026-09-29)
 
@@ -39,4 +39,4 @@ Status: **Concluída** (2026-09-29, falta publicar). Primeiro projeto com detalh
 - [x] Ajustes vistos nas capturas com o texto real: `TagGroups` passou a usar container query (no drawer a stack empilha mesmo no desktop); papel do card encurtado para "DMK3 · Full-Stack" (quebrava em "front-/end" no celular); o foco vai para o drawer ao abrir, e não para o x (que mostrava o contorno de foco ao abrir por link).
 - [x] Lighthouse no container (6 rodadas mobile em `/pt/`): mediana 96, CLS 0; HTML de `/pt/` de ~17 para ~21,5 KB gzip.
 - [x] PDF do currículo: o projeto entra no topo da página 2, que continua com 2 páginas (o drawer não vai para o PDF).
-- [ ] Conferir no site publicado depois do deploy.
+- [x] Conferido no site publicado pelo Pedro (2026-09-30).
