@@ -1,9 +1,22 @@
 name: Deploy to GitHub Pages
 
+# Only changes that can alter the site or its checks trigger a run: the frontend (except its Markdown docs), the Node
+# version and this workflow. Docs, wireframes and the local docker-compose.yml don't. Keep both lists equal.
+# workflow_dispatch still runs (and deploys) any commit by hand.
 on:
   push:
     branches: [main]
+    paths:
+      - "services/frontend/**"
+      - "!services/frontend/**/*.md"
+      - ".nvmrc"
+      - ".github/workflows/deploy.yml"
   pull_request:
+    paths:
+      - "services/frontend/**"
+      - "!services/frontend/**/*.md"
+      - ".nvmrc"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:

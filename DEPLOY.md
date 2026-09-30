@@ -12,6 +12,10 @@
 ### `services/frontend`
 
 - Trigger: push na `main` (ou execução manual em Actions). Pull requests rodam só as verificações, sem publicar.
+- Filtro de caminhos (push e pull request): o workflow só roda quando a mudança toca em `services/frontend/**` (exceto arquivos `.md`), `.nvmrc` ou no próprio `.github/workflows/deploy.yml`. Mudanças só em documentação (`docs/`, `.md` da raiz e do frontend), `wireframe/` ou `services/docker-compose.yml` não rodam verificações nem publicam, porque não mudam o site. Um push que mistura código e docs roda normalmente.
+- Para publicar um commit que o filtro ignorou, rode o workflow à mão em Actions > "Deploy to GitHub Pages" > Run workflow.
+- Novo serviço em `services/` ou outro arquivo lido no build ou nos testes fora de `services/frontend/`: acrescente o caminho às duas listas `paths` do workflow (push e pull request).
+- Se a `main` passar a exigir o check `check` em pull requests, um PR só de docs fica esperando um check que nunca roda. Nesse caso, troque o filtro do `pull_request` por um passo que detecte mudanças dentro do job.
 - Pipeline: `.github/workflows/deploy.yml` - lint, typecheck, Vitest, Playwright contra o build estático, upload de `services/frontend/out` e deploy no GitHub Pages.
 - Passos manuais: nenhum além do merge na `main`. Configuração única: Settings > Pages > Source = "GitHub Actions".
 
